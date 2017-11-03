@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition template="/base.xhtml"
+                xmlns:tc="http://myfaces.apache.org/tobago/component"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+  <ui:param name="title" value="Kamera / Sensor"/>
+
+  <tc:splitLayout>
+
+    <tc:form>
+      <tc:box label="Fotos">
+        <f:facet name="bar">
+          <tc:buttons>
+            <tc:button immediate="true" image="fa-refresh" label="Reload" action="#{cameraController.findAll}"/>
+            <tc:button image="fa-plus" label="Neu" action="#{cameraController.create}"/>
+          </tc:buttons>
+        </f:facet>
+
+        <tc:sheet value="#{cameraController.all}" var="camera" id="sheet" markup="hover">
+          <tc:row>
+            <tc:event event="click" action="#{cameraController.select(camera)}"/>
+          </tc:row>
+          <tc:column label="Name">
+            <tc:out value="#{camera.name}" labelLayout="skip"/>
+          </tc:column>
+          <tc:column label="Sensorformat">
+            <tc:out value="#{camera.sensorFormat}" labelLayout="skip"/>
+          </tc:column>
+        </tc:sheet>
+      </tc:box>
+    </tc:form>
+
+    <tc:box label="Kamera / Sensor">
+      <f:facet name="bar">
+        <tc:buttons>
+          <tc:button image="fa-plus" label="Neu" action="#{cameraController.create}"/>
+          <tc:button image="fa-trash" label="Löschen" action="#{cameraController.delete}">
+              <tc:style customClass="btn-danger"/>
+          </tc:button>
+        </tc:buttons>
+      </f:facet>
+
+      <tc:in label="ID" value="#{cameraController.current.id}"
+             readonly="#{cameraController.current.revision != null}" required="true"/>
+      <tc:in label="Revision" value="#{cameraController.current.revision}" readonly="true"/>
+      <tc:in label="Name" value="#{cameraController.current.name}"/>
+      <tc:in label="Manufacturer" value="#{cameraController.current.manufacturer}"/>
+      <tc:in label="Sensortyp" value="#{cameraController.current.sensorFormat}"/>
+      <tc:flexLayout columns="auto;1fr;1fr">
+        <tc:label value="Breite x Höhe [mm]"/>
+        <tc:in label="Breite [mm]" value="#{cameraController.current.width}" labelLayout="skip" required="true"/>
+        <tc:in label="Höhe [mm]" value="#{cameraController.current.height}" labelLayout="skip" required="true"/>
+      </tc:flexLayout>
+      <tc:flexLayout columns="auto;1fr;1fr">
+        <tc:label value="Pixelanzahl X x Y [mm]"/>
+        <tc:in label="Pixelanzahl X" value="#{cameraController.current.pixelCountX}" labelLayout="skip" required="true"/>
+        <tc:in label="Pixelanzahl Y" value="#{cameraController.current.pixelCountY}" labelLayout="skip" required="true"/>
+      </tc:flexLayout>
+
+      <tc:button label="Speichern" action="#{cameraController.save}"/>
+
+    </tc:box>
+
+  </tc:splitLayout>
+
+</ui:composition>

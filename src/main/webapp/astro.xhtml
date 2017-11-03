@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition template="/base.xhtml"
+                xmlns:tc="http://myfaces.apache.org/tobago/component"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+  <ui:param name="title" value="Fotografie"/>
+
+  <tc:panel id="astro">
+
+    <ui:include src="#{pageController.current}"/>
+
+  </tc:panel>
+
+</ui:composition>

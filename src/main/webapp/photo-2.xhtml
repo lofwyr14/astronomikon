@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:tc="http://myfaces.apache.org/tobago/component"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+  <tc:box label="Foto (including: #{pageController.current})">
+    <f:facet name="bar">
+      <tc:buttons>
+        <tc:button image="fa-edit" label="Bearbeiten">
+          <f:ajax listener="#{pageController.toPhotoEditor}" render=":page:astro"/>
+        </tc:button>
+        <tc:button image="fa-photo" label="Bild" link="#{photoController.photo.full}"/>
+      </tc:buttons>
+    </f:facet>
+
+    <tc:figure label="#{photoController.photo.target.name}">
+      <tc:image value="#{photoController.photo.preview}"/>
+    </tc:figure>
+
+    <tc:panel>
+      <tc:out label="Teleskop" tip="oder Objektiv" value="#{photoController.photo.optic}"/>
+    </tc:panel>
+
+  </tc:box>
+
+</ui:composition>

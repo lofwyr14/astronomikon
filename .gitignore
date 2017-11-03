@@ -1,0 +1,15 @@
+target/
+.idea/
+*.iml
+*.ipr
+*.iws
+.mvn/
+.checkstyle
+.classpath
+.DS_Store
+.pmd
+.eclipse-pmd
+.project
+.ruleset
+.settings/
+*.log

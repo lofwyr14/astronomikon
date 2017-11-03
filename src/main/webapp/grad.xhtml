@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition template="/base.xhtml"
+                xmlns:tc="http://myfaces.apache.org/tobago/component"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+  <ui:param name="title" value="Winkelberechnung"/>
+
+  <tc:script file="#{request.contextPath}/grad.js"/>
+
+  <tc:box label="Größe des Ausschnitts eines Fotos als Winkel in Grad">
+
+    <p>
+      Der Ausschnitt des Himmels <i class="math">α</i> der auf einem Foto erscheint ist von
+      der Sensorgröße <i class="math">s</i> der Kamera und der Brennweite <i class="math">l</i>
+      des Objektivs oder Teleskops abhängig (der Term <span class="math">180°/<i>π</i></span>
+      wird bei Taschenrechnern in der Standardeinstellung (Grad) nicht benötigt).
+    </p>
+    <tc:flowLayout textAlign="center">
+      <tc:figure>
+        <tc:style customClass="math-block"/>
+        <tc:style backgroundColor="red"/> <!-- XXX backgroundColor is undefined -->
+        <object data="grad.svg" type="image/svg+xml">
+          <!-- http://www.codecogs.com/latex/eqneditor.php svn latin -->
+          $$ \alpha = 2 \cdot \frac{180^{\circ}}{\pi} \cdot \tan^{-1}{\frac{s}{2 \cdot l} } $$
+        </object>
+      </tc:figure>
+    </tc:flowLayout>
+
+    <p>
+      Kameraauswahl:
+      <tc:selectOneRadio id="selectSensor1" value="#{angleCalculator.cameraController.current}"
+                         converter="#{angleCalculator.sensorConverter}">
+        <tc:selectItems value="#{angleCalculator.cameraController.all}" var="sensorFormat"
+                        itemValue="#{sensorFormat}"
+                        itemLabel="#{sensorFormat.manufacturer} #{sensorFormat.name} (#{sensorFormat.sensorFormat} - #{sensorFormat.width}mm x #{sensorFormat.height}mm)"/>
+        <f:ajax render="sheet" execute="sheet"/>
+      </tc:selectOneRadio>
+    </p>
+
+    <tc:sheet value="#{angleCalculator.optics}" var="optic" id="sheet" markup="small">
+      <tc:column label="Name">
+        <tc:out value="#{optic.name}" labelLayout="skip"/>
+      </tc:column>
+      <tc:column label="Dynamisch">
+        <tc:in value="#{optic.focalLength}" rendered="#{optic.zoom}" labelLayout="skip">
+          <f:ajax render=":::sheet"/>
+        </tc:in>
+      </tc:column>
+      <tc:column label="Brennweite">
+        <tc:out value="#{optic.focalLength}" converter="focalLength" labelLayout="skip"/>
+      </tc:column>
+      <tc:column label="Öffnung">
+        <tc:out value="#{optic.diameter}" converter="focalLength" labelLayout="skip"/>
+      </tc:column>
+      <tc:column label="Öffnungsverh.">
+        <tc:out value="#{optic.focalRatio}" labelLayout="skip">
+          <f:convertNumber maxFractionDigits="1" minFractionDigits="0"/>
+        </tc:out>
+      </tc:column>
+      <tc:column label="Ausschnitt auf dem Sensor">
+        <tc:out value="#{angleCalculator.formatSensorAngle(angleCalculator.cameraController.current, optic)}" labelLayout="skip"/>
+      </tc:column>
+      <tc:column label="Ausschnitt pro Pixel">
+        <tc:out value="#{angleCalculator.formatPixelAngle(angleCalculator.cameraController.current, optic)}" labelLayout="skip"/>
+      </tc:column>
+      <tc:column label="Größe des Beugungscheibchens bei lambda = 550 nm">
+        <tc:out value="#{276.0 / optic.diameter}&quot;" labelLayout="skip"/>
+      </tc:column>
+      <tc:column label="Auflösungsvermögen">
+        <tc:out value="#{276.0 / optic.diameter}&quot;" labelLayout="skip"/>
+        / <tc:out value="#{138.0 / optic.diameter}&quot;" labelLayout="skip"/>
+      </tc:column>
+    </tc:sheet>
+
+  </tc:box>
+
+  * Teilweise nicht korrekte Berechnungen, Zoom noch nicht implementiert.
+
+</ui:composition>
