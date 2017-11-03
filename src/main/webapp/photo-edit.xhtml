@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ui:composition template="/base.xhtml"
-                xmlns:tc="http://myfaces.apache.org/tobago/component"
+<ui:composition xmlns:tc="http://myfaces.apache.org/tobago/component"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns="http://www.w3.org/1999/xhtml">
 
-  <tc:box label="Foto (including: #{pageController.current})">
+  <tc:box label="Fotodaten bearbeiten" id="photo-edit">
     <f:facet name="bar">
       <tc:button image="fa-plus" label="Neu">
-        <f:ajax listener="#{photoController.create2}" render=":page:astro"/>
+        <f:ajax listener="#{photoController.create}" render=":page:astro"/>
       </tc:button>
     </f:facet>
 
@@ -33,7 +32,7 @@
     <tc:textarea label="Beschreibung" value="#{photoController.photo.description}"/>
 
     <tc:button label="Speichern">
-      <f:ajax listener="#{photoController.save2}" render=":page:astro"/>
+      <f:ajax listener="#{photoController.save}" render=":page:astro" execute="photo-edit"/>
     </tc:button>
 
   </tc:box>

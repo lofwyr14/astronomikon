@@ -12,13 +12,13 @@ import java.io.Serializable;
 @Named
 public class PageController implements Serializable {
 
-  public static final String PHOTO = "/photo-2.xhtml";
-  public static final String PHOTOS = "/photos-2.xhtml";
-  public static final String PHOTO_EDITOR = "/photo-editor-2.xhtml";
+  public static final String PHOTO_VIEW = "/photo-view.xhtml";
+  public static final String PHOTO_LIST = "/photo-list.xhtml";
+  public static final String PHOTO_EDIT = "/photo-edit.xhtml";
 
   private static final Logger LOG = LoggerFactory.getLogger(PageController.class);
 
-  private String current = PHOTOS;
+  private String current = PHOTO_LIST;
 
   public String getCurrent() {
     LOG.info("current is " + current);
@@ -30,10 +30,10 @@ public class PageController implements Serializable {
   }
 
   public void toList(final FacesEvent event) {
-    current = PHOTOS;
+    current = PHOTO_LIST;
   }
 
-  public void toPhotoEditor(final FacesEvent event) {
-    current = PHOTO_EDITOR;
+  public void toPhotoEdit(final FacesEvent event) {
+    current = PHOTO_EDIT;
   }
 }

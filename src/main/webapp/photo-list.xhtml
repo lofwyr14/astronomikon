@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ui:composition template="/base.xhtml"
-                xmlns:tc="http://myfaces.apache.org/tobago/component"
+<ui:composition xmlns:tc="http://myfaces.apache.org/tobago/component"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns="http://www.w3.org/1999/xhtml">
 
-  <ui:param name="title" value="Fotografie"/>
+  <f:event type="preRenderView" listener="#{photoController.findAll}"/>
 
   <tc:box label="Fotos">
     <f:facet name="bar">
-      <tc:button image="fa-plus" label="Neu" action="#{photoController.create}"/>
+      <tc:button image="fa-plus" label="Neu">
+        <f:ajax listener="#{photoController.create}" render=":page:astro"/>
+      </tc:button>
     </f:facet>
 
     <tc:sheet value="#{photoController.all}" var="photo" id="sheet" markup="hover">
       <tc:row>
-        <tc:event event="click" action="#{photoController.select(photo)}"/>
+        <f:ajax listener="#{photoController.select}" render=":page:astro"/>
       </tc:row>
       <tc:column>
         <tc:image value="#{photo.thumb}" labelLayout="skip"/>

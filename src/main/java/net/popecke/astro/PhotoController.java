@@ -29,13 +29,7 @@ public class PhotoController implements Serializable {
   private List<Photo> all;
   private Photo photo;
 
-  public String select(final Photo photo) {
-    LOG.info("Select photo {}", photo);
-    this.photo = photo;
-    return "/photo";
-  }
-
-  public void select2(final FacesEvent event) {
+  public void select(final FacesEvent event) {
     LOG.info("Select photo {}", event);
     final UIData data = ComponentUtils.findAncestor(event.getComponent(), UIData.class);
     if (data != null) {
@@ -47,7 +41,7 @@ public class PhotoController implements Serializable {
     }
 //    LOG.info("Select photo {}", photo);
 //    this.photo = photo;
-    pageController.setCurrent(PageController.PHOTO);
+    pageController.setCurrent(PageController.PHOTO_VIEW);
   }
 
   public Photo getPhoto() {
@@ -67,17 +61,12 @@ public class PhotoController implements Serializable {
     return "/photos";
   }
 
-  public String create() {
+  public void create(final FacesEvent event) {
     photo = new Photo();
-    return "/photo-editor";
+    pageController.setCurrent(PageController.PHOTO_EDIT);
   }
 
-  public void create2(final FacesEvent event) {
-    photo = new Photo();
-    pageController.setCurrent(PageController.PHOTO_EDITOR);
-  }
-
-  public String save() {
+  public void save(final FacesEvent event) {
     Date now = new Date();
     photo.setUpdateDate(now);
     if (photo.getReleaseDate() == null) {
@@ -88,20 +77,6 @@ public class PhotoController implements Serializable {
     } else {
       photoService.update(photo);
     }
-    return "/photo-editor";
-  }
-
-  public void save2(final FacesEvent event) {
-    Date now = new Date();
-    photo.setUpdateDate(now);
-    if (photo.getReleaseDate() == null) {
-      photo.setReleaseDate(now);
-    }
-    if (photo.getRevision() == null) {
-      photoService.add(photo);
-    } else {
-      photoService.update(photo);
-    }
-    pageController.setCurrent(PageController.PHOTO);
+    pageController.setCurrent(PageController.PHOTO_VIEW);
   }
 }
