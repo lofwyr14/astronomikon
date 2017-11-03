@@ -1,2 +1,2 @@
 # astro
-Website to manager astrophotography
+Website to view and manage astronomical photos.
