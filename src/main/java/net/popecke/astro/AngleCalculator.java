@@ -1,8 +1,5 @@
 package net.popecke.astro;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -17,8 +14,6 @@ import java.util.List;
 @SessionScoped
 @Named
 public class AngleCalculator implements Serializable {
-
-  private static final Logger LOG = LoggerFactory.getLogger(AngleCalculator.class);
 
   @Inject
   private CameraController cameraController;
@@ -124,20 +119,20 @@ public class AngleCalculator implements Serializable {
   }
 
   private static String formatSmall(final double angle) {
-    LOG.debug("-----------------------------------------------=");
-    LOG.debug("angle=" + angle);
+//    LOG.debug("-----------------------------------------------=");
+//    LOG.debug("angle=" + angle);
     double second = angle * 60 * 60;
-    LOG.debug("second=" + second);
+//    LOG.debug("second=" + second);
     final double a = Math.log10(second);
-    LOG.debug("a=" + a);
+//    LOG.debug("a=" + a);
     final long b = Math.round(a);
-    LOG.debug("b=" + b);
+//    LOG.debug("b=" + b);
     final long c = 2 - b;
-    LOG.debug("c=" + c);
+//    LOG.debug("c=" + c);
     final double factor = Math.pow(10, c);
-    LOG.debug("factor=" + factor);
+//    LOG.debug("factor=" + factor);
     second = Math.round((second * factor)) / factor;
-    LOG.debug("second=" + second);
+//    LOG.debug("second=" + second);
     return ("" + second + '"');
   }
 

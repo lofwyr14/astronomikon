@@ -4,9 +4,15 @@
                 xmlns:tc="http://myfaces.apache.org/tobago/component"
                 xmlns:ui="http://java.sun.com/jsf/facelets">
   <f:view>
-    <tc:page label="#{title}" id="page">
+    <tc:page id="page">
 
-      <ui:insert/>
+      <tc:panel id="astro">
+
+        (including: #{pageController.current})
+
+        <ui:include src="#{pageController.current}"/>
+
+      </tc:panel>
 
     </tc:page>
   </f:view>

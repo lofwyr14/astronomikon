@@ -25,6 +25,10 @@
 
     <tc:panel>
       <tc:out label="Teleskop" tip="oder Objektiv" value="#{photoController.photo.optic}"/>
+      <tc:out label="Datum" tip="Begin der Aufnahme" value="#{photoController.photo.begin}">
+        <f:convertDateTime type="both"/>
+      </tc:out>
+      <tc:out label="Teleskop" tip="oder Objektiv" value="#{photoController.photo.optic}"/>
     </tc:panel>
 
   </tc:box>
