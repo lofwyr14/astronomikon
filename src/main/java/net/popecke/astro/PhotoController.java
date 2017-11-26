@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIData;
+import javax.faces.event.ComponentSystemEvent;
 import javax.faces.event.FacesEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -56,9 +57,8 @@ public class PhotoController implements Serializable {
     return all;
   }
 
-  public String findAll() {
+  public void findAll(final ComponentSystemEvent event) {
     all = photoService.getAll();
-    return "/photos";
   }
 
   public void create(final FacesEvent event) {
@@ -77,6 +77,11 @@ public class PhotoController implements Serializable {
     } else {
       photoService.update(photo);
     }
+    pageController.setCurrent(PageController.PHOTO_VIEW);
+  }
+
+  public void delete(final FacesEvent event) {
+    photoService.remove(photo);
     pageController.setCurrent(PageController.PHOTO_VIEW);
   }
 }

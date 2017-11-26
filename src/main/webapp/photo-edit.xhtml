@@ -34,6 +34,9 @@
     <tc:button label="Speichern">
       <f:ajax listener="#{photoController.save}" render=":page:astro" execute="photo-edit"/>
     </tc:button>
+    <tc:button label="Löschen" confirmation="Wirklich löschen?" markup="danger">
+      <f:ajax listener="#{photoController.delete}" render=":page:astro" execute="photo-edit"/>
+    </tc:button>
 
   </tc:box>
 
