@@ -31,12 +31,14 @@
 
     <tc:textarea label="Beschreibung" value="#{photoController.photo.description}"/>
 
-    <tc:button label="Speichern">
-      <f:ajax listener="#{photoController.save}" render=":page:astro" execute="photo-edit"/>
-    </tc:button>
-    <tc:button label="Löschen" confirmation="Wirklich löschen?" markup="danger">
-      <f:ajax listener="#{photoController.delete}" render=":page:astro" execute="photo-edit"/>
-    </tc:button>
+    <tc:buttons>
+      <tc:button label="Speichern" defaultCommand="true">
+        <f:ajax listener="#{photoController.save}" render=":page:astro" execute="photo-edit"/>
+      </tc:button>
+      <tc:button label="Löschen" confirmation="Wirklich löschen?" markup="danger">
+        <f:ajax listener="#{photoController.delete}" render=":page:astro" execute="photo-edit"/>
+      </tc:button>
+    </tc:buttons>
 
   </tc:box>
 

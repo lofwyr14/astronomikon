@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:tc="http://myfaces.apache.org/tobago/component"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://java.sun.com/jsf/core">
+  <ui:param name="title" value="Bildbearbeitung"/>
+
+  <tc:section label="Bildbearbeitung">
+
+    Dies hier beschreibt meine normale Vorgehensweise
+    (es gibt natürlich sehr viele Variationsmöglichkeiten).
+
+    <tc:section label="Kalibrieren und Stapeln (Stacken)">
+
+      <tc:section>
+        Der Hintergrund für das Kalibrieren wird in diesem Video erklärt:
+        <tc:link label="Darks, Flats und Bias" link="https://www.youtube.com/watch?v=rgZ5MTSHClU"
+                 image="fa-youtube"/>
+      </tc:section>
+
+      <tc:section>
+        Hierfür verwende ich
+        <tc:link label="Deep Sky Stacker" link="http://deepskystacker.free.fr/" image="fa-external-link"/>.
+        Es werden folgende Bilder benötigt:
+
+        <ul>
+          <li><i>Lights:</i> sind die eigentlichen Bilder</li>
+          <li><i>Bias:</i></li>
+          <li><i>Darks:</i></li>
+          <li><i>Flats:</i></li>
+        </ul>
+      </tc:section>
+
+    </tc:section>
+
+    <tc:section label="Nachbearbeitung">
+
+      <p> Mein Workflow für mit Filter angefertigte Monochromaufnahmen basiert auf
+        diesem Video:
+        <tc:link label="CCD Monochrome Astrophotography LRGB Processing in Photoshop, Deep Sky Stacker"
+                 link="https://www.youtube.com/watch?v=b9ePip4rdsI" image="fa-youtube"/>.
+        <br/>Ggf. interessant:
+        <tc:link label="L-RGB -> Farbe mit PS" link="https://www.youtube.com/watch?v=d5KousVYadk"
+                 image="fa-youtube"/> und
+        <tc:link label="Forum Astrotreff" link="http://www.astrotreff.de/topic.asp?TOPIC_ID=214187"
+                 image="fa-external-link"/>
+      </p>
+
+      <p>
+        Hierfür wird "leider" Photoshop verwendet. Ich hätte es lieber mit Affinity gemacht, weiss aber nicht wie es
+        dort geht. (Kommt ja vielleicht noch)
+      </p>
+
+      <p>
+
+      </p>
+
+      <p>
+        Schritte:
+        <ul>
+          <li><i>In Photoshop öffnen:</i>
+            Nach dem Kalibrieren und Stacken hat man 4 Dateien für L-RGB in 32-bin-int TIFF gespeichert,
+            diese in Photoshop öffnen.</li>
+          <li><i>Level anpassen:</i> Menu → Image → Adjustments → Levels...
+            <ul>
+              <li><i>4x für L-RGB:</i> Grauregler (nicht den weißen) moderat in Richtung links zum Hügel ziehen</li>
+              <li><i>4x für L-RGB:</i> Schwarzregler an den unteren Anfang des Hügels ziehen</li>
+            </ul>
+          </li>
+          <li><i>4x für L-RGB: nach 16 bit konvertieren</i> Menu → Image → Mode → 16-bit/Channels... Method: Exposure and Gamma</li>
+          <li><i>Astronomy Tools 1.6</i>Actions zum Nachinstallieren.
+            <ul>
+              <li><i>3x für RGB:</i> Deep Space Noice Reduction durchführen (hatte bei mir keine sichtbare Änderung)</li>
+              <li><i>3x für RGB:</i> ggf. Space Noice Reduction durchführen (da sieht man dann schon was, offen: ist das gut?)</li>
+            </ul>
+          </li>
+          <li><i>RC Astro GradientXTerminator</i>Filter Plug-In zum Nachinstallieren.
+            <ul>
+              <li><i>1x für L:</i> Neue Einstellungsebene... Tonwertkorrektur... Kontrast etwas erhöhen</li>
+              <li><i>1x für L:</i> Zauberstab: 11x11 Pixel, Toleranz: 1, 2-tes Icon für Auswahl addieren</li>
+              <li><i>1x für L:</i> Klick auf ein oder mehrere sternlose Bereiche</li>
+              <li><i>1x für L:</i> Auswahl der Hintergrundebene</li>
+              <li><i>1x für L:</i> Menu → Filter → RC Astro → GradientXTerminator → Coarse/Medium</li>
+              <li><i>1x für L:</i> Klick auf ein oder mehrere sternlose Bereiche</li>
+              <li><i>1x für L:</i> Auswahl der Hintergrundebene</li>
+              <li><i>1x für L:</i> Menu → Filter → RC Astro → GradientXTerminator → Coarse/Medium</li>
+              <li><i>1x für L:</i> Die Hilfsebene kann nun in den Papierkorb</li>
+            </ul>
+          </li>
+          <li><i>Kanäle zusammenführen</i>
+            <ul>
+              <li><i>L auswählen</i></li>
+              <li><i>Neues Bild erzeugen:</i> Aus Zwischenablage mit Farbmode: RGB</li>
+              <li><i>Kanäle sind jetzt anzeigbar:</i></li>
+              <li><i>3x für RGB:</i> Kopieren des Bildes in den jeweiligen Kanal</li>
+              <li><i>RGB Kanal selektieren</i></li>
+              <li><i>Ebenen anzeigen: </i>"Hintergrund" umbenennen nach RGB</li>
+              <li><i>1x L auswählen</i> kopieren und vor die RGB Ebene einfügen</li>
+              <li><i>Mischmodus</i> von Normal auf Luminanz ändern</li>
+              <li><i>RGB Ebene auswählen:</i> Menu → Ebene → Neue Einstellungsebene → Farbton/Sättigung</li>
+              <li><i>Dort:</i> Sättigung auf +70 (evtl. eher weniger, vielleicht +50)</li>
+                <li><i>RGB Ebene auswählen:</i> Menu → Ebene → Neue Einstellungsebene → Tonwertkorrektur</li>
+                <li><i>Dort:</i> Statt RGB jeweils 3x die Farbe und dann den Schwarzregler in Richtung "Berg" und
+                Grauregler anpassen.</li>
+              <li><i>Dann:</i> RGB wählen und den Schwarzregler in Richtung "Berg", dabei wann wirklich clippen.
+              Das soll das Bunte aus dem Schwarzen Hintergrund entfernen.</li>
+              <li><i>Evtl.:</i> Mit den 4 Kanälen und den Reglern noch weiter optimieren.</li>
+              <li><i>L Ebene auswählen:</i> Menu → Ebene → Neue Einstellungsebene → Kurven</li>
+              <li><i>Dort:</i> Den Hintergrund abdunkeln und schauen, dass das Zentrum nicht ausbrennt.</li>
+              <li><i>Evtl.:</i> Den Schritt davor noch mal wiederholen.</li>
+
+
+
+            </ul>
+          </li>
+
+
+        </ul>
+      </p>
+
+
+    </tc:section>
+
+  </tc:section>
+
+</ui:composition>

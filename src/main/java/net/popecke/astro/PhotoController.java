@@ -66,7 +66,20 @@ public class PhotoController implements Serializable {
     pageController.setCurrent(PageController.PHOTO_EDIT);
   }
 
+  public void saveX(final FacesEvent event) {
+    LOG.info("X");
+
+    save(event);
+  }
+
   public void save(final FacesEvent event) {
+    LOG.info("save");
+    try {
+      Thread.sleep(10000);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+
     Date now = new Date();
     photo.setUpdateDate(now);
     if (photo.getReleaseDate() == null) {

@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <properties>
-    <tobago.version>4.0.0-SNAPSHOT</tobago.version>
+    <tobago.version>4.1.0-SNAPSHOT</tobago.version>
     <myfaces.version>2.2.12</myfaces.version>
     <openwebbeans.version>1.1.7</openwebbeans.version>
   </properties>

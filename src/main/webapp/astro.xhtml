@@ -32,6 +32,10 @@
                 <f:param name="blog" value="setup/setup"/>
                 <f:ajax listener="#{pageController.toBlog}" render=":page:astro"/>
               </tc:link>
+              <tc:link label="Bildbearbeitung">
+                <f:param name="blog" value="bildbearbeitung/bildbearbeitung"/>
+                <f:ajax listener="#{pageController.toBlog}" render=":page:astro"/>
+              </tc:link>
               <tc:link label="Fotoobjektiv vs. Maksutov">
                 <f:param name="blog" value="vergleich/vergleich-zoom-200-maksutov-c90"/>
                 <f:ajax listener="#{pageController.toBlog}" render=":page:astro"/>
