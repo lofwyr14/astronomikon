@@ -21,13 +21,13 @@
       <tc:column>
         <tc:image value="#{photo.thumb}" labelLayout="skip"/>
       </tc:column>
-      <tc:column label="Objekt">
+      <tc:column label="Objekt" sortable="true">
         <tc:out value="#{photo.name}" labelLayout="skip"/>
       </tc:column>
-      <tc:column label="Beschreibung">
+      <tc:column label="Beschreibung" sortable="true">
         <tc:out value="#{photo.description}" labelLayout="skip"/>
       </tc:column>
-      <tc:column label="Datum">
+      <tc:column label="Datum" sortable="true">
         <tc:out value="#{photo.begin}" labelLayout="skip">
           <f:convertDateTime type="date"/>
         </tc:out>

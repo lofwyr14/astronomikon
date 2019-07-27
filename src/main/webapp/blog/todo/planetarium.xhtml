@@ -7,20 +7,22 @@
   <ui:param name="title"
             value="Planetarium"/>
 
-  <tc:script file="/astro/virtualsky.js"/>
-  <tc:script file="/astro/planetarium.js"/>
+  <tc:script file="#{request.contextPath}/virtualsky/virtualsky.js"/>
+  <tc:script file="#{request.contextPath}/blog/todo/planetarium.js"/>
 
-  <tc:section label="Planetarium">
-
-    <tc:flexLayout columns="auto;*">
-      <tc:panel>
-        <div id="starmap" style="width:1024px;height:1024px;"></div>
-      </tc:panel>
-
+  <tc:box label="Planetarium">
+    <f:facet name="bar">
       <tc:date/>
+      <tc:buttons>
+        <tc:button id="compass" image="fa-compass" omit="true"/>
+      </tc:buttons>
+    </f:facet>
+    
+    <tc:flexLayout>
+        <div id="starmap" style="width:1024px;height:1024px;"/>
 
-      <tc:button id="compass" image="fa-compass" omit="true"/>
+
     </tc:flexLayout>
 
-  </tc:section>
+  </tc:box>
 </ui:composition>

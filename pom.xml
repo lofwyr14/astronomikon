@@ -17,13 +17,13 @@
   <name>Astronomie</name>
 
   <dependencies>
-<!--
-    <dependency>
-      <groupId>org.apache.deltaspike.modules</groupId>
-      <artifactId>deltaspike-jsf-module-impl</artifactId>
-      <version>1.8.0</version>
-    </dependency>
--->
+    <!--
+        <dependency>
+          <groupId>org.apache.deltaspike.modules</groupId>
+          <artifactId>deltaspike-jsf-module-impl</artifactId>
+          <version>1.8.0</version>
+        </dependency>
+    -->
     <dependency>
       <groupId>commons-beanutils</groupId>
       <artifactId>commons-beanutils</artifactId>
@@ -100,26 +100,26 @@
       <version>1.7.25</version>
       <!--<scope>provided</scope>-->
     </dependency>
-<!--
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jcl-over-slf4j</artifactId>
-      <version>1.7.25</version>
-      &lt;!&ndash;<scope>provided</scope>&ndash;&gt;
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>log4j-over-slf4j</artifactId>
-      <version>1.7.25</version>
-      &lt;!&ndash;<scope>provided</scope>&ndash;&gt;
-    </dependency>
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>jul-to-slf4j</artifactId>
-      <version>1.7.25</version>
-      &lt;!&ndash;<scope>provided</scope>&ndash;&gt;
-    </dependency>
--->
+    <!--
+        <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>jcl-over-slf4j</artifactId>
+          <version>1.7.25</version>
+          &lt;!&ndash;<scope>provided</scope>&ndash;&gt;
+        </dependency>
+        <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>log4j-over-slf4j</artifactId>
+          <version>1.7.25</version>
+          &lt;!&ndash;<scope>provided</scope>&ndash;&gt;
+        </dependency>
+        <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>jul-to-slf4j</artifactId>
+          <version>1.7.25</version>
+          &lt;!&ndash;<scope>provided</scope>&ndash;&gt;
+        </dependency>
+    -->
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
@@ -187,15 +187,26 @@
            -->
           <groupId>org.eclipse.jetty</groupId>
           <artifactId>jetty-maven-plugin</artifactId>
-          <version>9.4.7.v20170914</version>
+          <version>9.4.11.v20180605</version>
           <configuration>
+            <loginServices>
+              <loginService implementation="org.eclipse.jetty.security.HashLoginService">
+                <name>astro-realm</name>
+                <config>src/test/resources/realm.properties</config>
+              </loginService>
+            </loginServices>
+            <stopKey>stopKey</stopKey>
+            <stopPort>9999</stopPort>
+            <systemProperties>
+              <systemProperty>
+                <name>derby.stream.error.file</name>
+                <value>target/derby.log</value>
+              </systemProperty>
+            </systemProperties>
             <scanIntervalSeconds>5</scanIntervalSeconds>
             <webApp>
               <contextPath>/</contextPath>
             </webApp>
-            <!--            <stopKey>stopKey</stopKey>
-                        <stopPort>9999</stopPort>
-                        <stopWait>10</stopWait>-->
           </configuration>
         </plugin>
       </plugins>

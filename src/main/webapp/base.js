@@ -30,3 +30,23 @@ jQuery(document).ready(function () {
     }
   });
 });
+
+astro = {};
+
+astro.init = function() {
+  jQuery(".latex").each(function () {
+    var $element = jQuery(this);
+    if ($element.find(".katex").length > 0) {
+      // was already processed
+      return;
+    }
+    var latex = $element.text();
+    katex.render(latex, $element.get(0), {
+      throwOnError: true,
+      displayMode: $element.css("display") === "block"
+    });
+  });
+};
+
+Tobago.registerListener(astro.init, Tobago.Phase.DOCUMENT_READY);
+Tobago.registerListener(astro.init, Tobago.Phase.AFTER_UPDATE);

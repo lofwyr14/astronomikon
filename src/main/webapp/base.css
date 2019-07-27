@@ -2,7 +2,12 @@
   font-family: "Times New Roman", serif;
 }
 
-.math-block {
-  /* workaround */
-  background-color: #808080;
+.latex {
+  font-size: large;
+}
+
+figure {
+  border: 1px solid orange;
+  border-radius: 1rem;
+  padding: 1rem;
 }

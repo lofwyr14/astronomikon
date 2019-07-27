@@ -1,0 +1,114 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Vue Foto</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container"> 
+    <H1 style="margin-bottom:2em">Abbildungswinkel in Abhängigkeit der Brennweite und Sensorgröße</H1>  
+    <form class="form-inline">
+      <label for="sel1" >CCD-Sensor:</label>
+      <select v-model="selectedSensor" class="form-control" id="sel1">
+        <option v-for="sensor in sensoren" >{{ sensor.bezeichnung }}</option>
+      </select>
+	  <label>{{getSensor.laenge}} * {{getSensor.breite}} mm </label>
+  </form>
+    <table class="table">
+      <thead>
+      <tr>
+        <th v-for="label in objektivColumns">
+          {{ label }}
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <template v-for="objektiv in objektive" >
+      <tr v-if="objektiv.sensor == selectedSensor" >
+        <td>
+          {{ objektiv.bezeichnung }}
+        </td>
+        <td v-if="!objektiv.zoom" class="text-center" >
+          {{ objektiv.brennweite }}
+        </td>
+        <td v-else="objektiv.zoom" >
+          <input name="range" type="range"  v-bind:min=objektiv.brennweiteMin v-bind:max=objektiv.brennweiteMax step=1 v-model:value=objektiv.brennweite />
+		  <output name="range_value" for="range" class="text-center" >{{ objektiv.brennweite }}</output>
+        </td>
+        <td class="text-center">
+          {{ calculateWinkel(objektiv.brennweite, getSensor.laenge).toFixed(1) }}
+        </td>
+        <td class="text-center" >
+            {{ calculateWinkel(objektiv.brennweite, getSensor.breite).toFixed(1) }}
+        </td>
+      </tr>
+      </template>
+      <tr>
+        <td>
+          Bitte Brennweite eingeben
+        </td>
+        <td>
+          <input type="number" v-model.number="manBrennweite"  class="text-right" />
+        </td>
+        <td class="text-center">
+          {{ calculateWinkel(manBrennweite, getSensor.laenge).toFixed(1) }}
+        </td>
+        <td class="text-center">
+           {{ calculateWinkel(manBrennweite, getSensor.breite).toFixed(1) }}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+	<div class="panel panel-default">
+       <div class="panel-body">Berechnungsformel: Winkel = 2 * Atan(Sensorgröße / ( 2 * Brennweite)) * 180 / Pi</div>
+     </div>
+  </div>
+</body>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.js"></script>
+<script type="text/javascript">
+new Vue({
+  el: '.container',
+  data: {
+    selectedSensor: "MFT",
+    manBrennweite: 0,
+    calWinkelBreite: 0,
+    calWinkelHoehe: 0,
+    objektivColumns: ['Objektiv', 'Brennweite [mm]', 'Winkel (Sensorlänge) [°]', 'Winkel (Sensorbreite)  [°]'],
+    objektive: [
+      {bezeichnung: 'Olympus 7 Fisheye', brennweite: 7, sensor: 'MFT', zoom: false},
+      {bezeichnung: 'Olympus 25', brennweite: 25, sensor: 'MFT', zoom: false},
+      {bezeichnung: 'Olympus 50', brennweite: 50, sensor: 'MFT', zoom: false},
+      {bezeichnung: 'Olympus 14-150', brennweite: 14, brennweiteMin: 14, brennweiteMax: 150, sensor: 'MFT', zoom: true},
+      {bezeichnung: 'Nikon 10-15', brennweite: 10, brennweiteMin: 10, brennweiteMax: 15, sensor: 'ASPC D70', zoom: true},
+      {bezeichnung: 'Nikon 20-250', brennweite: 20, brennweiteMin: 20, brennweiteMax: 250, sensor: 'ASPC D70', zoom: true},
+      {bezeichnung: 'Nikon 10', brennweite: 10, sensor: 'ASPC D70', zoom: false}
+    ],
+    sensoren: [
+      {bezeichnung: 'MFT', laenge: 17.3, breite: 13},
+      {bezeichnung: 'ASPC D70', laenge: 23.7, breite: 15.6}
+    ]
+  },
+  computed: {
+    calculateManWinkel: function () {
+	  this.calWinkelHoehe = this.calculateWinkel(this.manBrennweite, this.getSensor.laenge), 
+      this.calWinkelBreite = this.calculateWinkel(this.manBrennweite, this.getSensor.breite)
+    },
+    getSensor: function (){
+      let sel = this.selectedSensor;
+      let result = this.sensoren.filter(function (obj) {
+        return obj.bezeichnung === sel;
+      })[0];
+      return result;
+    }
+  },
+  methods: {
+    calculateWinkel: function(f, side) {
+      let a = 2 * Math.atan(side / ( 2 * f)) * 180 / Math.PI;
+      return a
+    },
+
+  }
+})
+</script>
+</html>

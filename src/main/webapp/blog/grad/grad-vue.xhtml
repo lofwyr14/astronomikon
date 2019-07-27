@@ -7,9 +7,11 @@
 
   <ui:param name="title" value="Winkelberechnung"/>
 
+  <tc:script file="#{request.contextPath}/vue-v2.5.16.js"/>
   <tc:script file="#{request.contextPath}/blog/grad/grad.js"/>
+  <tc:script file="#{request.contextPath}/blog/grad/grad-vue.js"/>
 
-  <tc:box label="Größe des Ausschnitts eines Fotos als Winkel in Grad">
+  <tc:box id="box" label="Größe des Ausschnitts eines Fotos als Winkel in Grad">
 
     <p>
       Der Ausschnitt des Himmels <span class="latex">\alpha</span> der auf einem Foto erscheint ist von
@@ -25,20 +27,22 @@
       </tc:figure>
     </tc:flowLayout>
 
+    <h2>
+      angle width: {{angleWidth}} /
+      angle height: {{angleHeight}}
+    </h2>
+
     <p>
       Kameraauswahl:
+      <tc:hidden id="cameras">
+        <tc:dataAttribute name="cameras" value='{"width": #{sensorFormat.width}, "height": #{sensorFormat.height}'/>
+      </tc:hidden>
+
       <tc:selectOneRadio id="selectSensor1" value="#{angleCalculator.cameraController.current}"
                          converter="#{angleCalculator.sensorConverter}">
-        <tc:selectItems value="#{angleCalculator.cameraController.all}" var="sensorFormat"
-                        itemValue="#{sensorFormat}"
-                        itemLabel="#{sensorFormat.manufacturer} #{sensorFormat.name} (#{sensorFormat.sensorFormat} - #{sensorFormat.width}mm x #{sensorFormat.height}mm)"/>
-        <f:ajax render="sheet" execute="sheet"/>
+        <option v-model=""/>
       </tc:selectOneRadio>
     </p>
-
-    Randnotiz: Ende 2018 sind die ersten spiegellosen Vollformat-Kameras von Nikon rausgekommen, die
-    <a href="https://www.amazon.de/Nikon-System-Digitalkamera-24-70-Bajonettadapter/dp/B07H2XJ8WM/ref=sr_1_1&amp;tag=popecke-21">Z6</a>
-    und Z7 herausgekommen. Diese scheinen sehr interessant für Astro-Fotografie zu sein.
 
     <tc:sheet value="#{angleCalculator.optics}" var="optic" id="sheet" markup="small">
       <tc:column label="Name">

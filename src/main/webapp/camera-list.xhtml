@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:tc="http://myfaces.apache.org/tobago/component"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+  <f:event type="preRenderView" listener="#{cameraController.findAll}"/>
+
+  <tc:box label="Kameras">
+    <f:facet name="bar">
+      <tc:button image="fa-plus" label="Neu">
+        <f:ajax listener="#{cameraController.create}" render=":page:astro"/>
+      </tc:button>
+    </f:facet>
+
+    <tc:sheet value="#{cameraController.all}" var="camera" id="sheet" markup="hover">
+      <tc:row>
+        <f:ajax listener="#{cameraController.select}" render=":page:astro"/>
+      </tc:row>
+      <tc:column label="Name">
+        <tc:out value="#{camera.name}" labelLayout="skip"/>
+      </tc:column>
+    </tc:sheet>
+
+  </tc:box>
+
+</ui:composition>

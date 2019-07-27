@@ -92,7 +92,7 @@ public class AngleCalculator implements Serializable {
     return Math.atan(size / 2.0 / optic.getFocalLength()) / Math.PI * 180.0 * 2.0;
   }
 
-  private static String format(final double angle) {
+  public static String format(final double angle) {
 
     int d = (int) Math.floor(angle);
     double minfloat = (angle - d) * 60;
@@ -137,23 +137,22 @@ public class AngleCalculator implements Serializable {
   }
 
   public Converter getSensorConverter() {
-    return new SensorConverter();
-  }
-
-  public class SensorConverter implements Converter {
-    @Override
-    public Object getAsObject(FacesContext context, UIComponent component, String value) throws ConverterException {
-      for (Camera camera : cameraController.getAll()) {
-        if (camera.getName().equals(value)) {
-          return camera;
+    return new Converter() {
+      @Override
+      public Object getAsObject(FacesContext context, UIComponent component, String value) throws ConverterException {
+        for (Camera camera : cameraController.getAll()) {
+          if (camera.getName().equals(value)) {
+            return camera;
+          }
         }
+        return null;
       }
-      return null;
-    }
 
-    @Override
-    public String getAsString(FacesContext context, UIComponent component, Object value) throws ConverterException {
-      return ((Camera) value).getName();
-    }
+      @Override
+      public String getAsString(FacesContext context, UIComponent component, Object value) throws ConverterException {
+        return ((Camera) value).getName();
+      }
+    };
   }
+
 }

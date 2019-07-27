@@ -1,19 +1,15 @@
 package net.popecke.astro;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.ektorp.support.CouchDbDocument;
 import org.ektorp.support.TypeDiscriminator;
 
-import java.io.Serializable;
 import java.time.Duration;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 @JsonIgnoreProperties({"id", "revision"})
-public class Photo extends CouchDbDocument implements Serializable {
-
-  private String name; // tbd ?
+public class Photo extends AbstractEntity {
 
   private Target target;
 
@@ -35,17 +31,6 @@ public class Photo extends CouchDbDocument implements Serializable {
   private Integer countBias;
 
   private String description;
-
-  private Date releaseDate;
-  private Date updateDate;
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
 
   public Target getTarget() {
     return target;
@@ -163,22 +148,6 @@ public class Photo extends CouchDbDocument implements Serializable {
     this.description = description;
   }
 
-  public Date getReleaseDate() {
-    return releaseDate;
-  }
-
-  public void setReleaseDate(Date releaseDate) {
-    this.releaseDate = releaseDate;
-  }
-
-  public Date getUpdateDate() {
-    return updateDate;
-  }
-
-  public void setUpdateDate(Date updateDate) {
-    this.updateDate = updateDate;
-  }
-
   @TypeDiscriminator
   public String getType() {
     return getClass().getSimpleName();
@@ -194,7 +163,6 @@ public class Photo extends CouchDbDocument implements Serializable {
     return "Photo{" +
         "id='" + getId() + '\'' +
         ", revision='" + getRevision() + '\'' +
-        ", name='" + name + '\'' +
         ", target=" + target +
         ", thumb='" + thumb + '\'' +
         ", preview='" + preview + '\'' +
@@ -210,8 +178,6 @@ public class Photo extends CouchDbDocument implements Serializable {
         ", countFlat=" + countFlat +
         ", countBias=" + countBias +
         ", description='" + description + '\'' +
-        ", releaseDate=" + releaseDate +
-        ", updateDate=" + updateDate +
         '}';
   }
 }

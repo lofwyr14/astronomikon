@@ -7,7 +7,7 @@
   <f:view>
     <tc:page label="Fotografie" id="page">
 
-      <f:event type="preRenderView" listener="#{pageController.checkRequestParam}"/>
+      <f:event type="preRenderView" listener="#{navigation.checkRequestParam}"/>
 
       <tc:style file="#{request.contextPath}/base.css"/>
       <tc:script file="#{request.contextPath}/base.js"/>
@@ -26,43 +26,63 @@
             <tc:link label="Blog" omit="true">
               <tc:link label="Winkelberechnung">
                 <f:param name="blog" value="grad/grad"/>
-                <f:ajax listener="#{pageController.toBlog}" render=":page:astro"/>
+                <f:ajax listener="#{navigation.toBlog}" render=":page:astro"/>
+              </tc:link>
+              <tc:link label="Winkelberechnung (vuejs)">
+                <f:param name="blog" value="grad/grad-vue"/>
+                <f:ajax listener="#{navigation.toBlog}" render=":page:astro"/>
               </tc:link>
               <tc:link label="Setup">
                 <f:param name="blog" value="setup/setup"/>
-                <f:ajax listener="#{pageController.toBlog}" render=":page:astro"/>
+                <f:ajax listener="#{navigation.toBlog}" render=":page:astro"/>
               </tc:link>
-              <tc:link label="Bildbearbeitung">
-                <f:param name="blog" value="bildbearbeitung/bildbearbeitung"/>
-                <f:ajax listener="#{pageController.toBlog}" render=":page:astro"/>
+              <tc:link label="Bildbearbeitung" omit="true">
+                <tc:link label="DSS + PS">
+                  <f:param name="blog" value="bildbearbeitung/bildbearbeitung"/>
+                  <f:ajax listener="#{navigation.toBlog}" render=":page:astro"/>
+                </tc:link>
+                <tc:link label="PixInsight">
+                  <f:param name="blog" value="bildbearbeitung-pi/bildbearbeitung-pi"/>
+                  <f:ajax listener="#{navigation.toBlog}" render=":page:astro"/>
+                </tc:link>
+              </tc:link>
+              <tc:link label="Sky Quality Meter">
+                <f:param name="blog" value="sky-quality-meter/sky-quality-meter"/>
+                <f:ajax listener="#{navigation.toBlog}" render=":page:astro"/>
               </tc:link>
               <tc:link label="Fotoobjektiv vs. Maksutov">
                 <f:param name="blog" value="vergleich/vergleich-zoom-200-maksutov-c90"/>
-                <f:ajax listener="#{pageController.toBlog}" render=":page:astro"/>
+                <f:ajax listener="#{navigation.toBlog}" render=":page:astro"/>
               </tc:link>
               <tc:link label="Rauschen von Kameras">
                 <f:param name="blog" value="sensorrauschen/rauschen"/>
-                <f:ajax listener="#{pageController.toBlog}" render=":page:astro"/>
+                <f:ajax listener="#{navigation.toBlog}" render=":page:astro"/>
               </tc:link>
               <tc:link label="Leichte Teleskope">
                 <f:param name="blog" value="star-adventurer/small-teleskopes"/>
-                <f:ajax listener="#{pageController.toBlog}" render=":page:astro"/>
+                <f:ajax listener="#{navigation.toBlog}" render=":page:astro"/>
               </tc:link>
               <tc:link label="Software">
                 <f:param name="blog" value="software/software"/>
-                <f:ajax listener="#{pageController.toBlog}" render=":page:astro"/>
+                <f:ajax listener="#{navigation.toBlog}" render=":page:astro"/>
               </tc:link>
               <tc:link label="Links">
                 <f:param name="blog" value="links/links"/>
-                <f:ajax listener="#{pageController.toBlog}" render=":page:astro"/>
+                <f:ajax listener="#{navigation.toBlog}" render=":page:astro"/>
               </tc:link>
               <tc:link label="Planetarium (Todo)" image="wrench">
                 <f:param name="blog" value="todo/planetarium"/>
-                <f:ajax listener="#{pageController.toBlog}" render=":page:astro"/>
+                <f:ajax listener="#{navigation.toBlog}" render=":page:astro"/>
               </tc:link>
             </tc:link>
             <tc:link label="Fotos">
-              <f:ajax listener="#{pageController.toList}" render=":page:astro"/>
+              <f:ajax listener="#{photoController.toList}" render=":page:astro"/>
+            </tc:link>
+            <tc:link label="Kameras">
+              <f:ajax listener="#{cameraController.toList}" render=":page:astro"/>
+            </tc:link>
+            <tc:link label="Objekte">
+              <f:ajax listener="#{celestialController.toList}" render=":page:astro"/>
             </tc:link>
             <tc:link label="Hilfe" omit="true">
               <tc:link label="Über">
@@ -91,13 +111,13 @@
         </tc:bar>
       </tc:header>
 
-      <tc:messages/>
-
       <tc:panel id="astro">
 
-        (including: #{pageController.current})
+        <tc:messages/>
 
-        <ui:include src="#{pageController.current}"/>
+        (including: #{navigation.current})
+
+        <ui:include src="#{navigation.current}"/>
 
       </tc:panel>
 

@@ -14,13 +14,17 @@ import java.io.Serializable;
 
 @SessionScoped
 @Named
-public class PageController implements Serializable {
+public class Navigation implements Serializable {
 
   public static final String PHOTO_VIEW = "/photo-view.xhtml";
   public static final String PHOTO_LIST = "/photo-list.xhtml";
   public static final String PHOTO_EDIT = "/photo-edit.xhtml";
+  public static final String CAMERA_EDITOR = "/camera-editor.xhtml";
+  public static final String CELESTIAL_VIEW = "/celestial-view.xhtml";
+  public static final String CELESTIAL_LIST = "/celestial-list.xhtml";
+  public static final String CELESTIAL_EDIT = "/celestial-edit.xhtml";
 
-  private static final Logger LOG = LoggerFactory.getLogger(PageController.class);
+  private static final Logger LOG = LoggerFactory.getLogger(Navigation.class);
 
   private String current = PHOTO_LIST;
 
@@ -49,6 +53,14 @@ public class PageController implements Serializable {
 
   public void toList(final FacesEvent event) {
     current = PHOTO_LIST;
+  }
+
+  public void toCameraEditor(final FacesEvent event) {
+    current = CAMERA_EDITOR;
+  }
+
+  public void toCelestialEdit(final FacesEvent event) {
+    current = CELESTIAL_EDIT;
   }
 
   public void toPhotoEdit(final FacesEvent event) {

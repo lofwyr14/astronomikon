@@ -5,30 +5,30 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns="http://www.w3.org/1999/xhtml">
 
-  <tc:box label="#{photoController.photo.name}">
+  <tc:box label="#{photoController.current.name}">
     <f:facet name="bar">
       <tc:buttons>
         <tc:button image="fa-edit" label="Bearbeiten">
-          <f:ajax listener="#{pageController.toPhotoEdit}" render=":page:astro"/>
+          <f:ajax listener="#{photoController.toEdit}" render=":page:astro"/>
         </tc:button>
-        <tc:button image="fa-photo" label="Bild" link="#{photoController.photo.full}"/>
+        <tc:button image="fa-photo" label="Bild" link="#{photoController.current.full}"/>
       </tc:buttons>
     </f:facet>
 
     <p>
-      #{photoController.photo.description}
+      #{photoController.current.description}
     </p>
 
-    <tc:figure label="#{photoController.photo.target.name}">
-      <tc:image value="#{photoController.photo.preview}"/>
+    <tc:figure label="#{photoController.current.target.name}">
+      <tc:image value="#{photoController.current.preview}"/>
     </tc:figure>
 
     <tc:panel>
-      <tc:out label="Teleskop" tip="oder Objektiv" value="#{photoController.photo.optic}"/>
-      <tc:out label="Datum" tip="Begin der Aufnahme" value="#{photoController.photo.begin}">
+      <tc:out label="Teleskop" tip="oder Objektiv" value="#{photoController.current.optic}"/>
+      <tc:out label="Datum" tip="Begin der Aufnahme" value="#{photoController.current.begin}">
         <f:convertDateTime type="both"/>
       </tc:out>
-      <tc:out label="Teleskop" tip="oder Objektiv" value="#{photoController.photo.optic}"/>
+      <tc:out label="Teleskop" tip="oder Objektiv" value="#{photoController.current.optic}"/>
     </tc:panel>
 
   </tc:box>

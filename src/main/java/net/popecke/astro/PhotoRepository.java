@@ -2,8 +2,6 @@ package net.popecke.astro;
 
 import org.ektorp.support.CouchDbRepositorySupport;
 import org.ektorp.support.View;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -13,12 +11,10 @@ import java.util.List;
 @ApplicationScoped
 @Named
 @View( name = "all", map = "function(doc) { if (doc.type == 'Photo') emit( null, doc._id )}")
-public class PhotoService extends CouchDbRepositorySupport<Photo> {
-
-  private static final Logger LOG = LoggerFactory.getLogger(PhotoService.class);
+public class PhotoRepository extends CouchDbRepositorySupport<Photo> {
 
   @Inject
-  public PhotoService() {
+  public PhotoRepository() {
     super(Photo.class, CouchDb.getConnector());
     initStandardDesignDocument(); // todo: later in production do it otherwise
   }

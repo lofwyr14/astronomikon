@@ -1,25 +1,27 @@
 package net.popecke.astro;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.List;
 
 @SessionScoped
 @Named
-public class CameraController implements Serializable {
+public class CameraController extends AbstractEntityController<Camera> implements Serializable {
 
-  private static final Logger LOG = LoggerFactory.getLogger(CameraController.class);
+//  private static final Logger LOG = LoggerFactory.getLogger(CameraController.class);
 
   @Inject
 //  @Dependent
-  private CameraRepository cameraRepository;
+  private CameraRepository repository;
 
+  @PostConstruct
+  public void init() {
+    init(Camera.class, repository);
+  }
+
+/*
   private List<Camera> all;
   private Camera current;
 
@@ -50,7 +52,7 @@ public class CameraController implements Serializable {
   }
 
   public String findAll() {
-    all = cameraRepository.getAll();
+    all = repository.getAll();
     return "/camera-editor";
   }
 
@@ -60,17 +62,18 @@ public class CameraController implements Serializable {
   }
 
   public String delete() {
-    cameraRepository.remove(current);
+    repository.remove(current);
     current = null;
     return "/camera-editor";
   }
 
   public String save() {
     if (current.getRevision() == null) {
-      cameraRepository.add(current);
+      repository.add(current);
     } else {
-      cameraRepository.update(current);
+      repository.update(current);
     }
     return "/camera-editor";
   }
+*/
 }

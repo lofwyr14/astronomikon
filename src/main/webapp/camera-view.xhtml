@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:tc="http://myfaces.apache.org/tobago/component"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+  <tc:box label="#{cameraController.current.name} - #{cameraController.current.manufacturer} (#{cameraController.current.sensorFormat})">
+    <f:facet name="bar">
+      <tc:buttons>
+        <tc:button image="fa-edit" label="Bearbeiten">
+          <f:ajax listener="#{cameraController.toEdit}" render=":page:astro"/>
+        </tc:button>
+      </tc:buttons>
+    </f:facet>
+
+    <tc:out label="Breite x Höhe" value="#{cameraController.current.width} mm x #{cameraController.current.height} mm"/>
+    <tc:out label="Pixelanzahl X x Y" value="#{cameraController.current.pixelCountX} x #{cameraController.current.pixelCountY}"/>
+
+  </tc:box>
+
+</ui:composition>

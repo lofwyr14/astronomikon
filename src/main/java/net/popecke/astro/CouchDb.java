@@ -24,11 +24,14 @@ public class CouchDb {
   private CouchDbConnector db;
 
   public CouchDb() {
-
-    final String dbLocation = "http://localhost:5984";
+    String couchDbUrl = System.getenv().get("COUCH_DB_URL");
+    if (couchDbUrl == null) {
+      couchDbUrl ="http://localhost:5984";
+    }
+    LOG.info("Couch DB URL: '{}'", couchDbUrl);
     try {
       final HttpClient httpClient = new StdHttpClient.Builder()
-          .url(dbLocation)
+          .url(couchDbUrl)
           .build();
 
       final CouchDbInstance dbInstance = new StdCouchDbInstance(httpClient);
@@ -36,7 +39,7 @@ public class CouchDb {
 
       db.createDatabaseIfNotExists();
     } catch (Exception e) {
-      final String text = "Problems while connecting database " + dbLocation;
+      final String text = "Problems while connecting database url='" + couchDbUrl + "'!";
       LOG.error(text, e);
       throw new RuntimeException(text, e);
     }

@@ -1,56 +1,54 @@
 package net.popecke.astro;
 
-import org.apache.myfaces.tobago.util.ComponentUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.component.UIData;
-import javax.faces.event.ComponentSystemEvent;
-import javax.faces.event.FacesEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 
 @SessionScoped
 @Named
-public class PhotoController implements Serializable {
+public class PhotoController extends AbstractEntityController<Photo> implements Serializable {
 
-  private static final Logger LOG = LoggerFactory.getLogger(PhotoController.class);
+//  private static final Logger LOG = LoggerFactory.getLogger(PhotoController.class);
 
   @Inject
 //  @Dependent
-  private PhotoService photoService;
+  private PhotoRepository repository;
 
+  @PostConstruct
+  public void init() {
+    init(Photo.class, repository);
+  }
+
+/*
   @Inject
-  private PageController pageController;
+  private Navigation navigation;
 
   private List<Photo> all;
-  private Photo photo;
+  private Photo current;
 
   public void select(final FacesEvent event) {
     LOG.info("Select photo {}", event);
     final UIData data = ComponentUtils.findAncestor(event.getComponent(), UIData.class);
     if (data != null) {
-      photo = (Photo) data.getRowData();
-      LOG.info("Selected: " + photo.getName());
+      current = (Photo) data.getRowData();
+      LOG.info("Selected: " + current.getName());
     } else {
-      photo = null;
+      current = null;
       LOG.info("Deselect.");
     }
-//    LOG.info("Select photo {}", photo);
-//    this.photo = photo;
-    pageController.setCurrent(PageController.PHOTO_VIEW);
+//    LOG.info("Select photo {}", current);
+//    this.current = current;
+    navigation.setCurrent(Navigation.PHOTO_VIEW);
   }
 
-  public Photo getPhoto() {
+  public Photo getCurrent() {
 
-    if (photo == null) {
-      photo = new Photo();
+    if (current == null) {
+      current = new Photo();
     }
-    return photo;
+    return current;
   }
 
   public List<Photo> getAll() {
@@ -58,12 +56,12 @@ public class PhotoController implements Serializable {
   }
 
   public void findAll(final ComponentSystemEvent event) {
-    all = photoService.getAll();
+    all = repository.getAll();
   }
 
   public void create(final FacesEvent event) {
-    photo = new Photo();
-    pageController.setCurrent(PageController.PHOTO_EDIT);
+    current = new Photo();
+    navigation.setCurrent(Navigation.PHOTO_EDIT);
   }
 
   public void saveX(final FacesEvent event) {
@@ -75,26 +73,27 @@ public class PhotoController implements Serializable {
   public void save(final FacesEvent event) {
     LOG.info("save");
     try {
-      Thread.sleep(10000);
+      Thread.sleep(10_000);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
 
     Date now = new Date();
-    photo.setUpdateDate(now);
-    if (photo.getReleaseDate() == null) {
-      photo.setReleaseDate(now);
+    current.setUpdateDate(now);
+    if (current.getReleaseDate() == null) {
+      current.setReleaseDate(now);
     }
-    if (photo.getRevision() == null) {
-      photoService.add(photo);
+    if (current.getRevision() == null) {
+      repository.add(current);
     } else {
-      photoService.update(photo);
+      repository.update(current);
     }
-    pageController.setCurrent(PageController.PHOTO_VIEW);
+    navigation.setCurrent(Navigation.PHOTO_VIEW);
   }
 
   public void delete(final FacesEvent event) {
-    photoService.remove(photo);
-    pageController.setCurrent(PageController.PHOTO_VIEW);
-  }
+    repository.remove(current);
+    current = null;
+    navigation.setCurrent(Navigation.PHOTO_VIEW);
+  }*/
 }

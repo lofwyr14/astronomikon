@@ -12,24 +12,24 @@
       </tc:button>
     </f:facet>
 
-    <tc:in label="ID" value="#{photoController.photo.id}" readonly="#{photoController.photo.revision != null}"/>
-    <tc:in label="Revision" value="#{photoController.photo.revision}" readonly="true"/>
-    <tc:in label="Name" value="#{photoController.photo.name}"/>
-    <tc:date label="Startzeitpunkt" value="#{photoController.photo.begin}">
+    <tc:in label="ID" value="#{photoController.current.id}" readonly="#{photoController.current.revision != null}"/>
+    <tc:in label="Revision" value="#{photoController.current.revision}" readonly="true"/>
+    <tc:in label="Name" value="#{photoController.current.name}"/>
+    <tc:date label="Startzeitpunkt" value="#{photoController.current.begin}">
       <f:convertDateTime type="both" pattern="yyyy-MM-dd HH:mm:ss"/>
     </tc:date>
-    <tc:in label="Anzahl der Aufnahmen" value="#{photoController.photo.count}"/>
-    <tc:in label="Anzahl der Darks" value="#{photoController.photo.countDark}"/>
-    <tc:in label="Anzahl der Bias'" value="#{photoController.photo.countBias}"/>
-    <tc:in label="Anzahl der Flats" value="#{photoController.photo.countFlat}"/>
+    <tc:in label="Anzahl der Aufnahmen" value="#{photoController.current.count}"/>
+    <tc:in label="Anzahl der Darks" value="#{photoController.current.countDark}"/>
+    <tc:in label="Anzahl der Bias'" value="#{photoController.current.countBias}"/>
+    <tc:in label="Anzahl der Flats" value="#{photoController.current.countFlat}"/>
     <tc:in label="Optik" disabled="true" value="to be implemented"/>
     <tc:in label="Sensor" disabled="true" value="to be implemented"/>
 
-    <tc:in label="Foto Mini" value="#{photoController.photo.thumb}"/>
-    <tc:in label="Foto Vorschau" value="#{photoController.photo.preview}"/>
-    <tc:in label="Foto Original" value="#{photoController.photo.full}"/>
+    <tc:in label="Foto Mini" value="#{photoController.current.thumb}"/>
+    <tc:in label="Foto Vorschau" value="#{photoController.current.preview}"/>
+    <tc:in label="Foto Original" value="#{photoController.current.full}"/>
 
-    <tc:textarea label="Beschreibung" value="#{photoController.photo.description}"/>
+    <tc:textarea label="Beschreibung" value="#{photoController.current.description}"/>
 
     <tc:buttons>
       <tc:button label="Speichern" defaultCommand="true">
@@ -37,6 +37,9 @@
       </tc:button>
       <tc:button label="Löschen" confirmation="Wirklich löschen?" markup="danger">
         <f:ajax listener="#{photoController.delete}" render=":page:astro" execute="photo-edit"/>
+      </tc:button>
+      <tc:button label="Abbrechen">
+        <f:ajax listener="#{photoController.toList}" render=":page:astro"/>
       </tc:button>
     </tc:buttons>
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<f:view xmlns:tc="http://myfaces.apache.org/tobago/component"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns="http://www.w3.org/1999/xhtml">
+
+  <tc:page id="page" label="Login">
+    <tc:section label="Login">
+      <tc:messages/>
+
+      <tc:in id="username" value="#{login.username}" label="User" focus="true" required="true"/>
+      <tc:in id="password" value="#{login.password}" password="true" label="Password" required="true"/>
+      <tc:button id="login" action="#{login.login}" label="Login" defaultCommand="true"
+                 disabled="#{request.userPrincipal != null}"/>
+      <tc:button id="logout" action="#{login.logout}" label="Logout '#{request.userPrincipal.name}'"
+                 rendered="#{request.userPrincipal != null}" immediate="true"/>
+    </tc:section>
+  </tc:page>
+
+</f:view>

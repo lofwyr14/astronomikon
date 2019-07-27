@@ -1,14 +1,14 @@
 $(document).ready(function () {
 
-  var planetarium = $.virtualsky({
-    id: 'starmap'//,
-    // longitude: 53,
-    // latitude: 8
+  var planetarium = jQuery.virtualsky({
+    id: 'starmap',
+    longitude: 53,
+    latitude: 8
   });
 
   // todo: fn
 
-  $("#page\\:compass").click(function () {
+  jQuery("#page\\:compass").click(function () {
     // if ("geolocation" in navigator) {
     //   navigator.geolocation.getCurrentPosition(function(position) {
     //     planetarium.setLatitude(position.coords.latitude);
@@ -16,7 +16,7 @@ $(document).ready(function () {
 
         planetarium.setLatitude(40);
         planetarium.setLongitude(40);
-    planetarium.
+    // planetarium.
 
       // });
     // } else {

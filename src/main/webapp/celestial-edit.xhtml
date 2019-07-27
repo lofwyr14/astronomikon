@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:tc="http://myfaces.apache.org/tobago/component"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+  <tc:box label="Objekt bearbeiten" id="celestial-edit">
+
+    <tc:in label="ID" value="#{celestialController.current.id}" readonly="#{celestialController.current.revision != null}"/>
+    <tc:in label="Revision" value="#{celestialController.current.revision}" readonly="true"/>
+    <tc:in label="Name" value="#{celestialController.current.name}"/>
+    <tc:textarea label="Beschreibung" value="#{celestialController.current.description}"/>
+    <tc:in label="URL" value="#{celestialController.current.url}"/>
+    <tc:in label="Rektaszension" value="#{celestialController.current.rightAscension}" converter="rightAscension"/>
+    <tc:in label="Deklination" value="#{celestialController.current.declination}" converter="declination"/>
+    <tc:in label="Scheinbare Größe" value="#{celestialController.current.apparentSize}" converter="angle"/>
+
+    <tc:buttons>
+      <tc:button label="Speichern" defaultCommand="true">
+        <f:ajax listener="#{celestialController.save}" render=":page:astro" execute="celestial-edit"/>
+      </tc:button>
+      <tc:button label="Löschen" confirmation="Wirklich löschen?" markup="danger">
+        <f:ajax listener="#{celestialController.delete}" render=":page:astro" execute="celestial-edit"/>
+      </tc:button>
+      <tc:button image="fa-cancel" label="Abbrechen">
+        <f:ajax listener="#{celestialController.toList}" render=":page:astro"/>
+      </tc:button>
+    </tc:buttons>
+
+  </tc:box>
+
+</ui:composition>

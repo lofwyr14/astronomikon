@@ -72,4 +72,15 @@
   </error-page>
 -->
 
+  <session-config>
+    <cookie-config>
+      <http-only>true</http-only>
+      <!--<secure>true</secure>-->
+    </cookie-config>
+  </session-config>
+
+  <security-role>
+    <role-name>admin</role-name>
+  </security-role>
+
 </web-app>

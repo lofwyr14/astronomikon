@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns:tc="http://myfaces.apache.org/tobago/component"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+  <tc:box label="#{celestialController.current.name}">
+    <f:facet name="bar">
+      <tc:buttons>
+        <tc:button  link="#{celestialController.current.url}" image="fa-wikipedia-w" label="Wikipedia"/>
+        <tc:button image="fa-edit" label="Bearbeiten">
+          <f:ajax listener="#{celestialController.toEdit}" render=":page:astro"/>
+        </tc:button>
+      </tc:buttons>
+    </f:facet>
+
+    <p>
+      #{celestialController.current.description}
+    </p>
+
+    <tc:out label="Rektaszension" value="#{celestialController.current.rightAscension}" converter="rightAscension"/>
+    <tc:out label="Deklination" value="#{celestialController.current.declination}" converter="declination"/>
+    <tc:out label="Scheinbare Größe" value="#{celestialController.current.apparentSize}" converter="angle" />
+
+  </tc:box>
+
+</ui:composition>
