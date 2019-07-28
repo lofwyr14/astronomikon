@@ -53,12 +53,16 @@
       <artifactId>myfaces-api</artifactId>
       <version>${myfaces.version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.apache.myfaces.core</groupId>
       <artifactId>myfaces-impl</artifactId>
       <version>${myfaces.version}</version>
       <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
     </dependency>
     <dependency>
       <groupId>org.apache.geronimo.specs</groupId>
@@ -153,11 +157,16 @@
       <version>2.9.8</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.ektorp/org.ektorp -->
     <dependency>
       <groupId>org.ektorp</groupId>
       <artifactId>org.ektorp</artifactId>
       <version>1.5.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.webjars.npm</groupId>
+      <artifactId>katex</artifactId>
+      <version>0.9.0</version>
     </dependency>
 
   </dependencies>

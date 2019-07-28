@@ -1,3 +1,7 @@
+import {Listener, Phase} from "./tobago/standard/tobago-bootstrap/5.0.0-SNAPSHOT/js/tobago-listener";
+import {DomUtils} from "./tobago/standard/tobago-bootstrap/5.0.0-SNAPSHOT/js/tobago-utils";
+import {katex} from "./webjars/katex/0.9.0/dist/katex.js";
+
 jQuery(document).ready(function () {
 
   jQuery("#page\\:fullscreen").click(function () {
@@ -31,22 +35,24 @@ jQuery(document).ready(function () {
   });
 });
 
-astro = {};
+// XXX currently broken!
 
-astro.init = function() {
-  jQuery(".latex").each(function () {
-    var $element = jQuery(this);
-    if ($element.find(".katex").length > 0) {
+var astro_init = function(element) {
+  for(var latex of DomUtils.selfOrQuerySelectorAll(element, ".latex")) {
+    if (latex.querySelector(".katex")) {
       // was already processed
       return;
     }
-    var latex = $element.text();
-    katex.render(latex, $element.get(0), {
+    var text = latex.textContent;
+    katex.render(text, latex, {
       throwOnError: true,
-      displayMode: $element.css("display") === "block"
+      displayMode: latex.style.display === "block"
     });
-  });
+  }
 };
 
-Tobago.registerListener(astro.init, Tobago.Phase.DOCUMENT_READY);
-Tobago.registerListener(astro.init, Tobago.Phase.AFTER_UPDATE);
+Listener.register(astro_init, Phase.DOCUMENT_READY);
+Listener.register(astro_init, Phase.AFTER_UPDATE);
+
+// Tobago.registerListener(astro_init, Tobago.Phase.DOCUMENT_READY);
+// Tobago.registerListener(astro_init, Tobago.Phase.AFTER_UPDATE);

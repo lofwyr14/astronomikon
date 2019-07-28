@@ -28,14 +28,14 @@
       <versioned>false</versioned>
       <resources production="true">
         <includes>
-          <script name="/katex/katex.min.js"/>
-          <style name="/katex/katex.min.css"/>
+          <script name="/webjars/katex/0.9.0/dist/katex.min.js"/>
+          <style name="/webjars/katex/0.9.0/dist/katex.min.css"/>
         </includes>
       </resources>
       <resources production="false">
         <includes>
-          <script name="/katex/katex.js"/>
-          <style name="/katex/katex.css"/>
+          <script name="/webjars/katex/0.9.0/dist/katex.js"/>
+          <style name="/webjars/katex/0.9.0/dist/katex.css"/>
         </includes>
       </resources>
     </theme-definition>
