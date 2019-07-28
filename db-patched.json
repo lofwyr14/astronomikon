@@ -1,0 +1,126 @@
+{
+  "docs": [
+    {
+      "_id": "_design/Camera",
+      "views": {
+        "all": {
+          "map": "function(doc) { if (doc.type == 'Camera' ) emit( null, doc._id )}"
+        }
+      },
+      "lists": {},
+      "shows": {},
+      "language": "javascript",
+      "filters": {},
+      "updates": {}
+    },
+    {
+      "_id": "_design/Celestial",
+      "views": {
+        "all": {
+          "map": "function(doc) { if (doc.type == 'Celestial' ) emit( null, doc._id )}"
+        }
+      },
+      "lists": {},
+      "shows": {},
+      "language": "javascript",
+      "filters": {},
+      "updates": {}
+    },
+    {
+      "_id": "_design/Photo",
+      "views": {
+        "all": {
+          "map": "function(doc) { if (doc.type == 'Photo') emit( null, doc._id )}"
+        }
+      },
+      "lists": {},
+      "shows": {},
+      "language": "javascript",
+      "filters": {},
+      "updates": {}
+    },
+    {
+      "_id": "a7s",
+      "id": "a7s",
+      "name": "α7S",
+      "manufacturer": "Sony",
+      "sensorFormat": "Vollformat",
+      "width": 35.6,
+      "height": 23.8,
+      "pixelCountX": 4288,
+      "pixelCountY": 2848,
+      "type": "Camera"
+    },
+    {
+      "_id": "asi1600",
+      "id": "asi1600",
+      "name": "ASI 1600",
+      "manufacturer": "ZWO",
+      "sensorFormat": "Micro 3/4",
+      "width": 17.2,
+      "height": 13.2,
+      "pixelCountX": 4656,
+      "pixelCountY": 3520,
+      "type": "Camera"
+    },
+    {
+      "_id": "d5200",
+      "id": "d5200",
+      "name": "D5200",
+      "manufacturer": "Nikon",
+      "sensorFormat": "ASP-C",
+      "width": 23.5,
+      "height": 15.6,
+      "pixelCountX": 6000,
+      "pixelCountY": 4000,
+      "type": "Camera"
+    },
+    {
+      "_id": "d810",
+      "id": "d810",
+      "name": "D810",
+      "manufacturer": "Nikon",
+      "sensorFormat": "Vollformat",
+      "width": 36,
+      "height": 24,
+      "pixelCountX": 7360,
+      "pixelCountY": 4912,
+      "type": "Camera"
+    },
+    {
+      "_id": "m27",
+      "id": "m27",
+      "name": "M27 - Hantelnebel",
+      "thumb": "http://schnurpfeil.de/astro/image/2017-08-22-Oldenburg-M27/M27-thumb.jpg",
+      "preview": "http://schnurpfeil.de/astro/image/2017-08-22-Oldenburg-M27/M27-preview.jpg",
+      "full": "http://schnurpfeil.de/astro/image/2017-08-22-Oldenburg-M27/M27-full.jpg",
+      "pictures": {},
+      "begin": "2017-08-22T23:52:29.000+0000",
+      "count": 200,
+      "countDark": 10,
+      "countFlat": 0,
+      "countBias": 10,
+      "description": "M27",
+      "releaseDate": "2017-10-19T05:51:52.736+0000",
+      "updateDate": "2017-10-19T05:51:52.736+0000",
+      "type": "Photo"
+    },
+    {
+      "_id": "m31",
+      "id": "m31",
+      "name": "M31 - Andromedagalaxie",
+      "thumb": "http://schnurpfeil.de/astro/image/2017-10-15-Oldenburg-M31/M31-thumb.jpg",
+      "preview": "http://schnurpfeil.de/astro/image/2017-10-15-Oldenburg-M31/M31-preview.jpg",
+      "full": "http://schnurpfeil.de/astro/image/2017-10-15-Oldenburg-M31/M31-full.jpg",
+      "pictures": {},
+      "begin": "2017-10-16T00:01:04.000+0000",
+      "count": 212,
+      "countDark": 50,
+      "countBias": 50,
+      "description": "M31",
+      "releaseDate": "2017-10-19T05:52:04.183+0000",
+      "updateDate": "2017-10-19T06:48:00.135+0000",
+      "type": "Photo"
+    }
+  ]
+}
