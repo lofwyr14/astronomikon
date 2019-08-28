@@ -28,7 +28,7 @@
     <p>
       Kameraauswahl:
       <tc:selectOneRadio id="selectSensor1" value="#{angleCalculator.cameraController.current}"
-                         converter="#{angleCalculator.sensorConverter}">
+                         converter="#{angleCalculator.sensorConverter}" required="true">
         <tc:selectItems value="#{angleCalculator.cameraController.all}" var="sensorFormat"
                         itemValue="#{sensorFormat}"
                         itemLabel="#{sensorFormat.manufacturer} #{sensorFormat.name} (#{sensorFormat.sensorFormat} - #{sensorFormat.width}mm x #{sensorFormat.height}mm)"/>

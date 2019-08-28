@@ -70,6 +70,10 @@ public abstract class AbstractEntityController<T extends AbstractEntity> {
     toView(null);
   }
 
+  public void setCurrent(final T current) {
+    this.current = current;
+  }
+
   public T getCurrent() {
     if (current == null) {
       current = createInstance();
