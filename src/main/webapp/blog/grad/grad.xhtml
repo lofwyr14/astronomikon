@@ -69,11 +69,11 @@
         <tc:out value="#{angleCalculator.formatPixelAngle(angleCalculator.cameraController.current, optic)}" labelLayout="skip"/>
       </tc:column>
       <tc:column label="Größe des Beugungscheibchens bei lambda = 550 nm">
-        <tc:out value="#{276.0 / optic.diameter}&quot;" labelLayout="skip"/>
+        <tc:out value="#{276.0 / 3600.0 / optic.diameter}" labelLayout="skip" converter="angle"/>
       </tc:column>
       <tc:column label="Auflösungsvermögen">
-        <tc:out value="#{276.0 / optic.diameter}&quot;" labelLayout="skip"/>
-        / <tc:out value="#{138.0 / optic.diameter}&quot;" labelLayout="skip"/>
+        <tc:out value="#{276.0 / 3600.0 / optic.diameter}" labelLayout="skip" converter="angle"/>
+        / <tc:out value="#{138.0 / 3600.0 / optic.diameter}" labelLayout="skip"  converter="angle"/>
       </tc:column>
     </tc:sheet>
 

@@ -80,7 +80,25 @@ public class AngleConverter implements Converter {
       d -= m;
       d *= 60;
       int s = (int) (double) (d + 0.5);
-      return h + "° " + m + "' " + s + "\"";
+      if (h > 0 && s > 0) {
+        return h + "° " + m + "' " + s + "\"";
+      }
+      if (h > 0 && m > 0) {
+        return h + "° " + m + "'";
+      }
+      if (h > 0) {
+        return h + "°";
+      }
+      if (m > 0 && s > 0) {
+        return m + "' " + s + "\"";
+      }
+      if (m > 0) {
+        return m + "'";
+      }
+      if (s > 0) {
+        return s + "\"";
+      }
+      return "0°";
     } else {
       return null;
     }
