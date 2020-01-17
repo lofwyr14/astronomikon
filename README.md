@@ -1,7 +1,13 @@
 # astro
 Website to view and manage astronomical photos.
 
-#CouchDB Export Import
+# CouchDB Starten
+
+```
+docker-compose up -d
+```
+
+# CouchDB Export Import
 
 ```
 curl -X GET http://localhost:5984/astro/_all_docs\?include_docs\=true > db.json
