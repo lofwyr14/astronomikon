@@ -27,7 +27,7 @@
     <dependency>
       <groupId>commons-beanutils</groupId>
       <artifactId>commons-beanutils</artifactId>
-      <version>1.9.3</version>
+      <version>1.9.4</version>
     </dependency>
 
     <dependency>
@@ -224,6 +224,14 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.owasp</groupId>
+        <artifactId>dependency-check-maven</artifactId>
+        <version>5.2.4</version>
+        <configuration>
+          <failBuildOnCVSS>0</failBuildOnCVSS>
+        </configuration>
       </plugin>
     </plugins>
   </build>
