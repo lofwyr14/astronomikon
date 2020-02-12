@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.ektorp.support.TypeDiscriminator;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @JsonIgnoreProperties({"id", "revision"})
@@ -23,7 +25,7 @@ public class Photo extends AbstractEntity {
   private Camera camera;
 
   private Date begin;
-  private Duration exposureTime;
+  private List<ExposurePart> exposures = new ArrayList<>(1);
   private Duration totalDuration;
   private Integer count;
   private Integer countDark;
@@ -92,12 +94,15 @@ public class Photo extends AbstractEntity {
     this.begin = begin;
   }
 
-  public Duration getExposureTime() {
-    return exposureTime;
+  public List<ExposurePart> getExposures() {
+    if (exposures.size() < 1) {
+      exposures.add(new ExposurePart());
+    }
+    return exposures;
   }
 
-  public void setExposureTime(Duration exposureTime) {
-    this.exposureTime = exposureTime;
+  public void setExposures(List<ExposurePart> exposures) {
+    this.exposures = exposures;
   }
 
   public Duration getTotalDuration() {
@@ -148,6 +153,10 @@ public class Photo extends AbstractEntity {
     this.description = description;
   }
 
+  public Spectrum[] getSpectrumValues() {
+    return Spectrum.values();
+  }
+
   @TypeDiscriminator
   public String getType() {
     return getClass().getSimpleName();
@@ -171,7 +180,7 @@ public class Photo extends AbstractEntity {
         ", optic=" + optic +
         ", sensor=" + camera +
         ", begin=" + begin +
-        ", exposureTime=" + exposureTime +
+        ", exposures=" + exposures +
         ", totalDuration=" + totalDuration +
         ", count=" + count +
         ", countDark=" + countDark +

@@ -7,6 +7,7 @@
 
   <ui:param name="title" value="Sky Quality Meter - Lichtqualität des Himmels messen"/>
 
+  <tc:script file="#{request.contextPath}/vue-v2.5.16.js"/>
   <tc:script file="#{request.contextPath}/blog/sky-quality-meter/sky-quality-meter.js"/>
 
   <tc:box id="box" label="Sky Quality Meter - Lichtqualität des Himmels messen">
@@ -48,9 +49,6 @@
         label="Flächenhelligkeit"
              link="https://de.wikipedia.org/wiki/Fl%C3%A4chenhelligkeit"/>.
 
-    <sky-quality-meter>
-
-    </sky-quality-meter>
 <table class="table">
   <tr>
     <td>Ort</td>
@@ -60,7 +58,7 @@
     <td class="text-center">Zeit [s]</td>
     <td class="text-center">Mag/arcsec</td>
   </tr>
-  <template id="meterings" >
+  <template v-for="metering in meterings" >
     <tr>
       <td>
         {{ metering.location }}
