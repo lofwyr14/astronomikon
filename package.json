@@ -1,0 +1,29 @@
+{
+  "name": "astro",
+  "version": "1.0.0",
+  "description": "Website to view astronomical photos.",
+  "scripts": {
+    "tsc": "tsc --target ES2015 --outDir target/www/js --moduleResolution node src/main/ts/index.ts",
+    "___cp-js": "cp src/main/js/*.js target/www/js",
+    "cp-html": "cp -r src/main/html/* target/www",
+    "cp-css": "mkdir -p target/www/css && cp -r src/main/css/*.css node_modules/katex/dist/katex.css node_modules/katex/dist/fonts target/www/css/",
+    "browserify": "browserify target/www/js/*.js -o target/www/js/bundle.js",
+    "rollup": "rollup --config rollup.config.js",
+    "build": "npm-run-all tsc cp-html cp-css rollup",
+    "clean": "rm -r target",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "Apache 2.0",
+  "devDependencies": {
+    "katex": "^0.11.1",
+    "npm-run-all": "^4.1.5",
+    "rollup": "^1.31.1",
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "@rollup/plugin-commonjs": "^11.0.2",
+    "rollup-plugin-postcss": "^2.0.6",
+    "rollup-plugin-css-porter": "^1.0.2",
+    "@rollup/plugin-typescript": "^3.0.0"
+  }
+}

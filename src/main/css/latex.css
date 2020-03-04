@@ -1,0 +1,12 @@
+astro-latex {
+  font-size: large;
+  display: block;
+  text-align: center;
+}
+
+astro-latex > figure {
+  border: 1px solid orange;
+  border-radius: 1rem;
+  padding: 1rem;
+  display: inline-block;
+}

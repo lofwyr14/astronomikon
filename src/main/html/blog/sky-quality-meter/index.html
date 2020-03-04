@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Sky Quality Meter - Lichtqualität des Himmels messen</title>
+  <script src="../../js/index.js" type="text/javascript"></script>
+  <link href="../../css/latex.css" rel="stylesheet"/>
+  <link href="../../css/katex.css" rel="stylesheet"/>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+
+<astro-title></astro-title>
+
+<p>
+  Mit einer normalen Digitalkamera kann man die Qualität des Himmels, bzw. die Lichtverschmutzung durch
+  Mond oder künstliches Licht messen.
+  Es gibt auch ein fertiges Messgerät hierfür
+  <i class="fa-amazon"></i>
+  <a href="https://www.amazon.de/Sky-Quality-Meter-Linse-Helligkeitsmessung/dp/B00CBRDRFK?tag=popecke-21"
+  >zu kaufen</a>, aber das war mir bislang zu teuer,
+  und die dahinter liegende Technik hat man mit einer DSLR ohnehin schon zur Verfügung.
+</p>
+
+<astro-latex display-mode="true">
+  \alpha = 7.43 + 2.5 \cdot \log_{10} (\frac{t \cdot iso}{f^2})
+</astro-latex>
+
+Legende:
+<astro-latex display-mode="true">
+  \alpha [\frac{\mathit{Mag}}{\mathit{arcsec}}] \text{(Helligkeit pro Winkelsekundenquadrat)} \\
+
+  t [s] \text{(Zeit in Sekunden)} \\
+
+  \alpha = 13.93 + 2.5 \cdot \log_{10} (t)
+</astro-latex>
+
+Der maximale Wert scheint auf der Erde für einen lichtvermutzungsfreien
+Sternenhimmel (laut
+<astro-link fa="wikipedia-w"
+            label="Wikipedia - Flächenhelligkeit"
+            link="https://de.wikipedia.org/wiki/Fl%C3%A4chenhelligkeit"></astro-link>) bei 21.6 zu liegen.
+
+<p>
+Einige beispielhafte Messungen:
+</p>
+<sky-quality-meter>
+</sky-quality-meter>
+
+</body>
+</html>

@@ -25,3 +25,13 @@ curl -d @db.json -H "Content-type: application/json" -X POST http://127.0.0.1:59
 
 
 https://stackoverflow.com/questions/32442339/what-is-the-best-way-to-export-couchdb
+
+# Bugs/Issues/Todos:
+
+* add font awesome css to plain HTML version.
+
+# Lokalen Apachen starten
+der auf target/www served:
+```
+docker run -dit --rm -p 80:80 -v `pwd`/target/www:/usr/local/apache2/htdocs/ httpd
+```
