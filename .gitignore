@@ -13,3 +13,4 @@ target/
 .ruleset
 .settings/
 *.log
+node_modules/
