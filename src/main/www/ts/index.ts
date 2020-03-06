@@ -1,4 +1,5 @@
 import "./astro-latex"
+import "./astro-template"
+import "./astro-title"
 import "./link"
 import "./sky-quality-meter"
-import "./title"

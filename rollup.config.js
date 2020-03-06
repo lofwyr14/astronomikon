@@ -4,9 +4,9 @@ import commonjs from "@rollup/plugin-commonjs"
 import css from "rollup-plugin-css-porter"; //todo
 
 export default {
-  input: 'target/www/js/index.js',
+  input: 'src/main/www/js/index.js',
   output: {
-    dir: 'target/www/js',
+    dir: 'src/main/www/js',
     format: 'umd', /* tbd: check if "iife" or "umd" is better? */
     sourcemap: true/*,
     name: 'astro'*/

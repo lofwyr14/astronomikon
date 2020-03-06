@@ -33,6 +33,16 @@ class SkyQualityMeter extends HTMLElement {
 
   constructor() {
     super();
+
+
+    let quantity = document.getElementById("quantity") as HTMLSpanElement;
+
+    let iso = document.getElementById("iso")as HTMLInputElement;
+    iso.addEventListener("keyup", (event) => {quantity.innerText = String(parseInt(aperture.value) + parseInt(iso.value))});
+
+    let aperture = document.getElementById("aperture")as HTMLInputElement;
+    aperture.addEventListener("keyup", (event) => {quantity.innerText = String(parseInt(aperture.value) + parseInt(iso.value))});
+
   }
 
   connectedCallback() {
@@ -65,7 +75,7 @@ class SkyQualityMeter extends HTMLElement {
   }
 
   getMeasurings(): Promise<Measuring[]> {
-    return window.fetch("data.json")
+    return window.fetch("html/blog/sky-quality-meter/data.json")
         .then(response => response.json())
         .then((json: any[]) => json.map((metering: any) => new Measuring(metering)))
   }

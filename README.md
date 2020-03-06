@@ -33,5 +33,5 @@ https://stackoverflow.com/questions/32442339/what-is-the-best-way-to-export-couc
 # Lokalen Apachen starten
 der auf target/www served:
 ```
-docker run -dit --rm -p 80:80 -v `pwd`/target/www:/usr/local/apache2/htdocs/ httpd
+docker run -dit --rm -p 80:80 -v `pwd`/src/main/www:/usr/local/apache2/htdocs/ httpd
 ```

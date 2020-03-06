@@ -3,13 +3,12 @@
   "version": "1.0.0",
   "description": "Website to view astronomical photos.",
   "scripts": {
-    "tsc": "tsc --target ES2015 --outDir target/www/js --moduleResolution node src/main/ts/index.ts",
+    "tsc": "tsc --target ES2015 --outDir src/main/www/js --moduleResolution node src/main/www/ts/index.ts",
     "___cp-js": "cp src/main/js/*.js target/www/js",
-    "cp-html": "cp -r src/main/html/* target/www",
-    "cp-css": "mkdir -p target/www/css && cp -r src/main/css/*.css node_modules/katex/dist/katex.css node_modules/katex/dist/fonts target/www/css/",
-    "browserify": "browserify target/www/js/*.js -o target/www/js/bundle.js",
+    "cp-css": "cp -r node_modules/katex/dist/katex.css node_modules/katex/dist/fonts src/main/www/css/",
+    "browserify": "browserify src/main/www/js/*.js -o src/main/www/js/bundle.js",
     "rollup": "rollup --config rollup.config.js",
-    "build": "npm-run-all tsc cp-html cp-css rollup",
+    "build": "npm-run-all tsc cp-css rollup",
     "clean": "rm -r target",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
