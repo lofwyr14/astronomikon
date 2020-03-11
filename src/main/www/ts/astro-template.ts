@@ -18,8 +18,8 @@ class AstroTemplate extends HTMLElement {
 
   private sync() {
     const hash = window.location.hash;
-    if (hash && hash.startsWith("#")) {
-      this.content = hash.substring(1);
+    if (hash && hash.startsWith("#!")) {
+      this.content = hash.substring(2);
     }
   }
 
