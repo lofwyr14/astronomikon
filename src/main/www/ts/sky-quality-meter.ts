@@ -75,7 +75,7 @@ class SkyQualityMeter extends HTMLElement {
   }
 
   getMeasurings(): Promise<Measuring[]> {
-    return window.fetch("html/blog/sky-quality-meter/data.json")
+    return window.fetch("html/blog/sky-quality-meter/sqm.json")
         .then(response => response.json())
         .then((json: any[]) => json.map((metering: any) => new Measuring(metering)))
   }
