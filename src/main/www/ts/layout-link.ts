@@ -1,4 +1,4 @@
-class Link extends HTMLElement {
+class LayoutLink extends HTMLElement {
 
   constructor() {
     super();
@@ -54,5 +54,5 @@ class Link extends HTMLElement {
 }
 
 document.addEventListener("DOMContentLoaded", function (event: Event) {
-  window.customElements.define("astro-link", Link);
+  window.customElements.define("layout-link", LayoutLink);
 });

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<astro-title>Sky Quality Meter - Lichtqualität des Himmels messen</astro-title>
+<layout-title>Sky Quality Meter - Lichtqualität des Himmels messen</layout-title>
 
 <p>
   Mit einer normalen Digitalkamera kann man die Qualität des Himmels, bzw. die Lichtverschmutzung durch
@@ -12,33 +12,33 @@
   und die dahinter liegende Technik hat man mit einer DSLR ohnehin schon zur Verfügung.
 </p>
 
-<astro-latex display-mode="true">
+<layout-latex display-mode="true">
   \alpha = 7.43 + 2.5 \cdot \log_{10} (\frac{t \cdot iso}{f^2})
-</astro-latex>
+</layout-latex>
 
 Legende:
-<astro-latex display-mode="true">
+<layout-latex display-mode="true">
   \alpha [\frac{\mathit{Mag}}{\mathit{arcsec}}] \text{(Helligkeit pro Winkelsekundenquadrat)} \\
 
   t [s] \text{(Zeit in Sekunden)} \\
 
   \alpha = 13.93 + 2.5 \cdot \log_{10} (t)
-</astro-latex>
+</layout-latex>
 
 <form>
-<div class="form-group">
+<div class="form-group d-none">
   <label for="iso">ISO</label>
   <input type="number" list="iso-list" class="form-control" id="iso">
 </div>
-<div class="form-group">
+<div class="form-group d-none">
   <label for="aperture">Aperture</label>
   <input type="number" list="aperture-list" class="form-control" id="aperture">
 </div>
-<div class="form-group">
+<div class="form-group d-none">
   <label for="time">Zeit</label>
   <input type="number" list="time-list" class="form-control" id="time">
 </div>
-<div class="form-group">
+<div class="form-group d-none">
   <span id="quantity">+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</span>
 </div>
 </form>
@@ -70,9 +70,9 @@ Legende:
 
 Der maximale Wert scheint auf der Erde für einen lichtvermutzungsfreien
 Sternenhimmel (laut
-<astro-link fa="wikipedia-w"
+<layout-link fa="wikipedia-w"
             label="Wikipedia - Flächenhelligkeit"
-            link="https://de.wikipedia.org/wiki/Fl%C3%A4chenhelligkeit"></astro-link>) bei 21.6 zu liegen.
+            link="https://de.wikipedia.org/wiki/Fl%C3%A4chenhelligkeit"></layout-link>) bei 21.6 zu liegen.
 
 <p>
 Einige beispielhafte Messungen:

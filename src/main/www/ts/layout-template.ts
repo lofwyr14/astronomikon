@@ -1,4 +1,4 @@
-class AstroTemplate extends HTMLElement {
+class LayoutTemplate extends HTMLElement {
 
   static get observedAttributes() {
     return ['content'];
@@ -20,6 +20,8 @@ class AstroTemplate extends HTMLElement {
     const hash = window.location.hash;
     if (hash && hash.startsWith("#!")) {
       this.content = hash.substring(2);
+    } else {
+      this.content = "html";
     }
   }
 
@@ -48,5 +50,5 @@ class AstroTemplate extends HTMLElement {
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
-  window.customElements.define("astro-template", AstroTemplate);
+  window.customElements.define("layout-template", LayoutTemplate);
 });

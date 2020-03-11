@@ -52,9 +52,9 @@ class SkyQualityMeter extends HTMLElement {
     <th>Ort</th>
     <th>Datum</th>
     <th class="text-center">ISO</th>
-    <th class="text-center">Blende <astro-latex>[f]</astro-latex></th>
-    <th class="text-center">Zeit <astro-latex>[s]</astro-latex></th>
-    <th class="text-center">Helligkeit <astro-latex>[Mag/arcsec]</astro-latex></th>
+    <th class="text-center">Blende <layout-latex>[f]</layout-latex></th>
+    <th class="text-center">Zeit <layout-latex>[s]</layout-latex></th>
+    <th class="text-center">Helligkeit <layout-latex>[Mag/arcsec]</layout-latex></th>
   </tr></thead><tbody></tbody></table>`);
 
     this.getMeasurings().then(

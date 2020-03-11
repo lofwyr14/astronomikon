@@ -1,29 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ui:composition xmlns:tc="http://myfaces.apache.org/tobago/component"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns="http://www.w3.org/1999/xhtml">
-
-  <ui:param name="title" value="Winkelberechnung"/>
+  <layout-title>Winkelberechnung</layout-title>
 
   <tc:script file="#{request.contextPath}/blog/grad/grad.js"/>
 
   <tc:box label="Größe des Ausschnitts eines Fotos als Winkel in Grad">
 
     <p>
-      Der Ausschnitt des Himmels <popecke-latex>\alpha</popecke-latex> der auf einem Foto erscheint ist von
-      der Sensorgröße <popecke-latex>s</popecke-latex> der Kamera und der Brennweite <popecke-latex>l</popecke-latex>
-      des Objektivs oder Teleskops abhängig (der Umrechnungsterm <popecke-latex>\frac{180^{\circ}}{\pi}</popecke-latex>
+      Der Ausschnitt des Himmels <layout-latex>\alpha</layout-latex> der auf einem Foto erscheint ist von
+      der Sensorgröße <layout-latex>s</layout-latex> der Kamera und der Brennweite <layout-latex>l</layout-latex>
+      des Objektivs oder Teleskops abhängig (der Umrechnungsterm <layout-latex>\frac{180^{\circ}}{\pi}</layout-latex>
       wird bei Taschenrechnern in der Standardeinstellung (Grad) nicht benötigt).
     </p>
-    <tc:flowLayout textAlign="center">
-      <tc:figure>
-        <popecke-latex display-mode="true">
-          \alpha = 2 \cdot \frac{180^{\circ}}{\pi} \cdot \tan^{-1}{\frac{s}{2 \cdot l} }
-        </popecke-latex>
-      </tc:figure>
-    </tc:flowLayout>
+    <layout-latex display-mode="true">
+      \alpha = 2 \cdot \frac{180^{\circ}}{\pi} \cdot \tan^{-1}{\frac{s}{2 \cdot l} }
+    </layout-latex>
 
     <p>
       Kameraauswahl:
@@ -37,7 +28,7 @@
     </p>
 
     Randnotiz: Ende 2018 sind die ersten spiegellosen Vollformat-Kameras von Nikon rausgekommen, die
-    <tc:link image="fa-amazon"
+    <layout-link fa="fa-amazon"
              link="https://www.amazon.de/Nikon-System-Digitalkamera-24-70-Bajonettadapter/dp/B07H2XJ8WM/ref=sr_1_1?tag=popecke-21"
              label="Z6"/>
     und Z7 herausgekommen. Diese scheinen sehr interessant für Astro-Fotografie zu sein.
@@ -80,5 +71,3 @@
   </tc:box>
 
   * Teilweise nicht korrekte Berechnungen, Zoom noch nicht implementiert.
-
-</ui:composition>

@@ -1,6 +1,6 @@
 import katex from "katex";
 
-class Latex extends HTMLElement {
+class LayoutLatex extends HTMLElement {
 
   constructor() {
     super();
@@ -37,5 +37,5 @@ class Latex extends HTMLElement {
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
-  window.customElements.define("astro-latex", Latex);
+  window.customElements.define("layout-latex", LayoutLatex);
 });

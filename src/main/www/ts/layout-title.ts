@@ -1,4 +1,4 @@
-class AstroTitle extends HTMLElement {
+class LayoutTitle extends HTMLElement {
 
   constructor() {
     super();
@@ -13,5 +13,5 @@ class AstroTitle extends HTMLElement {
 }
 
 document.addEventListener("DOMContentLoaded", function (event: Event) {
-  window.customElements.define("astro-title", AstroTitle);
+  window.customElements.define("layout-title", LayoutTitle);
 });
