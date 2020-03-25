@@ -1,0 +1,22 @@
+[
+  {
+    "id": "d5200",
+    "name": "D5200",
+    "manufacturer": "Nikon",
+    "sensorFormat": "ASP-C",
+    "width": 23.5,
+    "height": 15.6,
+    "pixelCountX": 6000,
+    "pixelCountY": 4000
+  },
+  {
+    "id": "z6",
+    "name": "Z6",
+    "manufacturer": "Nikon",
+    "sensorFormat": "Vollformat",
+    "width": 35.8,
+    "height": 23.9,
+    "pixelCountX": 6048,
+    "pixelCountY": 4024
+  }
+]

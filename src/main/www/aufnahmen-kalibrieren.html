@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+  <!--#include virtual="_head.html" -->
+</head>
+<body>
+
+<!--#include virtual="_menu.html" -->
+
+<div class="container">
+
+<layout-title>Aufnahmen kalibrieren</layout-title>
+<p>
+  Um die Aufnahmen (Lights) möglichst von allen Fehlern zu befreien, werden Kalibrierungsaufnahmen benötigt.
+</p>
+<p>
+  Diese werden Darks, Bias und Lights genannt. Die Tabelle zeigt, für welche Art von Bildern welche Einstellungen wichtig sind.
+</p>
+
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Art</th>
+    <th>Kamera / Sensor</th>
+    <th>ISO / Gain</th>
+    <th title="Belichtungsdauer">Dauer</th>
+    <th title="Außentemperatur oder falls vorhanden die Chip-Temperatur">Temperatur</th>
+    <th title="Objektiv oder Teleskop">Optik</th>
+    <th title="Falls vorhanden">Filter (optional)</th>
+    <th title="Falls vorhanden">Blende (optional)</th>
+    <th title="Falls vorhanden">Zoom (optional)</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr title="Die eigentlichen Aufnahmen">
+    <th>Lights</th>
+    <td>✓</td>
+    <td>✓</td>
+    <td>✓</td>
+    <td>✓</td>
+    <td>✓</td>
+    <td>✓</td>
+    <td>✓</td>
+    <td>✓</td>
+  </tr>
+  <tr title="Dunkelbilder gegen Sensorrauschen">
+    <th>Darks</th>
+    <td>✓</td>
+    <td>✓</td>
+    <td>✓</td>
+    <td>✓</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+  </tr>
+  <tr title="Bias gegen Ausleserauschen">
+    <th>Bias</th>
+    <td>✓</td>
+    <td>✓</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+  </tr>
+  <tr title="Weissbilder gegen optische Fehler wie Staub und Vignettierung">
+    <th>Flats</th>
+    <td>✓</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td>✓</td>
+    <td>✓</td>
+    <td>✓</td>
+    <td>✓</td>
+  </tr>
+  </tbody>
+</table>
+
+<h2>Bibliothek anlegen</h2>
+<p>
+  Die Kalibrierungsbilder werden z. B. 20 mal in gleicher Weise angefertigt. Diese Bilder werden gestackt.
+  Daraus kann man sich eine Bibliothek von Kalibrierungsaufnamen aufbauen (vielleicht abgesehen von den Flats,
+  die sollten immer neu erstellt werden, da hier auch Staub eine Rolle spielt). Hierzu bietet sich
+  dieses Namensschema an.
+</p>
+
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>Art</th>
+    <th>Namensschema</th>
+    <th>Beispiel (DSLR)</th>
+    <th>Beispiel (Astro-Kamera)</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr title="Die eigentlichen Aufnahmen">
+    <th>Lights</th>
+    <td>{ziel}&#8203;_{kamera}&#8203;_iso{iso}&#8203;_{dauer}s&#8203;_{temperatur}°C&#8203;_{objektiv}&#8203;_f{blende}&#8203;_{zoom}&#8203;_{filter}.dng</td>
+    <td>UMa&#8203;_z6&#8203;_iso400&#8203;_30s&#8203;_5°C&#8203;_nikon24-70mm&#8203;_f4&#8203;_50mm.dng</td>
+    <td>M101&#8203;_asi1600&#8203;_gain130&#8203;_30s&#8203;_-30°C&#8203;_newton10.dng</td>
+  </tr>
+  <tr title="Dunkelbilder gegen Sensorrauschen">
+    <th>Darks</th>
+    <td>dark&#8203;_{kamera}&#8203;_iso{iso}&#8203;_{dauer}s&#8203;_{temperatur}°C&#8203;_{objektiv}&#8203;_f{blende}.dng</td>
+    <td>dark&#8203;_z6&#8203;_iso400&#8203;_30s&#8203;_5°C.dng</td>
+    <td>dark&#8203;_asi1600&#8203;_gain130&#8203;_30s&#8203;_-30°C.dng</td>
+  </tr>
+  <tr title="Bias gegen Ausleserauschen">
+    <th>Bias</th>
+    <td>bias&#8203;_{kamera}&#8203;_iso{iso}.dng</td>
+    <td>bias&#8203;_z6&#8203;_iso400.dng</td>
+    <td>bias&#8203;_asi1600&#8203;_gain1300.dng</td>
+  </tr>
+  <tr title="Weissbilder gegen optische Fehler wie Staub und Vignettierung">
+    <th>Flats</th>
+    <td>flat&#8203;_{kamera}&#8203;_{objektiv}&#8203;_f{blende}&#8203;_{zoom}&#8203;_{filter}.dng</td>
+    <td>flat&#8203;_z6&#8203;_nikon24-70mm&#8203;_f4&#8203;_50mm.dng</td>
+    <td>flat&#8203;_asi1600&#8203;_newton10_green.dng</td>
+  </tr>
+  </tbody>
+</table>
+
+</div>
+
+<!--#include virtual="_foot.html" -->
+
+</body>
+</html>

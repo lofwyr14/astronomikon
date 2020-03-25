@@ -1,0 +1,23 @@
+[
+  {
+    "id": "fc60",
+    "name": "FS-60CB",
+    "manufacturer": "Takahashi",
+    "focalLength": 355,
+    "diameter": 60
+  },
+  {
+    "id": "fc60flat",
+    "name": "FS-60CB + Flattner",
+    "manufacturer": "Takahashi",
+    "focalLength": 374,
+    "diameter": 60
+  },
+  {
+    "id": "fc60red",
+    "name": "FS-60CB + Reducer",
+    "manufacturer": "Takahashi",
+    "focalLength": 264,
+    "diameter": 60
+  }
+]

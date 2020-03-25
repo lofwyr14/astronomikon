@@ -1,10 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
 
-  <layout-title>Winkelberechnung</layout-title>
+<html lang="de">
+<head>
+  <!--#include virtual="_head.html" -->
+</head>
+<body>
 
-  <tc:script file="#{request.contextPath}/blog/grad/grad.js"/>
+<!--#include virtual="_menu.html" -->
 
-  <tc:box label="Größe des Ausschnitts eines Fotos als Winkel in Grad">
+<div class="container">
+
+<layout-title>Bildwinkel berechnen</layout-title>
+
+  <h2>Größe des Ausschnitts eines Fotos als Winkel in Grad</h2>
 
     <p>
       Der Ausschnitt des Himmels <layout-latex>\alpha</layout-latex> der auf einem Foto erscheint ist von
@@ -16,16 +24,22 @@
       \alpha = 2 \cdot \frac{180^{\circ}}{\pi} \cdot \tan^{-1}{\frac{s}{2 \cdot l} }
     </layout-latex>
 
-    <p>
-      Kameraauswahl:
-      <tc:selectOneRadio id="selectSensor1" value="#{angleCalculator.cameraController.current}"
-                         converter="#{angleCalculator.sensorConverter}" required="true">
-        <tc:selectItems value="#{angleCalculator.cameraController.all}" var="sensorFormat"
-                        itemValue="#{sensorFormat}"
-                        itemLabel="#{sensorFormat.manufacturer} #{sensorFormat.name} (#{sensorFormat.sensorFormat} - #{sensorFormat.width}mm x #{sensorFormat.height}mm)"/>
-        <f:ajax render="sheet" execute="sheet"/>
-      </tc:selectOneRadio>
-    </p>
+<div class="row">
+  <p class="col-lg-4 col-md-6 col-sm-12 order-lg-0">
+    Optikauswahl:
+    <astro-optic-form></astro-optic-form>
+  </p>
+
+  <p class="col-lg-4 col-md-6 col-sm-12 order-lg-2">
+    Kameraauswahl:
+    <astro-camera-selector></astro-camera-selector>
+  </p>
+
+  <p class="col-lg-4 col-md-12 col-sm-12 order-lg-1" style="border: 1px solid darkred">
+    Ergebnis:
+    <astro-frame-angle></astro-frame-angle>
+  </p>
+</div>
 
     Randnotiz: Ende 2018 sind die ersten spiegellosen Vollformat-Kameras von Nikon rausgekommen, die
     <layout-link fa="fa-amazon"
@@ -68,6 +82,13 @@
       </tc:column>
     </tc:sheet>
 
-  </tc:box>
+  </h2>
 
   * Teilweise nicht korrekte Berechnungen, Zoom noch nicht implementiert.
+
+</div>
+
+<!--#include virtual="_foot.html" -->
+
+</body>
+</html>

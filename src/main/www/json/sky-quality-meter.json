@@ -68,5 +68,12 @@
     "iso": 3200,
     "aperture": 2.4,
     "exposureTime": 30
+  },
+  {
+    "location": "Oldenburg, Deutschland",
+    "date": "2020-03-20T23:50",
+    "iso": 3200,
+    "aperture": 2.8,
+    "exposureTime": 15
   }
 ]
