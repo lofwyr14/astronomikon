@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+  <!--#include virtual="_head.html" -->
+</head>
+<body>
+
+<!--#include virtual="_menu.html" -->
+
+<div class="container">
+
+  <layout-title>Bildbearbeitung mit PixInsight</layout-title>
+
+  Dies hier ist meine neuere Vorgehensweise ab ca. 2018.
+
+  <h2>1. Kalibrieren und Stapeln (Stacken)</h2>
+
+  <h2>2. Lineare Bearbeitung</h2>
+
+  <h3>2.1 LRGB Combination</h3>
+  Nur RGB (L kommt später) -> Apply Global
+
+  <h3>2.2 DBE - Dynamic Background Extraction</h3>
+  Subtraction oder Division (eigentlich je nach Fehlerart), aber ich muss manchmal beides mehrfach ausführen.
+  Zwischendurch auch wieder auf Auto-Stretch drücken.
+  Evtl. Tolerance von 0.5 auch 1.5 erhöhen.
+
+  <h3>2.3 Background Neutralization</h3>
+
+  <h3>2.4 Color Calibration</h3>
+
+  <h3>2.5 DBE für die Luminance</h3>
+  mit gleichem Pattern
+
+  <h2>3. Nicht-Lineare Bearbeitung</h2>
+
+  <h3>3.1 Histogram Transformation RGB</h3>
+  <h3>3.2 Histogram Transformation L</h3>
+  <h3>3.3 HDR Multiscale Transformation (Wavelet)</h3>
+  Numbers of Layers: ausprobieren
+  Lightness mask: Haken, wenn nur auf helle Objekte anwenden
+
+
+</div>
+<!--#include virtual="_foot.html" -->
+
+</body>
+</html>
