@@ -1289,18 +1289,24 @@
           const clickHandler = {
               // handleEvent method is required.
               handleEvent(e) {
-                  console.log('clicked!');
+                  console.log('clicked!', e.currentTarget);
               },
               // event listener objects can also define zero or more of the event
               // listener options: capture, passive, and once.
               capture: true,
           };
           const myTemplate = (value) => html `<button @click=${clickHandler}>Click Me ${value}!</button>`;
+          render(html `
+<div id="d1"></div>
+<div id="d2"></div>
+<div id="d3"></div>
+`, this);
+          // todo: d1 d2 d3 ist natürlich Quatsch
           // Render the template with some data
-          render(myTemplate('world'), document.body);
+          render(myTemplate('world'), this.querySelector("#d1"));
           // ... Later on ...
           // Render the template with different data
-          render(myTemplate('lit-html'), document.body);
+          render(myTemplate('lit-html'), this.querySelector("#d2"));
           render(html `<astro-optic-selector>
 </astro-optic-selector>
 <button @click=${clickHandler}>Click Me ${this.tagName}!</button>
@@ -1319,7 +1325,7 @@
     Öffnungsverhältnis
     <input type="number" class="form-control" min="0.5" max="100" list="aperture-list">
   </label>
-</div>`, document.body);
+</div>`, this.querySelector("#d3"));
       }
       log(event) {
           console.log(event);

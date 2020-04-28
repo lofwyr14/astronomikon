@@ -3,7 +3,7 @@ FROM debian:buster-slim
 RUN apt update
 RUN apt upgrade -y
 RUN apt install apache2 -y
-RUN a2enmod include
+RUN a2enmod rewrite include
 RUN service apache2 restart
 
 COPY 000-default.conf /etc/apache2/sites-available
