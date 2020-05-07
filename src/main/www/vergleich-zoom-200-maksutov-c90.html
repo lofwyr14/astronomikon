@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+  <!--#include virtual="_head.html" -->
+</head>
+<body>
+
+<!--#include virtual="_menu.html" -->
+
+<div class="container">
+
+  <layout-title>Vergleich 200 mm Zomm mit Celestron C 90</layout-title>
+
+  <p>
+    Versuch des Vergleichs von einem
+    <b><a href="http://www.photoinfos.com/astronomie/Celestron-C90-orange.htm"
+          target="_blank">Celestron Maksutov C 90 1000 mm</a></b>
+    (Baujahr ca. 1988) mit einem
+    <b><a
+        href="http://www.nikon.de/de_DE/product/nikkor-lenses/auto-focus-lenses/dx/zoom/af-s-dx-nikkor-18-200mm-f-3-5-5-6g-ed-vr-ii"
+        target="_blank">Nikon 18mm - 200mm Zoom</a></b> Objektiv (Baujahr 2014, bei 200 mm),
+    bei dunklen Lichtverhältnissen (Straßenbeleuchtung). Entfernung: ca. 100 m.
+  </p>
+
+  <div style="display: flex">
+<!--    XXX fix flex box-->
+    <figure>
+      <img src="image/blog/stuck-celestron-c90.jpg"/>
+      <figcaption>Maksutov C 90 mit 1000 mm, f/11,
+        <a href="https://www.amazon.de/Nikon-D5200-SLR-Digitalkamera-Megapixel-TFT-Display/dp/B00A2MSZUI/ref=sr_1_3?tag=popecke-21">
+            Nikon D5200</a>
+        mit ISO 1600, 1 s (Ausschnitt)</figcaption>
+    </figure>
+
+    <figure>
+      <img src="image/blog/stuck-nikon-70-200.jpg"/>
+      <figcaption>
+        Nikon 18-200 3,5-5,6 mit 200 mm f/5,6,
+        <a href="https://www.amazon.de/Nikon-D5200-SLR-Digitalkamera-Megapixel-TFT-Display/dp/B00A2MSZUI/ref=sr_1_3?tag=popecke-21">Nikon D5200</a>
+        mit ISO 1600, 1 s (Ausschnitt)
+      </figcaption>
+    </figure>
+  </div>
+
+  <p>
+    Das Maksutov lieferte natürlich einen viel engeren Ausschnitt, wegen der 5 x größeren Brennweite.
+    Das Bild war aber auch wesentlich dunkler, daher habe ich es hier 2 Stufen aufgehellt.
+    Vermutlich passt das dazu, dass der Blendenwert ja auch doppelt so große ist.
+  </p>
+  <p>
+    Man erkennt auf dem Nikon viel stärker das Bildrauschen und die Pixel. Ich vermute, dass das
+    an dem 5 x schwächeren Zoom liegt, da das digitale Bild vergrößert werden musste.
+  </p>
+  <p>
+    Mein persönlicher Eindruck ist, dass das Maksutov zwar etwas bessere Bilder liefert. Meine Erwartung,
+    dass das Maksutov deutlich besser sein müsste, hat sich jedoch nicht bestätigt.
+  </p>
+
+  <p>
+    Als nächstes habe ich einen <a
+      href="https://de.wikipedia.org/wiki/Siemensstern"
+      target="_blank">Siemensstern</a> mit ca. 8 cm Radius aus ca. 23 m Entfernung tagsüber
+    bei bewölktem Himmel fotographiert.
+  </p>
+
+  <div style="display: flex">
+    <!--    XXX fix flex box-->
+    <figure>
+      <img src="image/blog/siemens-celestron-c90.jpg"/>
+      <figcaption>Maksutov C 90 mit 1000 mm, f/11, Nikon D5200 mit ISO 1600, 1/1000 s (Ausschnitt)</figcaption>
+    </figure>
+
+    <figure>
+      <img src="image/blog/siemens-nikon-70-200.jpg"/>
+      <figcaption>Nikon 18-200 3,5-5,6 mit 200 mm f/5,6, Nikon D5200 mit ISO 1600, 1/1000 s (Ausschnitt)</figcaption>
+    </figure>
+  </div>
+
+  Die Flächen werden bei
+  <layout-latex>d_c = 3,5 mm</layout-latex>
+  bzw.
+  <layout-latex>d_n = 6 mm</layout-latex>
+  grau.
+  Daraus ergeben sich mit
+  <layout-latex>l = \frac{\pi d}{32}</layout-latex>
+  die Werte
+  <layout-latex>l_c = 0,35 mm</layout-latex>
+  bzw.
+  <layout-latex>l_n = 0,6 mm</layout-latex>
+  .
+  Bei 23 m Abstand entspricht dies etwa 3" bzw. 5" Auflösungsvermögen.
+
+  Das rechnerische Auflösungskriterium nach Rayleigh beträgt jedoch
+  1.5" bzw. 4".
+</div>
+
+<!--#include virtual="_foot.html" -->
+
+</body>
+</html>
