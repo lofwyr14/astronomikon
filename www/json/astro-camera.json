@@ -18,5 +18,35 @@
     "height": 23.9,
     "pixelCountX": 6048,
     "pixelCountY": 4024
+  },
+  {
+    "id": "a7s",
+    "name": "α7S",
+    "manufacturer": "Sony",
+    "sensorFormat": "Vollformat",
+    "width": 35.6,
+    "height": 23.8,
+    "pixelCountX": 4288,
+    "pixelCountY": 2848
+  },
+  {
+    "id": "asi1600",
+    "name": "ASI 1600",
+    "manufacturer": "ZWO",
+    "sensorFormat": "Micro 3/4",
+    "width": 17.2,
+    "height": 13.2,
+    "pixelCountX": 4656,
+    "pixelCountY": 3520
+  },
+  {
+    "id": "asi178",
+    "name": "ASI178MC",
+    "manufacturer": "ZWO",
+    "sensorFormat": "1/1.8\"",
+    "width": 7.4,
+    "height": 5,
+    "pixelCountX": 3096,
+    "pixelCountY": 2080
   }
 ]
