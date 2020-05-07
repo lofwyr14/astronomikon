@@ -1,4 +1,4 @@
-# astro
+# astronomikon
 Website for astronomical infos and show photos.
 
 # Lokalen Apachen starten
