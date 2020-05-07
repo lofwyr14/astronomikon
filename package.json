@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "Website to view astronomical photos.",
   "scripts": {
-    "tsc": "tsc --target ES2015 --outDir src/main/www/js --moduleResolution node src/main/www/ts/index.ts",
-    "___cp-js": "cp src/main/js/*.js target/www/js",
-    "cp-css": "cp -r node_modules/katex/dist/katex.css node_modules/katex/dist/fonts src/main/www/css/",
-    "browserify": "browserify src/main/www/js/*.js -o src/main/www/js/bundle.js",
+    "tsc": "tsc --target ES2015 --outDir www/js --moduleResolution node src/main/www/ts/index.ts",
+    "cp-css": "cp -r node_modules/katex/dist/katex.css node_modules/katex/dist/fonts www/css/",
+    "browserify": "browserify www/js/*.js -o src/main/www/js/bundle.js",
     "rollup": "rollup --config rollup.config.js",
     "build": "npm-run-all tsc cp-css rollup",
     "clean": "rm -r target",
