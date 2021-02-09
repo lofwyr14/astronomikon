@@ -1,0 +1,51 @@
+[
+  {
+    "id": "2017-08-22-Oldenburg-M27",
+    "title": "M27 - Hantelnebel",
+    "pictures": {
+      "thumb": {"name": "M27-thumb.jpg"},
+      "preview": {"name": "M27-preview.jpg"},
+      "full": {"name": "M27-full.jpg"}
+    },
+    "begin": "2017-08-22T23:52:29.000+0000",
+    "count": 200,
+    "countDark": 10,
+    "countFlat": 0,
+    "countBias": 10,
+    "city": "Oldenburg",
+    "description": "M27",
+    "releaseDate": "2017-10-19T05:51:52.736+0000",
+    "updateDate": "2017-10-19T05:51:52.736+0000"
+  },
+  {
+    "id": "2017-10-15-Oldenburg-M31",
+    "title": "M31 - Andromedagalaxie",
+    "pictures": {
+      "thumb": {"name": "M31-thumb.jpg"},
+      "preview": {"name": "M31-preview.jpg"},
+      "full": {"name": "M31-full.jpg"}
+    },
+    "begin": "2017-10-16T00:01:04.000+0000",
+    "count": 212,
+    "countDark": 50,
+    "countFlat": 0,
+    "countBias": 50,
+    "city": "Oldenburg",
+    "description": "M31",
+    "releaseDate": "2017-10-19T05:52:04.183+0000",
+    "updateDate": "2017-10-19T06:48:00.135+0000"
+  },
+  {
+    "id": "2020-04-07-Oldenburg-Mond",
+    "title": "Vollmond",
+    "pictures": {
+      "thumb": {"name": "Mond-thumb.jpg"},
+      "full": {"name": "Mond-ganz.jpg"}
+    },
+    "begin": "2020-04-07",
+    "city": "Oldenburg",
+    "description": "Vollmond",
+    "releaseDate": "2020-04-10T12:00:00+0",
+    "updateDate": "2021-02-08T22:00:00+0"
+  }
+]

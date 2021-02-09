@@ -7,3 +7,6 @@ RewriteEngine On
 RewriteBase /
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
 RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+# Gallery
+RewriteRule ^gallery-([A-Za-z0-9\-])*\.html$ gallery.html [QSA,L]

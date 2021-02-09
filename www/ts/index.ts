@@ -1,5 +1,6 @@
 import "./astro-camera";
 import "./astro-frame-angle";
+import "./astro-image";
 import "./astro-optic";
 import "./layout-latex";
 import "./layout-title";
