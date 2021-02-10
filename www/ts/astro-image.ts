@@ -1,4 +1,5 @@
 import {html, render} from "lit-html";
+import {ifDefined} from "lit-html/directives/if-defined";
 
 class AstroImage {
 
@@ -36,13 +37,19 @@ class AstroImage {
     }
   }
 
-  url(name: string): string {
+  url(name: string, alt?: string): string {
     let picture = this.pictures.get(name);
+    if (!picture && alt) {
+      picture = this.pictures.get(alt);
+    }
+    if (!picture) {
+      picture = this.pictures.values().next().value;
+    }
     return picture ? `/image/gallery/${this.id}/${picture.name}` : undefined; // todo: n/a image
   }
 
   get thumbUrl(): string {
-    return this.url("thumb");
+    return this.url("thumb", "preview");
   }
 
   get previewUrl(): string {
@@ -66,6 +73,8 @@ class AstroImageService extends HTMLElement {
 
   data: AstroImage[] = [];
 
+  ready: boolean = false;
+
   constructor() {
     super();
   }
@@ -80,18 +89,14 @@ class AstroImageService extends HTMLElement {
         .then((images: AstroImage[]) =>
             images.forEach((image: AstroImage) => this.data.push(image)))
         .then(() => {
+          this.ready = true;
           document.dispatchEvent(new Event("AstroImageService.loaded"));
           console.error("--- [service] fetch then #4 length=", this.data.length);
         }) // XXX
   }
 
   findImageById(id: string): AstroImage {
-    this.data.forEach((image) => {
-      if (image.id === id) {
-        return image;
-      }
-    });
-    return null;
+    return this.data.find((image) => image.id === id);
   }
 
   findImages(): AstroImage[] {
@@ -129,13 +134,6 @@ class AstroImageTable extends HTMLElement {
     document.addEventListener("AstroImageService.loaded", this.init.bind(this));
 
     this.service = document.querySelector("astro-image-service") as AstroImageService;
-    console.error("--- [table cc] old service: " + this.service);
-    if (!this.service) {
-      document.querySelector("body").insertAdjacentHTML("beforeend",
-          `<astro-image-service></astro-image-service>`);
-      this.service = document.querySelector("astro-image-service") as AstroImageService;
-      console.error("--- [table cc] new service: " + this.service);
-    }
   }
 
   init() {
@@ -147,7 +145,7 @@ class AstroImageTable extends HTMLElement {
         <table class="table table-hover">
           <thead>
           <tr>
-            <th>Vorschau</th>
+            <th>Bild</th>
             <th>Titel</th>
             <th>Beschreibung</th>
             <th>Aufnamedatum</th>
@@ -159,7 +157,7 @@ class AstroImageTable extends HTMLElement {
           ${list.map((image) => html`
             <tr>
               <td><a href="gallery-${image.id}.html" @click="${gallery.navigate.bind(gallery)}"
-                ><img src="${image.thumbUrl}" alt="Vorschau"/></a></td>
+              ><img src="${image.thumbUrl}" alt="Ansicht"/></a></td>
               <td>${image.title}</td>
               <td>${image.description}</td>
               <td>${Display.date(image.begin)}</td>
@@ -179,35 +177,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 class AstroImageViewer extends HTMLElement {
 
-  // xxx
   service: AstroImageService;
-// xxx
-  current: AstroImage;
 
   constructor() {
     super();
   }
 
   connectedCallback() {
-    // let list = AstroImageService.findImages(); XXX
-    // this.current = list[0];
-    this.current = new AstroImage({id: "test", title: "test"});
-
-    if (this.current) {
-      this.render();
-    }
-  }
-
-  private render() {
-    render(html`
-        <figure>
-          <h1>${this.imageId}</h1>
-          <figcaption>${this.imageId}</figcaption>
-        </figure>
-      `, this);
+    console.warn("................. CC")
+    document.addEventListener("AstroImageService.loaded", this.init.bind(this));
+    this.service = document.querySelector("astro-image-service") as AstroImageService;
   }
 
   attributeChangedCallback(name: string, oldValue: any, newValue: any) {
+    console.warn("................. ACC", name)
     console.info("attributeChangedCallback", name, oldValue, newValue);
     switch (name) {
       case "image-id":
@@ -231,6 +214,36 @@ class AstroImageViewer extends HTMLElement {
 
   set imageId(imageId: string) {
     this.setAttribute("image-id", imageId);
+  }
+
+  init() {
+    this.render();
+  }
+
+  private render() {
+
+    if (this.service && this.service.ready) {
+      console.warn("++++++++++++++++++ " + this.service);
+      const image = this.service.findImageById(this.imageId);
+      console.warn("++++++++++++++++++ " + image);
+      if (image) {
+        let gallery = this.closest('astro-gallery') as AstroGallery;
+        render(html`
+          <a href="gallery.html" @click="${gallery.navigate.bind(gallery)}" title="Schließen"
+          >[Ansicht schließen]</a>
+          <figure>
+            <img src="${image.previewUrl}" alt="${image.title}"/>
+            <figcaption>${image.description} vom ${Display.date(image.begin)}</figcaption>
+          </figure>
+        `, this);
+        this.classList.remove("d-none");
+      } else {
+        this.classList.add("d-none");
+      }
+    } else {
+      console.warn("service is not ready... still waiting...");
+      this.classList.add("d-none");
+    }
   }
 }
 
@@ -258,16 +271,20 @@ class AstroGallery extends HTMLElement {
     console.info("result = ", result);
     if (result && result.length == 3 && result[2]) {
       this.currentImage = result[2];
+    } else {
+      this.currentImage = null;
     }
   }
 
   private render() {
     render(html`
+      <astro-image-service>
+      </astro-image-service>
       <layout-title>Here will be the gallery soon!</layout-title>
+      <astro-image-viewer image-id="${ifDefined(this.currentImage)}">
+      </astro-image-viewer>
       <astro-image-table>
       </astro-image-table>
-      <astro-image-viewer image-id="${this.currentImage}">
-      </astro-image-viewer>
     `, this);
   }
 

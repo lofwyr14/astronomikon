@@ -105,6 +105,51 @@
    * http://polymer.github.io/PATENTS.txt
    */
   const directives = new WeakMap();
+  /**
+   * Brands a function as a directive factory function so that lit-html will call
+   * the function during template rendering, rather than passing as a value.
+   *
+   * A _directive_ is a function that takes a Part as an argument. It has the
+   * signature: `(part: Part) => void`.
+   *
+   * A directive _factory_ is a function that takes arguments for data and
+   * configuration and returns a directive. Users of directive usually refer to
+   * the directive factory as the directive. For example, "The repeat directive".
+   *
+   * Usually a template author will invoke a directive factory in their template
+   * with relevant arguments, which will then return a directive function.
+   *
+   * Here's an example of using the `repeat()` directive factory that takes an
+   * array and a function to render an item:
+   *
+   * ```js
+   * html`<ul><${repeat(items, (item) => html`<li>${item}</li>`)}</ul>`
+   * ```
+   *
+   * When `repeat` is invoked, it returns a directive function that closes over
+   * `items` and the template function. When the outer template is rendered, the
+   * return directive function is called with the Part for the expression.
+   * `repeat` then performs it's custom logic to render multiple items.
+   *
+   * @param f The directive factory function. Must be a function that returns a
+   * function of the signature `(part: Part) => void`. The returned function will
+   * be called with the part object.
+   *
+   * @example
+   *
+   * import {directive, html} from 'lit-html';
+   *
+   * const immutable = directive((v) => (part) => {
+   *   if (part.value !== v) {
+   *     part.setValue(v)
+   *   }
+   * });
+   */
+  const directive = (f) => ((...args) => {
+      const d = f(...args);
+      directives.set(d, true);
+      return d;
+  });
   const isDirective = (o) => {
       return typeof o === 'function' && directives.has(o);
   };
@@ -1196,6 +1241,37 @@
    */
   const html = (strings, ...values) => new TemplateResult(strings, values, 'html', defaultTemplateProcessor);
 
+  /**
+   * @license
+   * Copyright (c) 2018 The Polymer Project Authors. All rights reserved.
+   * This code may only be used under the BSD style license found at
+   * http://polymer.github.io/LICENSE.txt
+   * The complete set of authors may be found at
+   * http://polymer.github.io/AUTHORS.txt
+   * The complete set of contributors may be found at
+   * http://polymer.github.io/CONTRIBUTORS.txt
+   * Code distributed by Google as part of the polymer project is also
+   * subject to an additional IP rights grant found at
+   * http://polymer.github.io/PATENTS.txt
+   */
+  /**
+   * For AttributeParts, sets the attribute if the value is defined and removes
+   * the attribute if the value is undefined.
+   *
+   * For other part types, this directive is a no-op.
+   */
+  const ifDefined = directive((value) => (part) => {
+      if (value === undefined && part instanceof AttributePart) {
+          if (value !== part.value) {
+              const name = part.committer.name;
+              part.committer.element.removeAttribute(name);
+          }
+      }
+      else {
+          part.setValue(value);
+      }
+  });
+
   class AstroImage {
       constructor(image) {
           this.id = image.id;
@@ -1217,12 +1293,18 @@
               });
           }
       }
-      url(name) {
+      url(name, alt) {
           let picture = this.pictures.get(name);
+          if (!picture && alt) {
+              picture = this.pictures.get(alt);
+          }
+          if (!picture) {
+              picture = this.pictures.values().next().value;
+          }
           return picture ? `/image/gallery/${this.id}/${picture.name}` : undefined; // todo: n/a image
       }
       get thumbUrl() {
-          return this.url("thumb");
+          return this.url("thumb", "preview");
       }
       get previewUrl() {
           return this.url("preview");
@@ -1237,6 +1319,7 @@
       constructor() {
           super();
           this.data = [];
+          this.ready = false;
       }
       connectedCallback() {
           if (this.data.length > 0) {
@@ -1247,17 +1330,13 @@
               .then((json) => json.map((image) => new AstroImage(image)))
               .then((images) => images.forEach((image) => this.data.push(image)))
               .then(() => {
+              this.ready = true;
               document.dispatchEvent(new Event("AstroImageService.loaded"));
               console.error("--- [service] fetch then #4 length=", this.data.length);
           }); // XXX
       }
       findImageById(id) {
-          this.data.forEach((image) => {
-              if (image.id === id) {
-                  return image;
-              }
-          });
-          return null;
+          return this.data.find((image) => image.id === id);
       }
       findImages() {
           return this.data;
@@ -1285,12 +1364,6 @@
           console.error("--- [table cc] adding listener: AstroImageService.loaded to Table.init");
           document.addEventListener("AstroImageService.loaded", this.init.bind(this));
           this.service = document.querySelector("astro-image-service");
-          console.error("--- [table cc] old service: " + this.service);
-          if (!this.service) {
-              document.querySelector("body").insertAdjacentHTML("beforeend", `<astro-image-service></astro-image-service>`);
-              this.service = document.querySelector("astro-image-service");
-              console.error("--- [table cc] new service: " + this.service);
-          }
       }
       init() {
           let list = this.service.findImages();
@@ -1301,7 +1374,7 @@
         <table class="table table-hover">
           <thead>
           <tr>
-            <th>Vorschau</th>
+            <th>Bild</th>
             <th>Titel</th>
             <th>Beschreibung</th>
             <th>Aufnamedatum</th>
@@ -1313,7 +1386,7 @@
           ${list.map((image) => html `
             <tr>
               <td><a href="gallery-${image.id}.html" @click="${gallery.navigate.bind(gallery)}"
-                ><img src="${image.thumbUrl}" alt="Vorschau"/></a></td>
+              ><img src="${image.thumbUrl}" alt="Ansicht"/></a></td>
               <td>${image.title}</td>
               <td>${image.description}</td>
               <td>${Display.date(image.begin)}</td>
@@ -1334,22 +1407,12 @@
           super();
       }
       connectedCallback() {
-          // let list = AstroImageService.findImages(); XXX
-          // this.current = list[0];
-          this.current = new AstroImage({ id: "test", title: "test" });
-          if (this.current) {
-              this.render();
-          }
-      }
-      render() {
-          render(html `
-        <figure>
-          <h1>${this.imageId}</h1>
-          <figcaption>${this.imageId}</figcaption>
-        </figure>
-      `, this);
+          console.warn("................. CC");
+          document.addEventListener("AstroImageService.loaded", this.init.bind(this));
+          this.service = document.querySelector("astro-image-service");
       }
       attributeChangedCallback(name, oldValue, newValue) {
+          console.warn("................. ACC", name);
           console.info("attributeChangedCallback", name, oldValue, newValue);
           switch (name) {
               case "image-id":
@@ -1371,6 +1434,35 @@
       set imageId(imageId) {
           this.setAttribute("image-id", imageId);
       }
+      init() {
+          this.render();
+      }
+      render() {
+          if (this.service && this.service.ready) {
+              console.warn("++++++++++++++++++ " + this.service);
+              const image = this.service.findImageById(this.imageId);
+              console.warn("++++++++++++++++++ " + image);
+              if (image) {
+                  let gallery = this.closest('astro-gallery');
+                  render(html `
+          <a href="gallery.html" @click="${gallery.navigate.bind(gallery)}" title="Schließen"
+          >[Ansicht schließen]</a>
+          <figure>
+            <img src="${image.previewUrl}" alt="${image.title}"/>
+            <figcaption>${image.description} vom ${Display.date(image.begin)}</figcaption>
+          </figure>
+        `, this);
+                  this.classList.remove("d-none");
+              }
+              else {
+                  this.classList.add("d-none");
+              }
+          }
+          else {
+              console.warn("service is not ready... still waiting...");
+              this.classList.add("d-none");
+          }
+      }
   }
   document.addEventListener("DOMContentLoaded", function (event) {
       window.customElements.define("astro-image-viewer", AstroImageViewer);
@@ -1389,14 +1481,19 @@
           if (result && result.length == 3 && result[2]) {
               this.currentImage = result[2];
           }
+          else {
+              this.currentImage = null;
+          }
       }
       render() {
           render(html `
+      <astro-image-service>
+      </astro-image-service>
       <layout-title>Here will be the gallery soon!</layout-title>
+      <astro-image-viewer image-id="${ifDefined(this.currentImage)}">
+      </astro-image-viewer>
       <astro-image-table>
       </astro-image-table>
-      <astro-image-viewer image-id="${this.currentImage}">
-      </astro-image-viewer>
     `, this);
       }
       navigate(event) {
