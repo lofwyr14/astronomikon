@@ -75,5 +75,12 @@
     "iso": 3200,
     "aperture": 2.8,
     "exposureTime": 15
+  },
+  {
+    "location": "Friedeburg, Deutschland",
+    "date": "2021-02-13T03:10",
+    "iso": 6400,
+    "aperture": 1.4,
+    "exposureTime": 13
   }
 ]
