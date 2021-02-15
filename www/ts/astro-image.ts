@@ -45,7 +45,7 @@ class AstroImage {
     if (!picture) {
       picture = this.pictures.values().next().value;
     }
-    return picture ? `/image/gallery/${this.id}/${picture.name}` : undefined; // todo: n/a image
+    return picture ? `image/gallery/${this.id}/${picture.name}` : undefined; // todo: n/a image
   }
 
   get thumbUrl(): string {
@@ -142,30 +142,21 @@ class AstroImageTable extends HTMLElement {
     if (list) {
       let gallery = this.closest('astro-gallery') as AstroGallery;
       render(html`
-        <table class="table table-hover">
-          <thead>
-          <tr>
-            <th>Bild</th>
-            <th>Titel</th>
-            <th>Beschreibung</th>
-            <th>Aufnamedatum</th>
-            <th>Anzahl</th> <!-- todo: besser <th>Gesamtbelichtungszeit</th> -->
-            <th>Ort</th>
-          </tr>
-          </thead>
-          <tbody>
+        <div class="row">
           ${list.map((image) => html`
-            <tr>
-              <td><a href="gallery-${image.id}.html" @click="${gallery.navigate.bind(gallery)}"
-              ><img src="${image.thumbUrl}" alt="Ansicht"/></a></td>
-              <td>${image.title}</td>
-              <td>${image.description}</td>
-              <td>${Display.date(image.begin)}</td>
-              <td>${image.count}</td>
-              <td>${image.city}</td>
-            </tr>`)}
-          </tbody>
-        </table>
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+              <div class="card preview">
+                <a href="gallery-${image.id}.html" @click="${gallery.navigate.bind(gallery)}"
+              ><img src="${image.thumbUrl}" class="float-left float-start" alt="Ansicht"/>
+                  <b>${image.title}</b><br/>
+                  <i>${image.description}</i><br/>
+                  Datum: ${Display.date(image.begin)}<br/>
+                  Anzahl: ${image.count}<br/>
+                  Ort: ${image.city}<br/>
+                </a>
+              </div>
+            </div>`)}
+        </div>
       `, this);
     }
   }
