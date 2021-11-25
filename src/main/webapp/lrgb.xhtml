@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition template="/main.xhtml"
+                xmlns:tc="http://myfaces.apache.org/tobago/component"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:f="http://java.sun.com/jsf/core" xmlns="http://www.w3.org/1999/xhtml">
+  <ui:param name="title"
+            value="Einkaufsliste"/>
+
+
+  <svg height="0">
+    <mask id="mask-1">
+      <linearGradient id="gradient-1" y2="1">
+        <stop stop-color="white" offset="0"></stop>
+        <stop stop-opacity="0" offset="1"></stop>
+      </linearGradient>
+      <circle cx="0.25" cy="0.25" r="0.25" id="circle" fill="white"></circle>
+      <rect x="0.5" y="0.2" width="300" height="100" fill="url(#gradient-1)"></rect>
+    </mask>
+  </svg>
+
+  <h3>
+    Farbtest LRGB
+  </h3>
+
+
+  <img alt="Blauanteil" class="figure-img" src="IMG_Blue_0s_001.jpeg"
+
+       style="width: 400px; height: 300px; mask:url('#mask-1')"/>
+
+
+
+
+  <p class="target" style="background: lime; mask:url('#mask-1')">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+    ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+  </p>
+  <pre class="target">lorem</pre>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipisicing
+    <b class="target">elit, sed do eiusmod tempor incididunt
+      ut labore et dolore magna aliqua.</b>
+    Ut enim ad minim veniam.
+  </p>
+
+</ui:composition>
