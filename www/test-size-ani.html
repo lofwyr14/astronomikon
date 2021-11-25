@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+  <title>Astronomikon</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="Astronomie, Fotografie, Teleskop, Deep Sky">
+  <link href="css/latex.css" rel="stylesheet">
+  <link href="css/katex.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh">
+  <style>
+    .preview {
+      /*border: 1px solid greenyellow;*/
+      height: 130px;
+      overflow-x: auto;
+    }
+
+    figure img {
+      max-width: 100%;
+    }
+
+    astro-image-viewer {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      background-color: #8fd19e;
+    }
+
+    astro-image-viewer .astro-fit-image {
+      max-width: 100vw;
+      max-height: 100vh;
+    }
+
+    astro-image-viewer .astro-fill-image {
+      min-width: 100vw;
+      min-height: 100vh;
+      overflow: auto;
+    }
+
+    astro-image-viewer figcaption {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      color: #FFFFFF;
+      background-color: #888888;
+      opacity: 0.6;
+      padding: 3px 7px;
+      border-radius: 3px;
+    }
+    /*.img-rectangular img {
+      width: 200px;
+      height: 200px;
+    }*/
+    .img-rectangular:hover img {
+      transform-origin: left top;
+      animation: scale 400ms ease-in-out forwards;
+    }
+    @keyframes scale {
+      to {
+        transform: scale(1.2);
+      }
+    }  </style>
+</head>
+<body>
+<div id="dnn_ctr428_ContentPane" class="img-rectangular">
+  <div id="dnn_ctr428_ModuleContent" class="DNNModuleContent ModDNNHTMLC">
+    <div id="dnn_ctr428_HtmlModule_lblContent" class="Normal">
+      <img alt="" src="http://lorempixel.com/400/400/nature/1">
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

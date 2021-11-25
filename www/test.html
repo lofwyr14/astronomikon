@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<html lang="de">
+<head>
+  <title>Astronomikon</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="Astronomie, Fotografie, Teleskop, Deep Sky">
+  <link href="css/latex.css" rel="stylesheet">
+  <link href="css/katex.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh">
+  <style>
+    .preview {
+      /*border: 1px solid greenyellow;*/
+      height: 130px;
+      overflow-x: auto;
+    }
+
+    figure img {
+      max-width: 100%;
+    }
+
+    astro-image-viewer {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      background-color: #8fd19e;
+    }
+
+    astro-image-viewer .astro-fit-image {
+      max-width: 100vw;
+      max-height: 100vh;
+    }
+
+    astro-image-viewer .astro-fill-image {
+      min-width: 100vw;
+      min-height: 100vh;
+      overflow: auto;
+    }
+
+    astro-image-viewer figcaption {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      color: #FFFFFF;
+      background-color: #888888;
+      opacity: 0.6;
+      padding: 3px 7px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+<div class="badge badge-warning">test</div>
+<astro-image-viewer image-id="2020-04-07-Oldenburg-Mond">
+    <img class="astro-fit-image" src="image/gallery/2020-04-07-Oldenburg-Mond/Mond-ganz.jpg" alt="Vollmond">
+  <!--
+    <img src="image/gallery/2020-04-07-Oldenburg-Mond/Mond-Tycho.jpg" alt="Vollmond"
+         style="min-width: 100vw; min-height: 100vh;">
+  -->
+<!--  <img class="astro-fill-image" src="image/gallery/2020-04-07-Oldenburg-Mond/Mond-Tycho.jpg" alt="Vollmond">-->
+  <figcaption>Vollmond vom 7.4.2020</figcaption>
+</astro-image-viewer>
+
+</body>
+</html>
