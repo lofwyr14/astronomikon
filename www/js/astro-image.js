@@ -13,6 +13,7 @@ class AstroImage {
         this.description = image.description;
         this.releaseDate = image.releaseDate;
         this.updateDate = image.updateDate;
+        this.dir = image.dir;
         this.pictures = new Map();
         if (image.pictures) {
             Object.keys(image.pictures).forEach((key) => {
@@ -29,13 +30,16 @@ class AstroImage {
         if (!picture) {
             picture = this.pictures.values().next().value;
         }
-        return picture ? `image/gallery/${this.id}/${picture.name}` : undefined; // todo: n/a image
+        return picture ? `${this.dir}/${picture.name}` : undefined; // todo: n/a image
     }
     get thumbUrl() {
         return this.url("thumb", "preview");
     }
     get previewUrl() {
-        return this.url("preview");
+        return this.url("preview", "full");
+    }
+    get fullUrl() {
+        return this.url("full", "preview");
     }
 }
 class Picture {
@@ -106,7 +110,7 @@ class AstroImageTable extends HTMLElement {
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
               <div class="card preview">
                 <a href="gallery-${image.id}.html" @click="${gallery.navigate.bind(gallery)}"
-              ><img src="${image.thumbUrl}" class="float-left float-start" alt="Ansicht"/>
+                ><img src="${image.thumbUrl}" class="float-left float-start" alt="Ansicht"/>
                   <b>${image.title}</b><br/>
                   <i>${image.description}</i><br/>
                   Datum: ${Display.date(image.begin)}<br/>
@@ -166,13 +170,23 @@ class AstroImageViewer extends HTMLElement {
             if (image) {
                 let gallery = this.closest('astro-gallery');
                 render(html `
-          <a href="gallery.html" @click="${gallery.navigate.bind(gallery)}" title="Schließen"
-          >[Ansicht schließen]</a>
           <figure>
-            <img src="${image.previewUrl}" alt="${image.title}"/>
+            <img class="astro-fit-image" src="${image.previewUrl}" alt="${image.title}"/>
+            <div class="btn-group">
+              <button @click="${this.natural.bind(this)}" class="btn btn-dark active">1:1</button>
+              <button @click="${this.contract.bind(this)}" class="btn btn-dark"
+              ><i class="bi bi-arrows-angle-contract"></i></button>
+              <button @click="${this.expand.bind(this)}" class="btn btn-dark"
+              ><i class="bi bi-arrows-angle-expand"></i></button>
+              <button @click="${this.zoomOff.bind(this)}" class="btn btn-dark"
+              >100 %</button>
+              <button @click="${this.zoomOut.bind(this)}" class="btn btn-dark"
+              ><i class="bi bi-zoom-out"></i></button>
+              <button @click="${this.zoomIn.bind(this)}" class="btn btn-dark"
+              ><i class="bi bi-zoom-in"></i></button>
+            </div>
             <figcaption>${image.description} vom ${Display.date(image.begin)}</figcaption>
-          </figure>
-        `, this);
+          </figure>`, this);
                 this.classList.remove("d-none");
             }
             else {
@@ -183,6 +197,56 @@ class AstroImageViewer extends HTMLElement {
             console.warn("service is not ready... still waiting...");
             this.classList.add("d-none");
         }
+    }
+    natural(event) {
+        let img = this.querySelector("img");
+        img.style.width = img.naturalWidth + "px";
+        img.style.height = img.naturalHeight + "px";
+    }
+    contract(event) {
+        let img = this.querySelector("img");
+        img.style.width = "auto";
+        img.style.height = this.offsetHeight + "px";
+    }
+    expand(event) {
+        let img = this.querySelector("img");
+        img.style.width = this.offsetWidth + "px";
+        img.style.height = "auto";
+    }
+    zoomOff(event) {
+        let img = this.querySelector("img");
+        // console.log("img.style.width  ", img.style.width);
+        // console.log("this.scrollWidth ", this.scrollWidth);
+        // img.style.width = 0.70710678118 * this.scrollWidth + "px";
+        // console.log("img.style.width  ", img.style.width);
+        // console.log("this.scrollWidth ", this.scrollWidth);
+        // img.style.height = "auto";
+        const scale = img.getBoundingClientRect().width / img.offsetWidth;
+        img.style.transform = `scale(1)`;
+    }
+    zoomOut(event) {
+        let img = this.querySelector("img");
+        // console.log("img.style.width  ", img.style.width);
+        // console.log("this.scrollWidth ", this.scrollWidth);
+        // img.style.width = 0.70710678118 * this.scrollWidth + "px";
+        // console.log("img.style.width  ", img.style.width);
+        // console.log("this.scrollWidth ", this.scrollWidth);
+        // img.style.height = "auto";
+        const scale = img.getBoundingClientRect().width / img.offsetWidth;
+        img.style.transform = `scale(${scale * 0.70710678118})`;
+        // let boundingClientRect = img.getBoundingClientRect();
+        // img.parentElement.style.width = boundingClientRect.width + "px";
+        // img.parentElement.style.height = boundingClientRect.height + "px";
+    }
+    zoomIn(event) {
+        let img = this.querySelector("img");
+        // img.style.width = 1.41421356237 * this.scrollWidth + "px";
+        // img.style.height = "auto";
+        const scale = img.getBoundingClientRect().width / img.offsetWidth;
+        img.style.transform = `scale(${scale * 1.41421356237})`;
+        // let boundingClientRect = img.getBoundingClientRect();
+        // img.parentElement.style.width = boundingClientRect.width + "px";
+        // img.parentElement.style.height = boundingClientRect.height + "px";
     }
 }
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -210,12 +274,39 @@ class AstroGallery extends HTMLElement {
         render(html `
       <astro-image-service>
       </astro-image-service>
-      <layout-title>Here will be the gallery soon!</layout-title>
-      <astro-image-viewer image-id="${ifDefined(this.currentImage)}">
-      </astro-image-viewer>
-      <astro-image-table>
-      </astro-image-table>
+
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="1000000">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <astro-image-viewer image-id="${ifDefined(this.currentImage)}">
+            </astro-image-viewer>
+          </div>
+          <div class="carousel-item">
+            <astro-image-viewer image-id="2017-10-15-Oldenburg-M31">
+            </astro-image-viewer>
+          </div>
+          <div class="carousel-item">
+            <astro-image-viewer image-id="2020-04-07-Oldenburg-Mond">
+            </astro-image-viewer>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+      <!--      <astro-image-table>-->
+      <!--      </astro-image-table>-->
     `, this);
+        // let element = document.querySelector("astro-image-viewer");
+        // document.querySelector("body").insertAdjacentElement("afterbegin", element);
     }
     navigate(event) {
         // idea from https://developers.google.com/search/docs/guides/javascript-seo-basics#use-history-api
@@ -225,8 +316,9 @@ class AstroGallery extends HTMLElement {
         const href = target.href;
         window.history.pushState({}, document.title, href); // Update URL as well as browser history.
         this.parseUrl();
-        const viewer = this.querySelector("astro-image-viewer");
+        const viewer = document.querySelector("astro-image-viewer");
         viewer.imageId = this.currentImage;
+        // target.parentElement.parentElement.insertAdjacentElement("afterend", viewer);
     }
 }
 AstroGallery.PERMA_LINK = /\/gallery(-([A-Za-z0-9\-]+))?\.html/;

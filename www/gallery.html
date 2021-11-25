@@ -6,22 +6,86 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="keywords" content="Astronomie, Fotografie, Teleskop, Deep Sky">
-  <link href="css/latex.css" rel="stylesheet"/>
-  <link href="css/katex.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh">
+<!--  <link href="css/latex.css" rel="stylesheet"/>-->
+<!--  <link href="css/katex.css" rel="stylesheet"/>-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <style>
     .preview {
       /*border: 1px solid greenyellow;*/
       height: 130px;
       overflow-x: auto;
     }
+
+    body {
+      background-color: #333333;
+    }
+
+    astro-image-viewer {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: scroll;
+      background-color: #8fd19e;
+    }
+
+    astro-image-viewer figure {
+      overflow: auto;
+      height: 100%;
+      width: 100%;
+    }
+
+    astro-image-viewer figure img {
+      transition: transform 400ms ease-in-out;
+      transform-origin: center center;
+    }
+
+    astro-image-viewer .astro-fit-image {
+      /*max-width: 100vw;*/
+      /*max-height: 100vh;*/
+      width: auto;
+      height: auto;
+
+    }
+
+    astro-image-viewer .btn-group {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      opacity: 0.6;
+    }
+
+    astro-image-viewer figcaption {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      color: #FFFFFF;
+      background-color: #888888;
+      opacity: 0.6;
+      padding: 3px 7px;
+      border-radius: 3px;
+    }
+
+    /* fixme */
+    .carousel-control-prev, .carousel-control-next {
+      margin: 100px 0;
+    }
+
+    /* fixme */
+    .row > div {
+    max-width: 175px;
+    }
+
   </style>
 </head>
 <body>
 
-<h3 style="background-color: orangered; color: floralwhite; text-align: center; margin-top: 5px">🚧 under construction 🚧</h3>
+<!--<h3 style="background-color: orangered; color: floralwhite; text-align: center; margin-top: 5px">🚧 under construction 🚧</h3>-->
 
+<!--
 <header>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="/">Astronomikon</a>
@@ -57,8 +121,9 @@
     </div>
   </nav>
 </header>
+-->
 
-<div class="container-fluid" id="gallery">
+<div class="container-fluid" id="gallery-x">
 
   <astro-gallery></astro-gallery>
 
