@@ -49,7 +49,7 @@
           <configuration>
             <scanIntervalSeconds>5</scanIntervalSeconds>
             <webApp>
-              <contextPath>/</contextPath>
+              <contextPath>/astro</contextPath>
             </webApp>
             <!--            <stopKey>stopKey</stopKey>
                         <stopPort>9999</stopPort>
