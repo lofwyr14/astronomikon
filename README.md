@@ -1,6 +1,6 @@
 # Astronomikon
 
-Website zum Ansehen und Bearbeiten astronomischer Fotos.
+Website zum Ansehen astronomischer Fotos.
 
 ## Aktuelle Version mit TypeScript, Web Components und JSON-Backend
 

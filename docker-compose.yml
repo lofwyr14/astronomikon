@@ -1,0 +1,8 @@
+version: "3"
+services:
+  docker-astronomikon-apache-dev:
+    build: docker-astronomikon-apache-dev
+    ports:
+      - "80:80"
+    volumes:
+      - ./www:/var/www/html

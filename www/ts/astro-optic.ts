@@ -144,11 +144,11 @@ class AstroOpticForm extends HTMLElement {
     // todo: d1 d2 d3 ist natürlich Quatsch
 
 // Render the template with some data
-    render(myTemplate('world'), this.querySelector("#d1"));
+    render(myTemplate('world'), this.querySelector("#d1") as HTMLDivElement);
 
 // ... Later on ...
 // Render the template with different data
-    render(myTemplate('lit-html'), this.querySelector("#d2"));
+    render(myTemplate('lit-html'), this.querySelector("#d2") as HTMLDivElement);
 
     render(html`<astro-optic-selector>
 </astro-optic-selector>
@@ -168,7 +168,7 @@ class AstroOpticForm extends HTMLElement {
     Öffnungsverhältnis
     <input type="number" class="form-control" min="0.5" max="100" list="aperture-list">
   </label>
-</div>`,  this.querySelector("#d3"));
+</div>`,  this.querySelector("#d3") as HTMLDivElement);
   }
 
   log(event) {
