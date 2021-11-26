@@ -1,8 +1,8 @@
 # Astronomikon
 
-Website to view and manage astronomical photos.
+Website zum Ansehen und Bearbeiten astronomischer Fotos.
 
-## Alte Version mit JSF als SPA
+## Alte Version mit JSF als SPA mit CouchDB Backend
 
 # Starten
 
