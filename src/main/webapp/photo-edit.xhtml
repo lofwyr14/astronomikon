@@ -7,7 +7,7 @@
 
   <tc:box label="Fotodaten bearbeiten" id="photo-edit">
     <f:facet name="bar">
-      <tc:button image="fa-plus" label="Neu">
+      <tc:button image="bi-plus-lg" label="Neu">
         <f:ajax listener="#{photoController.create}" render=":page:astro"/>
       </tc:button>
     </f:facet>
@@ -32,13 +32,13 @@
     <tc:textarea label="Beschreibung" value="#{photoController.current.description}"/>
 
     <tc:buttons>
-      <tc:button label="Speichern" defaultCommand="true">
+      <tc:button image="bi-check-lg" label="Speichern" defaultCommand="true">
         <f:ajax listener="#{photoController.save}" render=":page:astro" execute="photo-edit"/>
       </tc:button>
-      <tc:button label="Löschen" confirmation="Wirklich löschen?" markup="danger">
+      <tc:button image="bi-trash" label="Löschen" confirmation="Wirklich löschen?" markup="danger">
         <f:ajax listener="#{photoController.delete}" render=":page:astro" execute="photo-edit"/>
       </tc:button>
-      <tc:button label="Abbrechen">
+      <tc:button image="bi-x-lg" label="Abbrechen">
         <f:ajax listener="#{photoController.toList}" render=":page:astro"/>
       </tc:button>
     </tc:buttons>

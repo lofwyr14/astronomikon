@@ -14,7 +14,7 @@
         <f:facet name="bar">
           <tc:buttons>
             <tc:button immediate="true" image="fa-refresh" label="Reload" action="#{cameraController.findAll}"/>
-            <tc:button image="fa-plus" label="Neu" action="#{cameraController.create}"/>
+            <tc:button image="bi-plus-lg" label="Neu" action="#{cameraController.create}"/>
           </tc:buttons>
         </f:facet>
 
@@ -35,8 +35,8 @@
     <tc:box label="Kamera / Sensor">
       <f:facet name="bar">
         <tc:buttons>
-          <tc:button image="fa-plus" label="Neu" action="#{cameraController.create}"/>
-          <tc:button image="fa-trash" label="Löschen" action="#{cameraController.delete}">
+          <tc:button image="bi-plus-lg" label="Neu" action="#{cameraController.create}"/>
+          <tc:button image="bi-trash" label="Löschen" action="#{cameraController.delete}">
               <tc:style customClass="btn-danger"/>
           </tc:button>
         </tc:buttons>
@@ -59,7 +59,7 @@
         <tc:in label="Pixelanzahl Y" value="#{cameraController.current.pixelCountY}" labelLayout="skip" required="true"/>
       </tc:flexLayout>
 
-      <tc:button label="Speichern" action="#{cameraController.save}"/>
+      <tc:button image="bi-check-lg" label="Speichern" action="#{cameraController.save}"/>
 
     </tc:box>
 

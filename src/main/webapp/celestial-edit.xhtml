@@ -17,13 +17,13 @@
     <tc:in label="Scheinbare Größe" value="#{celestialController.current.apparentSize}" converter="angle"/>
 
     <tc:buttons>
-      <tc:button label="Speichern" defaultCommand="true">
+      <tc:button image="bi-check-lg" label="Speichern" defaultCommand="true">
         <f:ajax listener="#{celestialController.save}" render=":page:astro" execute="celestial-edit"/>
       </tc:button>
-      <tc:button label="Löschen" confirmation="Wirklich löschen?" markup="danger">
+      <tc:button image="bi-trash" label="Löschen" confirmation="Wirklich löschen?" markup="danger">
         <f:ajax listener="#{celestialController.delete}" render=":page:astro" execute="celestial-edit"/>
       </tc:button>
-      <tc:button image="fa-cancel" label="Abbrechen">
+      <tc:button image="bi-x-lg" label="Abbrechen">
         <f:ajax listener="#{celestialController.toList}" render=":page:astro"/>
       </tc:button>
     </tc:buttons>

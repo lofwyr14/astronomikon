@@ -2,7 +2,7 @@
 
 Website zum Ansehen und Bearbeiten astronomischer Fotos.
 
-## Alte Version mit JSF als SPA mit CouchDB Backend
+## Alte Version (2019) mit JSF als SPA mit CouchDB Backend
 
 # Starten
 
