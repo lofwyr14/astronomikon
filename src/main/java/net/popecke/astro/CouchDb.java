@@ -9,19 +9,16 @@ import org.ektorp.impl.StdCouchDbInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.enterprise.inject.spi.CDI;
-import javax.inject.Named;
-import javax.naming.InitialContext;
-
-@ApplicationScoped
-@Named
+//fixme: using CDI bean
+//@ApplicationScoped
+//@Named
 public class CouchDb {
 
   private static final Logger LOG = LoggerFactory.getLogger(CouchDb.class);
 
-  private CouchDbConnector db;
+  private static final CouchDb COUCH_DB = new CouchDb();
+
+  private final CouchDbConnector db;
 
   public CouchDb() {
     String couchDbUrl = System.getenv().get("COUCH_DB_URL");
@@ -50,6 +47,11 @@ public class CouchDb {
   }
 
   public static CouchDbConnector getConnector() {
+    return COUCH_DB.getDb();
+  }
+
+/* todo: use CDI
+  public static CouchDbConnector getConnector() {
     final BeanManager beanManager = getBeanManager();
     CouchDb couchDb = null;
     if (beanManager != null) {
@@ -77,5 +79,5 @@ public class CouchDb {
     } catch (Exception ignore) {
     }
     return null;
-  }
+  }*/
 }

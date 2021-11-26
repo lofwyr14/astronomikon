@@ -16,11 +16,11 @@
 version: "3"
 services:
   couchdb:
-    image: "apache/couchdb:2.3.0"
+    image: "apache/couchdb:2.3"
     ports:
       - "5984:5984"
   tomcat:
-    image: "tomcat:9-jdk11-openjdk-slim"
+    image: "tomcat:9-jdk8-openjdk-slim"
     ports:
       - "8080:8080"
     volumes:

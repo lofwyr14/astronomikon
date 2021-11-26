@@ -25,7 +25,7 @@
       <name>astro</name>
       <display-name>Astro Theme</display-name>
       <fallback>roxborough</fallback>
-      <versioned>false</versioned>
+      <version>1.0</version>
     </theme-definition>
   </theme-definitions>
 
