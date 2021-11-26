@@ -1,6 +1,8 @@
-# astronomikon
+# Astronomikon
 
-Website for astronomical infos and gallery of astrophotography.
+Website zum Ansehen und Bearbeiten astronomischer Fotos.
+
+## Aktuelle Version mit TypeScript, Web Components und JSON-Backend
 
 # Lokalen Apachen starten
 der auf www served:
@@ -12,4 +14,5 @@ docker-compose up -d
 
 Browse: http://localhost/
 
-# Ideen: Tabelle->Auswahl der Spalten
+# Ideen: 
+* Tabelle->Auswahl der Spalten
