@@ -4,6 +4,8 @@ Website zum Ansehen und Bearbeiten astronomischer Fotos.
 
 ## Alte Version (2019) mit JSF als SPA mit CouchDB Backend
 
+Noch Online auf https://www.popecke.net/astro/astro.xhtml
+
 # Starten
 
 ## Tomcat + CouchDB in Docker
