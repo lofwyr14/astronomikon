@@ -1,6 +1,8 @@
-# astro
+# Astronomikon
 
 Website to view and manage astronomical photos.
+
+## Alte Version mit JSF als SPA
 
 # Starten
 
