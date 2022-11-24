@@ -18,7 +18,7 @@
     "bootstrap-icons": "^1.9.1"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-commonjs": "^23.0.2",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-typescript": "^8.4.0",
     "katex": "^0.16.2",
