@@ -96,32 +96,32 @@
    * Copyright 2019 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  const t$1=window.ShadowRoot&&(void 0===window.ShadyCSS||window.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,e$2=Symbol(),n$3=new Map;class s$3{constructor(t,n){if(this._$cssResult$=!0,n!==e$2)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t;}get styleSheet(){let e=n$3.get(this.cssText);return t$1&&void 0===e&&(n$3.set(this.cssText,e=new CSSStyleSheet),e.replaceSync(this.cssText)),e}toString(){return this.cssText}}const o$3=t=>new s$3("string"==typeof t?t:t+"",e$2),i$2=(e,n)=>{t$1?e.adoptedStyleSheets=n.map((t=>t instanceof CSSStyleSheet?t:t.styleSheet)):n.forEach((t=>{const n=document.createElement("style"),s=window.litNonce;void 0!==s&&n.setAttribute("nonce",s),n.textContent=t.cssText,e.appendChild(n);}));},S$2=t$1?t=>t:t=>t instanceof CSSStyleSheet?(t=>{let e="";for(const n of t.cssRules)e+=n.cssText;return o$3(e)})(t):t;
+  const t$1=window,e$2=t$1.ShadowRoot&&(void 0===t$1.ShadyCSS||t$1.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,s$3=Symbol(),n$3=new WeakMap;let o$3 = class o{constructor(t,e,n){if(this._$cssResult$=!0,n!==s$3)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=e;}get styleSheet(){let t=this.o;const s=this.t;if(e$2&&void 0===t){const e=void 0!==s&&1===s.length;e&&(t=n$3.get(s)),void 0===t&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),e&&n$3.set(s,t));}return t}toString(){return this.cssText}};const r$2=t=>new o$3("string"==typeof t?t:t+"",void 0,s$3),S$2=(s,n)=>{e$2?s.adoptedStyleSheets=n.map((t=>t instanceof CSSStyleSheet?t:t.styleSheet)):n.forEach((e=>{const n=document.createElement("style"),o=t$1.litNonce;void 0!==o&&n.setAttribute("nonce",o),n.textContent=e.cssText,s.appendChild(n);}));},c$1=e$2?t=>t:t=>t instanceof CSSStyleSheet?(t=>{let e="";for(const s of t.cssRules)e+=s.cssText;return r$2(e)})(t):t;
 
   /**
    * @license
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
-   */var s$2;const e$1=window.trustedTypes,r$1=e$1?e$1.emptyScript:"",h$1=window.reactiveElementPolyfillSupport,o$2={toAttribute(t,i){switch(i){case Boolean:t=t?r$1:null;break;case Object:case Array:t=null==t?t:JSON.stringify(t);}return t},fromAttribute(t,i){let s=t;switch(i){case Boolean:s=null!==t;break;case Number:s=null===t?null:Number(t);break;case Object:case Array:try{s=JSON.parse(t);}catch(t){s=null;}}return s}},n$2=(t,i)=>i!==t&&(i==i||t==t),l$3={attribute:!0,type:String,converter:o$2,reflect:!1,hasChanged:n$2};class a$1 extends HTMLElement{constructor(){super(),this._$Et=new Map,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Ei=null,this.o();}static addInitializer(t){var i;null!==(i=this.l)&&void 0!==i||(this.l=[]),this.l.push(t);}static get observedAttributes(){this.finalize();const t=[];return this.elementProperties.forEach(((i,s)=>{const e=this._$Eh(s,i);void 0!==e&&(this._$Eu.set(e,s),t.push(e));})),t}static createProperty(t,i=l$3){if(i.state&&(i.attribute=!1),this.finalize(),this.elementProperties.set(t,i),!i.noAccessor&&!this.prototype.hasOwnProperty(t)){const s="symbol"==typeof t?Symbol():"__"+t,e=this.getPropertyDescriptor(t,s,i);void 0!==e&&Object.defineProperty(this.prototype,t,e);}}static getPropertyDescriptor(t,i,s){return {get(){return this[i]},set(e){const r=this[t];this[i]=e,this.requestUpdate(t,r,s);},configurable:!0,enumerable:!0}}static getPropertyOptions(t){return this.elementProperties.get(t)||l$3}static finalize(){if(this.hasOwnProperty("finalized"))return !1;this.finalized=!0;const t=Object.getPrototypeOf(this);if(t.finalize(),this.elementProperties=new Map(t.elementProperties),this._$Eu=new Map,this.hasOwnProperty("properties")){const t=this.properties,i=[...Object.getOwnPropertyNames(t),...Object.getOwnPropertySymbols(t)];for(const s of i)this.createProperty(s,t[s]);}return this.elementStyles=this.finalizeStyles(this.styles),!0}static finalizeStyles(i){const s=[];if(Array.isArray(i)){const e=new Set(i.flat(1/0).reverse());for(const i of e)s.unshift(S$2(i));}else void 0!==i&&s.push(S$2(i));return s}static _$Eh(t,i){const s=i.attribute;return !1===s?void 0:"string"==typeof s?s:"string"==typeof t?t.toLowerCase():void 0}o(){var t;this._$Ep=new Promise((t=>this.enableUpdating=t)),this._$AL=new Map,this._$Em(),this.requestUpdate(),null===(t=this.constructor.l)||void 0===t||t.forEach((t=>t(this)));}addController(t){var i,s;(null!==(i=this._$Eg)&&void 0!==i?i:this._$Eg=[]).push(t),void 0!==this.renderRoot&&this.isConnected&&(null===(s=t.hostConnected)||void 0===s||s.call(t));}removeController(t){var i;null===(i=this._$Eg)||void 0===i||i.splice(this._$Eg.indexOf(t)>>>0,1);}_$Em(){this.constructor.elementProperties.forEach(((t,i)=>{this.hasOwnProperty(i)&&(this._$Et.set(i,this[i]),delete this[i]);}));}createRenderRoot(){var t;const s=null!==(t=this.shadowRoot)&&void 0!==t?t:this.attachShadow(this.constructor.shadowRootOptions);return i$2(s,this.constructor.elementStyles),s}connectedCallback(){var t;void 0===this.renderRoot&&(this.renderRoot=this.createRenderRoot()),this.enableUpdating(!0),null===(t=this._$Eg)||void 0===t||t.forEach((t=>{var i;return null===(i=t.hostConnected)||void 0===i?void 0:i.call(t)}));}enableUpdating(t){}disconnectedCallback(){var t;null===(t=this._$Eg)||void 0===t||t.forEach((t=>{var i;return null===(i=t.hostDisconnected)||void 0===i?void 0:i.call(t)}));}attributeChangedCallback(t,i,s){this._$AK(t,s);}_$ES(t,i,s=l$3){var e,r;const h=this.constructor._$Eh(t,s);if(void 0!==h&&!0===s.reflect){const n=(null!==(r=null===(e=s.converter)||void 0===e?void 0:e.toAttribute)&&void 0!==r?r:o$2.toAttribute)(i,s.type);this._$Ei=t,null==n?this.removeAttribute(h):this.setAttribute(h,n),this._$Ei=null;}}_$AK(t,i){var s,e,r;const h=this.constructor,n=h._$Eu.get(t);if(void 0!==n&&this._$Ei!==n){const t=h.getPropertyOptions(n),l=t.converter,a=null!==(r=null!==(e=null===(s=l)||void 0===s?void 0:s.fromAttribute)&&void 0!==e?e:"function"==typeof l?l:null)&&void 0!==r?r:o$2.fromAttribute;this._$Ei=n,this[n]=a(i,t.type),this._$Ei=null;}}requestUpdate(t,i,s){let e=!0;void 0!==t&&(((s=s||this.constructor.getPropertyOptions(t)).hasChanged||n$2)(this[t],i)?(this._$AL.has(t)||this._$AL.set(t,i),!0===s.reflect&&this._$Ei!==t&&(void 0===this._$E_&&(this._$E_=new Map),this._$E_.set(t,s))):e=!1),!this.isUpdatePending&&e&&(this._$Ep=this._$EC());}async _$EC(){this.isUpdatePending=!0;try{await this._$Ep;}catch(t){Promise.reject(t);}const t=this.scheduleUpdate();return null!=t&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){var t;if(!this.isUpdatePending)return;this.hasUpdated,this._$Et&&(this._$Et.forEach(((t,i)=>this[i]=t)),this._$Et=void 0);let i=!1;const s=this._$AL;try{i=this.shouldUpdate(s),i?(this.willUpdate(s),null===(t=this._$Eg)||void 0===t||t.forEach((t=>{var i;return null===(i=t.hostUpdate)||void 0===i?void 0:i.call(t)})),this.update(s)):this._$EU();}catch(t){throw i=!1,this._$EU(),t}i&&this._$AE(s);}willUpdate(t){}_$AE(t){var i;null===(i=this._$Eg)||void 0===i||i.forEach((t=>{var i;return null===(i=t.hostUpdated)||void 0===i?void 0:i.call(t)})),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(t)),this.updated(t);}_$EU(){this._$AL=new Map,this.isUpdatePending=!1;}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$Ep}shouldUpdate(t){return !0}update(t){void 0!==this._$E_&&(this._$E_.forEach(((t,i)=>this._$ES(i,this[i],t))),this._$E_=void 0),this._$EU();}updated(t){}firstUpdated(t){}}a$1.finalized=!0,a$1.elementProperties=new Map,a$1.elementStyles=[],a$1.shadowRootOptions={mode:"open"},null==h$1||h$1({ReactiveElement:a$1}),(null!==(s$2=globalThis.reactiveElementVersions)&&void 0!==s$2?s$2:globalThis.reactiveElementVersions=[]).push("1.2.3");
+   */var s$2;const e$1=window,r$1=e$1.trustedTypes,h$1=r$1?r$1.emptyScript:"",o$2=e$1.reactiveElementPolyfillSupport,n$2={toAttribute(t,i){switch(i){case Boolean:t=t?h$1:null;break;case Object:case Array:t=null==t?t:JSON.stringify(t);}return t},fromAttribute(t,i){let s=t;switch(i){case Boolean:s=null!==t;break;case Number:s=null===t?null:Number(t);break;case Object:case Array:try{s=JSON.parse(t);}catch(t){s=null;}}return s}},a$1=(t,i)=>i!==t&&(i==i||t==t),l$3={attribute:!0,type:String,converter:n$2,reflect:!1,hasChanged:a$1};let d$1 = class d extends HTMLElement{constructor(){super(),this._$Ei=new Map,this.isUpdatePending=!1,this.hasUpdated=!1,this._$El=null,this.u();}static addInitializer(t){var i;this.finalize(),(null!==(i=this.h)&&void 0!==i?i:this.h=[]).push(t);}static get observedAttributes(){this.finalize();const t=[];return this.elementProperties.forEach(((i,s)=>{const e=this._$Ep(s,i);void 0!==e&&(this._$Ev.set(e,s),t.push(e));})),t}static createProperty(t,i=l$3){if(i.state&&(i.attribute=!1),this.finalize(),this.elementProperties.set(t,i),!i.noAccessor&&!this.prototype.hasOwnProperty(t)){const s="symbol"==typeof t?Symbol():"__"+t,e=this.getPropertyDescriptor(t,s,i);void 0!==e&&Object.defineProperty(this.prototype,t,e);}}static getPropertyDescriptor(t,i,s){return {get(){return this[i]},set(e){const r=this[t];this[i]=e,this.requestUpdate(t,r,s);},configurable:!0,enumerable:!0}}static getPropertyOptions(t){return this.elementProperties.get(t)||l$3}static finalize(){if(this.hasOwnProperty("finalized"))return !1;this.finalized=!0;const t=Object.getPrototypeOf(this);if(t.finalize(),void 0!==t.h&&(this.h=[...t.h]),this.elementProperties=new Map(t.elementProperties),this._$Ev=new Map,this.hasOwnProperty("properties")){const t=this.properties,i=[...Object.getOwnPropertyNames(t),...Object.getOwnPropertySymbols(t)];for(const s of i)this.createProperty(s,t[s]);}return this.elementStyles=this.finalizeStyles(this.styles),!0}static finalizeStyles(i){const s=[];if(Array.isArray(i)){const e=new Set(i.flat(1/0).reverse());for(const i of e)s.unshift(c$1(i));}else void 0!==i&&s.push(c$1(i));return s}static _$Ep(t,i){const s=i.attribute;return !1===s?void 0:"string"==typeof s?s:"string"==typeof t?t.toLowerCase():void 0}u(){var t;this._$E_=new Promise((t=>this.enableUpdating=t)),this._$AL=new Map,this._$Eg(),this.requestUpdate(),null===(t=this.constructor.h)||void 0===t||t.forEach((t=>t(this)));}addController(t){var i,s;(null!==(i=this._$ES)&&void 0!==i?i:this._$ES=[]).push(t),void 0!==this.renderRoot&&this.isConnected&&(null===(s=t.hostConnected)||void 0===s||s.call(t));}removeController(t){var i;null===(i=this._$ES)||void 0===i||i.splice(this._$ES.indexOf(t)>>>0,1);}_$Eg(){this.constructor.elementProperties.forEach(((t,i)=>{this.hasOwnProperty(i)&&(this._$Ei.set(i,this[i]),delete this[i]);}));}createRenderRoot(){var t;const s=null!==(t=this.shadowRoot)&&void 0!==t?t:this.attachShadow(this.constructor.shadowRootOptions);return S$2(s,this.constructor.elementStyles),s}connectedCallback(){var t;void 0===this.renderRoot&&(this.renderRoot=this.createRenderRoot()),this.enableUpdating(!0),null===(t=this._$ES)||void 0===t||t.forEach((t=>{var i;return null===(i=t.hostConnected)||void 0===i?void 0:i.call(t)}));}enableUpdating(t){}disconnectedCallback(){var t;null===(t=this._$ES)||void 0===t||t.forEach((t=>{var i;return null===(i=t.hostDisconnected)||void 0===i?void 0:i.call(t)}));}attributeChangedCallback(t,i,s){this._$AK(t,s);}_$EO(t,i,s=l$3){var e;const r=this.constructor._$Ep(t,s);if(void 0!==r&&!0===s.reflect){const h=(void 0!==(null===(e=s.converter)||void 0===e?void 0:e.toAttribute)?s.converter:n$2).toAttribute(i,s.type);this._$El=t,null==h?this.removeAttribute(r):this.setAttribute(r,h),this._$El=null;}}_$AK(t,i){var s;const e=this.constructor,r=e._$Ev.get(t);if(void 0!==r&&this._$El!==r){const t=e.getPropertyOptions(r),h="function"==typeof t.converter?{fromAttribute:t.converter}:void 0!==(null===(s=t.converter)||void 0===s?void 0:s.fromAttribute)?t.converter:n$2;this._$El=r,this[r]=h.fromAttribute(i,t.type),this._$El=null;}}requestUpdate(t,i,s){let e=!0;void 0!==t&&(((s=s||this.constructor.getPropertyOptions(t)).hasChanged||a$1)(this[t],i)?(this._$AL.has(t)||this._$AL.set(t,i),!0===s.reflect&&this._$El!==t&&(void 0===this._$EC&&(this._$EC=new Map),this._$EC.set(t,s))):e=!1),!this.isUpdatePending&&e&&(this._$E_=this._$Ej());}async _$Ej(){this.isUpdatePending=!0;try{await this._$E_;}catch(t){Promise.reject(t);}const t=this.scheduleUpdate();return null!=t&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){var t;if(!this.isUpdatePending)return;this.hasUpdated,this._$Ei&&(this._$Ei.forEach(((t,i)=>this[i]=t)),this._$Ei=void 0);let i=!1;const s=this._$AL;try{i=this.shouldUpdate(s),i?(this.willUpdate(s),null===(t=this._$ES)||void 0===t||t.forEach((t=>{var i;return null===(i=t.hostUpdate)||void 0===i?void 0:i.call(t)})),this.update(s)):this._$Ek();}catch(t){throw i=!1,this._$Ek(),t}i&&this._$AE(s);}willUpdate(t){}_$AE(t){var i;null===(i=this._$ES)||void 0===i||i.forEach((t=>{var i;return null===(i=t.hostUpdated)||void 0===i?void 0:i.call(t)})),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(t)),this.updated(t);}_$Ek(){this._$AL=new Map,this.isUpdatePending=!1;}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$E_}shouldUpdate(t){return !0}update(t){void 0!==this._$EC&&(this._$EC.forEach(((t,i)=>this._$EO(i,this[i],t))),this._$EC=void 0),this._$Ek();}updated(t){}firstUpdated(t){}};d$1.finalized=!0,d$1.elementProperties=new Map,d$1.elementStyles=[],d$1.shadowRootOptions={mode:"open"},null==o$2||o$2({ReactiveElement:d$1}),(null!==(s$2=e$1.reactiveElementVersions)&&void 0!==s$2?s$2:e$1.reactiveElementVersions=[]).push("1.6.1");
 
   /**
    * @license
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  var t;const i$1=globalThis.trustedTypes,s$1=i$1?i$1.createPolicy("lit-html",{createHTML:t=>t}):void 0,e=`lit$${(Math.random()+"").slice(9)}$`,o$1="?"+e,n$1=`<${o$1}>`,l$2=document,h=(t="")=>l$2.createComment(t),r=t=>null===t||"object"!=typeof t&&"function"!=typeof t,d=Array.isArray,u=t=>{var i;return d(t)||"function"==typeof(null===(i=t)||void 0===i?void 0:i[Symbol.iterator])},c=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,v=/-->/g,a=/>/g,f=/>|[ 	\n\r](?:([^\s"'>=/]+)([ 	\n\r]*=[ 	\n\r]*(?:[^ 	\n\r"'`<>=]|("|')|))|$)/g,_=/'/g,m=/"/g,g=/^(?:script|style|textarea|title)$/i,p=t=>(i,...s)=>({_$litType$:t,strings:i,values:s}),$=p(1),b=Symbol.for("lit-noChange"),w=Symbol.for("lit-nothing"),T$1=new WeakMap,x=(t,i,s)=>{var e,o;const n=null!==(e=null==s?void 0:s.renderBefore)&&void 0!==e?e:i;let l=n._$litPart$;if(void 0===l){const t=null!==(o=null==s?void 0:s.renderBefore)&&void 0!==o?o:null;n._$litPart$=l=new N(i.insertBefore(h(),t),t,void 0,null!=s?s:{});}return l._$AI(t),l},A=l$2.createTreeWalker(l$2,129,null,!1),C=(t,i)=>{const o=t.length-1,l=[];let h,r=2===i?"<svg>":"",d=c;for(let i=0;i<o;i++){const s=t[i];let o,u,p=-1,$=0;for(;$<s.length&&(d.lastIndex=$,u=d.exec(s),null!==u);)$=d.lastIndex,d===c?"!--"===u[1]?d=v:void 0!==u[1]?d=a:void 0!==u[2]?(g.test(u[2])&&(h=RegExp("</"+u[2],"g")),d=f):void 0!==u[3]&&(d=f):d===f?">"===u[0]?(d=null!=h?h:c,p=-1):void 0===u[1]?p=-2:(p=d.lastIndex-u[2].length,o=u[1],d=void 0===u[3]?f:'"'===u[3]?m:_):d===m||d===_?d=f:d===v||d===a?d=c:(d=f,h=void 0);const y=d===f&&t[i+1].startsWith("/>")?" ":"";r+=d===c?s+n$1:p>=0?(l.push(o),s.slice(0,p)+"$lit$"+s.slice(p)+e+y):s+e+(-2===p?(l.push(void 0),i):y);}const u=r+(t[o]||"<?>")+(2===i?"</svg>":"");if(!Array.isArray(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return [void 0!==s$1?s$1.createHTML(u):u,l]};class E{constructor({strings:t,_$litType$:s},n){let l;this.parts=[];let r=0,d=0;const u=t.length-1,c=this.parts,[v,a]=C(t,s);if(this.el=E.createElement(v,n),A.currentNode=this.el.content,2===s){const t=this.el.content,i=t.firstChild;i.remove(),t.append(...i.childNodes);}for(;null!==(l=A.nextNode())&&c.length<u;){if(1===l.nodeType){if(l.hasAttributes()){const t=[];for(const i of l.getAttributeNames())if(i.endsWith("$lit$")||i.startsWith(e)){const s=a[d++];if(t.push(i),void 0!==s){const t=l.getAttribute(s.toLowerCase()+"$lit$").split(e),i=/([.?@])?(.*)/.exec(s);c.push({type:1,index:r,name:i[2],strings:t,ctor:"."===i[1]?M:"?"===i[1]?H:"@"===i[1]?I:S$1});}else c.push({type:6,index:r});}for(const i of t)l.removeAttribute(i);}if(g.test(l.tagName)){const t=l.textContent.split(e),s=t.length-1;if(s>0){l.textContent=i$1?i$1.emptyScript:"";for(let i=0;i<s;i++)l.append(t[i],h()),A.nextNode(),c.push({type:2,index:++r});l.append(t[s],h());}}}else if(8===l.nodeType)if(l.data===o$1)c.push({type:2,index:r});else {let t=-1;for(;-1!==(t=l.data.indexOf(e,t+1));)c.push({type:7,index:r}),t+=e.length-1;}r++;}}static createElement(t,i){const s=l$2.createElement("template");return s.innerHTML=t,s}}function P(t,i,s=t,e){var o,n,l,h;if(i===b)return i;let d=void 0!==e?null===(o=s._$Cl)||void 0===o?void 0:o[e]:s._$Cu;const u=r(i)?void 0:i._$litDirective$;return (null==d?void 0:d.constructor)!==u&&(null===(n=null==d?void 0:d._$AO)||void 0===n||n.call(d,!1),void 0===u?d=void 0:(d=new u(t),d._$AT(t,s,e)),void 0!==e?(null!==(l=(h=s)._$Cl)&&void 0!==l?l:h._$Cl=[])[e]=d:s._$Cu=d),void 0!==d&&(i=P(t,d._$AS(t,i.values),d,e)),i}class V{constructor(t,i){this.v=[],this._$AN=void 0,this._$AD=t,this._$AM=i;}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}p(t){var i;const{el:{content:s},parts:e}=this._$AD,o=(null!==(i=null==t?void 0:t.creationScope)&&void 0!==i?i:l$2).importNode(s,!0);A.currentNode=o;let n=A.nextNode(),h=0,r=0,d=e[0];for(;void 0!==d;){if(h===d.index){let i;2===d.type?i=new N(n,n.nextSibling,this,t):1===d.type?i=new d.ctor(n,d.name,d.strings,this,t):6===d.type&&(i=new L(n,this,t)),this.v.push(i),d=e[++r];}h!==(null==d?void 0:d.index)&&(n=A.nextNode(),h++);}return o}m(t){let i=0;for(const s of this.v)void 0!==s&&(void 0!==s.strings?(s._$AI(t,s,i),i+=s.strings.length-2):s._$AI(t[i])),i++;}}class N{constructor(t,i,s,e){var o;this.type=2,this._$AH=w,this._$AN=void 0,this._$AA=t,this._$AB=i,this._$AM=s,this.options=e,this._$Cg=null===(o=null==e?void 0:e.isConnected)||void 0===o||o;}get _$AU(){var t,i;return null!==(i=null===(t=this._$AM)||void 0===t?void 0:t._$AU)&&void 0!==i?i:this._$Cg}get parentNode(){let t=this._$AA.parentNode;const i=this._$AM;return void 0!==i&&11===t.nodeType&&(t=i.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,i=this){t=P(this,t,i),r(t)?t===w||null==t||""===t?(this._$AH!==w&&this._$AR(),this._$AH=w):t!==this._$AH&&t!==b&&this.$(t):void 0!==t._$litType$?this.T(t):void 0!==t.nodeType?this.S(t):u(t)?this.A(t):this.$(t);}M(t,i=this._$AB){return this._$AA.parentNode.insertBefore(t,i)}S(t){this._$AH!==t&&(this._$AR(),this._$AH=this.M(t));}$(t){this._$AH!==w&&r(this._$AH)?this._$AA.nextSibling.data=t:this.S(l$2.createTextNode(t)),this._$AH=t;}T(t){var i;const{values:s,_$litType$:e}=t,o="number"==typeof e?this._$AC(t):(void 0===e.el&&(e.el=E.createElement(e.h,this.options)),e);if((null===(i=this._$AH)||void 0===i?void 0:i._$AD)===o)this._$AH.m(s);else {const t=new V(o,this),i=t.p(this.options);t.m(s),this.S(i),this._$AH=t;}}_$AC(t){let i=T$1.get(t.strings);return void 0===i&&T$1.set(t.strings,i=new E(t)),i}A(t){d(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let s,e=0;for(const o of t)e===i.length?i.push(s=new N(this.M(h()),this.M(h()),this,this.options)):s=i[e],s._$AI(o),e++;e<i.length&&(this._$AR(s&&s._$AB.nextSibling,e),i.length=e);}_$AR(t=this._$AA.nextSibling,i){var s;for(null===(s=this._$AP)||void 0===s||s.call(this,!1,!0,i);t&&t!==this._$AB;){const i=t.nextSibling;t.remove(),t=i;}}setConnected(t){var i;void 0===this._$AM&&(this._$Cg=t,null===(i=this._$AP)||void 0===i||i.call(this,t));}}class S$1{constructor(t,i,s,e,o){this.type=1,this._$AH=w,this._$AN=void 0,this.element=t,this.name=i,this._$AM=e,this.options=o,s.length>2||""!==s[0]||""!==s[1]?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=w;}get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}_$AI(t,i=this,s,e){const o=this.strings;let n=!1;if(void 0===o)t=P(this,t,i,0),n=!r(t)||t!==this._$AH&&t!==b,n&&(this._$AH=t);else {const e=t;let l,h;for(t=o[0],l=0;l<o.length-1;l++)h=P(this,e[s+l],i,l),h===b&&(h=this._$AH[l]),n||(n=!r(h)||h!==this._$AH[l]),h===w?t=w:t!==w&&(t+=(null!=h?h:"")+o[l+1]),this._$AH[l]=h;}n&&!e&&this.k(t);}k(t){t===w?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,null!=t?t:"");}}class M extends S$1{constructor(){super(...arguments),this.type=3;}k(t){this.element[this.name]=t===w?void 0:t;}}const k=i$1?i$1.emptyScript:"";class H extends S$1{constructor(){super(...arguments),this.type=4;}k(t){t&&t!==w?this.element.setAttribute(this.name,k):this.element.removeAttribute(this.name);}}class I extends S$1{constructor(t,i,s,e,o){super(t,i,s,e,o),this.type=5;}_$AI(t,i=this){var s;if((t=null!==(s=P(this,t,i,0))&&void 0!==s?s:w)===b)return;const e=this._$AH,o=t===w&&e!==w||t.capture!==e.capture||t.once!==e.once||t.passive!==e.passive,n=t!==w&&(e===w||o);o&&this.element.removeEventListener(this.name,this,e),n&&this.element.addEventListener(this.name,this,t),this._$AH=t;}handleEvent(t){var i,s;"function"==typeof this._$AH?this._$AH.call(null!==(s=null===(i=this.options)||void 0===i?void 0:i.host)&&void 0!==s?s:this.element,t):this._$AH.handleEvent(t);}}class L{constructor(t,i,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=i,this.options=s;}get _$AU(){return this._$AM._$AU}_$AI(t){P(this,t);}}const z=window.litHtmlPolyfillSupport;null==z||z(E,N),(null!==(t=globalThis.litHtmlVersions)&&void 0!==t?t:globalThis.litHtmlVersions=[]).push("2.1.3");
+  var t;const i$1=window,s$1=i$1.trustedTypes,e=s$1?s$1.createPolicy("lit-html",{createHTML:t=>t}):void 0,o$1=`lit$${(Math.random()+"").slice(9)}$`,n$1="?"+o$1,l$2=`<${n$1}>`,h=document,r=(t="")=>h.createComment(t),d=t=>null===t||"object"!=typeof t&&"function"!=typeof t,u=Array.isArray,c=t=>u(t)||"function"==typeof(null==t?void 0:t[Symbol.iterator]),v=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,a=/-->/g,f=/>/g,_=RegExp(">|[ \t\n\f\r](?:([^\\s\"'>=/]+)([ \t\n\f\r]*=[ \t\n\f\r]*(?:[^ \t\n\f\r\"'`<>=]|(\"|')|))|$)","g"),m=/'/g,p=/"/g,$=/^(?:script|style|textarea|title)$/i,g=t=>(i,...s)=>({_$litType$:t,strings:i,values:s}),y=g(1),x=Symbol.for("lit-noChange"),b=Symbol.for("lit-nothing"),T$1=new WeakMap,A=h.createTreeWalker(h,129,null,!1),E=(t,i)=>{const s=t.length-1,n=[];let h,r=2===i?"<svg>":"",d=v;for(let i=0;i<s;i++){const s=t[i];let e,u,c=-1,g=0;for(;g<s.length&&(d.lastIndex=g,u=d.exec(s),null!==u);)g=d.lastIndex,d===v?"!--"===u[1]?d=a:void 0!==u[1]?d=f:void 0!==u[2]?($.test(u[2])&&(h=RegExp("</"+u[2],"g")),d=_):void 0!==u[3]&&(d=_):d===_?">"===u[0]?(d=null!=h?h:v,c=-1):void 0===u[1]?c=-2:(c=d.lastIndex-u[2].length,e=u[1],d=void 0===u[3]?_:'"'===u[3]?p:m):d===p||d===m?d=_:d===a||d===f?d=v:(d=_,h=void 0);const y=d===_&&t[i+1].startsWith("/>")?" ":"";r+=d===v?s+l$2:c>=0?(n.push(e),s.slice(0,c)+"$lit$"+s.slice(c)+o$1+y):s+o$1+(-2===c?(n.push(void 0),i):y);}const u=r+(t[s]||"<?>")+(2===i?"</svg>":"");if(!Array.isArray(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return [void 0!==e?e.createHTML(u):u,n]};class C{constructor({strings:t,_$litType$:i},e){let l;this.parts=[];let h=0,d=0;const u=t.length-1,c=this.parts,[v,a]=E(t,i);if(this.el=C.createElement(v,e),A.currentNode=this.el.content,2===i){const t=this.el.content,i=t.firstChild;i.remove(),t.append(...i.childNodes);}for(;null!==(l=A.nextNode())&&c.length<u;){if(1===l.nodeType){if(l.hasAttributes()){const t=[];for(const i of l.getAttributeNames())if(i.endsWith("$lit$")||i.startsWith(o$1)){const s=a[d++];if(t.push(i),void 0!==s){const t=l.getAttribute(s.toLowerCase()+"$lit$").split(o$1),i=/([.?@])?(.*)/.exec(s);c.push({type:1,index:h,name:i[2],strings:t,ctor:"."===i[1]?M:"?"===i[1]?k:"@"===i[1]?H:S$1});}else c.push({type:6,index:h});}for(const i of t)l.removeAttribute(i);}if($.test(l.tagName)){const t=l.textContent.split(o$1),i=t.length-1;if(i>0){l.textContent=s$1?s$1.emptyScript:"";for(let s=0;s<i;s++)l.append(t[s],r()),A.nextNode(),c.push({type:2,index:++h});l.append(t[i],r());}}}else if(8===l.nodeType)if(l.data===n$1)c.push({type:2,index:h});else {let t=-1;for(;-1!==(t=l.data.indexOf(o$1,t+1));)c.push({type:7,index:h}),t+=o$1.length-1;}h++;}}static createElement(t,i){const s=h.createElement("template");return s.innerHTML=t,s}}function P(t,i,s=t,e){var o,n,l,h;if(i===x)return i;let r=void 0!==e?null===(o=s._$Co)||void 0===o?void 0:o[e]:s._$Cl;const u=d(i)?void 0:i._$litDirective$;return (null==r?void 0:r.constructor)!==u&&(null===(n=null==r?void 0:r._$AO)||void 0===n||n.call(r,!1),void 0===u?r=void 0:(r=new u(t),r._$AT(t,s,e)),void 0!==e?(null!==(l=(h=s)._$Co)&&void 0!==l?l:h._$Co=[])[e]=r:s._$Cl=r),void 0!==r&&(i=P(t,r._$AS(t,i.values),r,e)),i}class V{constructor(t,i){this.u=[],this._$AN=void 0,this._$AD=t,this._$AM=i;}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}v(t){var i;const{el:{content:s},parts:e}=this._$AD,o=(null!==(i=null==t?void 0:t.creationScope)&&void 0!==i?i:h).importNode(s,!0);A.currentNode=o;let n=A.nextNode(),l=0,r=0,d=e[0];for(;void 0!==d;){if(l===d.index){let i;2===d.type?i=new N(n,n.nextSibling,this,t):1===d.type?i=new d.ctor(n,d.name,d.strings,this,t):6===d.type&&(i=new I(n,this,t)),this.u.push(i),d=e[++r];}l!==(null==d?void 0:d.index)&&(n=A.nextNode(),l++);}return o}p(t){let i=0;for(const s of this.u)void 0!==s&&(void 0!==s.strings?(s._$AI(t,s,i),i+=s.strings.length-2):s._$AI(t[i])),i++;}}class N{constructor(t,i,s,e){var o;this.type=2,this._$AH=b,this._$AN=void 0,this._$AA=t,this._$AB=i,this._$AM=s,this.options=e,this._$Cm=null===(o=null==e?void 0:e.isConnected)||void 0===o||o;}get _$AU(){var t,i;return null!==(i=null===(t=this._$AM)||void 0===t?void 0:t._$AU)&&void 0!==i?i:this._$Cm}get parentNode(){let t=this._$AA.parentNode;const i=this._$AM;return void 0!==i&&11===t.nodeType&&(t=i.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,i=this){t=P(this,t,i),d(t)?t===b||null==t||""===t?(this._$AH!==b&&this._$AR(),this._$AH=b):t!==this._$AH&&t!==x&&this.g(t):void 0!==t._$litType$?this.$(t):void 0!==t.nodeType?this.T(t):c(t)?this.k(t):this.g(t);}O(t,i=this._$AB){return this._$AA.parentNode.insertBefore(t,i)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t));}g(t){this._$AH!==b&&d(this._$AH)?this._$AA.nextSibling.data=t:this.T(h.createTextNode(t)),this._$AH=t;}$(t){var i;const{values:s,_$litType$:e}=t,o="number"==typeof e?this._$AC(t):(void 0===e.el&&(e.el=C.createElement(e.h,this.options)),e);if((null===(i=this._$AH)||void 0===i?void 0:i._$AD)===o)this._$AH.p(s);else {const t=new V(o,this),i=t.v(this.options);t.p(s),this.T(i),this._$AH=t;}}_$AC(t){let i=T$1.get(t.strings);return void 0===i&&T$1.set(t.strings,i=new C(t)),i}k(t){u(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let s,e=0;for(const o of t)e===i.length?i.push(s=new N(this.O(r()),this.O(r()),this,this.options)):s=i[e],s._$AI(o),e++;e<i.length&&(this._$AR(s&&s._$AB.nextSibling,e),i.length=e);}_$AR(t=this._$AA.nextSibling,i){var s;for(null===(s=this._$AP)||void 0===s||s.call(this,!1,!0,i);t&&t!==this._$AB;){const i=t.nextSibling;t.remove(),t=i;}}setConnected(t){var i;void 0===this._$AM&&(this._$Cm=t,null===(i=this._$AP)||void 0===i||i.call(this,t));}}let S$1 = class S{constructor(t,i,s,e,o){this.type=1,this._$AH=b,this._$AN=void 0,this.element=t,this.name=i,this._$AM=e,this.options=o,s.length>2||""!==s[0]||""!==s[1]?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=b;}get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}_$AI(t,i=this,s,e){const o=this.strings;let n=!1;if(void 0===o)t=P(this,t,i,0),n=!d(t)||t!==this._$AH&&t!==x,n&&(this._$AH=t);else {const e=t;let l,h;for(t=o[0],l=0;l<o.length-1;l++)h=P(this,e[s+l],i,l),h===x&&(h=this._$AH[l]),n||(n=!d(h)||h!==this._$AH[l]),h===b?t=b:t!==b&&(t+=(null!=h?h:"")+o[l+1]),this._$AH[l]=h;}n&&!e&&this.j(t);}j(t){t===b?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,null!=t?t:"");}};class M extends S$1{constructor(){super(...arguments),this.type=3;}j(t){this.element[this.name]=t===b?void 0:t;}}const R=s$1?s$1.emptyScript:"";class k extends S$1{constructor(){super(...arguments),this.type=4;}j(t){t&&t!==b?this.element.setAttribute(this.name,R):this.element.removeAttribute(this.name);}}class H extends S$1{constructor(t,i,s,e,o){super(t,i,s,e,o),this.type=5;}_$AI(t,i=this){var s;if((t=null!==(s=P(this,t,i,0))&&void 0!==s?s:b)===x)return;const e=this._$AH,o=t===b&&e!==b||t.capture!==e.capture||t.once!==e.once||t.passive!==e.passive,n=t!==b&&(e===b||o);o&&this.element.removeEventListener(this.name,this,e),n&&this.element.addEventListener(this.name,this,t),this._$AH=t;}handleEvent(t){var i,s;"function"==typeof this._$AH?this._$AH.call(null!==(s=null===(i=this.options)||void 0===i?void 0:i.host)&&void 0!==s?s:this.element,t):this._$AH.handleEvent(t);}}class I{constructor(t,i,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=i,this.options=s;}get _$AU(){return this._$AM._$AU}_$AI(t){P(this,t);}}const z=i$1.litHtmlPolyfillSupport;null==z||z(C,N),(null!==(t=i$1.litHtmlVersions)&&void 0!==t?t:i$1.litHtmlVersions=[]).push("2.6.1");const Z=(t,i,s)=>{var e,o;const n=null!==(e=null==s?void 0:s.renderBefore)&&void 0!==e?e:i;let l=n._$litPart$;if(void 0===l){const t=null!==(o=null==s?void 0:s.renderBefore)&&void 0!==o?o:null;n._$litPart$=l=new N(i.insertBefore(r(),t),t,void 0,null!=s?s:{});}return l._$AI(t),l};
 
   /**
    * @license
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
-   */var l$1,o;class s extends a$1{constructor(){super(...arguments),this.renderOptions={host:this},this._$Dt=void 0;}createRenderRoot(){var t,e;const i=super.createRenderRoot();return null!==(t=(e=this.renderOptions).renderBefore)&&void 0!==t||(e.renderBefore=i.firstChild),i}update(t){const i=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this._$Dt=x(i,this.renderRoot,this.renderOptions);}connectedCallback(){var t;super.connectedCallback(),null===(t=this._$Dt)||void 0===t||t.setConnected(!0);}disconnectedCallback(){var t;super.disconnectedCallback(),null===(t=this._$Dt)||void 0===t||t.setConnected(!1);}render(){return b}}s.finalized=!0,s._$litElement$=!0,null===(l$1=globalThis.litElementHydrateSupport)||void 0===l$1||l$1.call(globalThis,{LitElement:s});const n=globalThis.litElementPolyfillSupport;null==n||n({LitElement:s});(null!==(o=globalThis.litElementVersions)&&void 0!==o?o:globalThis.litElementVersions=[]).push("3.1.2");
+   */var l$1,o;class s extends d$1{constructor(){super(...arguments),this.renderOptions={host:this},this._$Dt=void 0;}createRenderRoot(){var t,e;const i=super.createRenderRoot();return null!==(t=(e=this.renderOptions).renderBefore)&&void 0!==t||(e.renderBefore=i.firstChild),i}update(t){const i=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this._$Dt=Z(i,this.renderRoot,this.renderOptions);}connectedCallback(){var t;super.connectedCallback(),null===(t=this._$Dt)||void 0===t||t.setConnected(!0);}disconnectedCallback(){var t;super.disconnectedCallback(),null===(t=this._$Dt)||void 0===t||t.setConnected(!1);}render(){return x}}s.finalized=!0,s._$litElement$=!0,null===(l$1=globalThis.litElementHydrateSupport)||void 0===l$1||l$1.call(globalThis,{LitElement:s});const n=globalThis.litElementPolyfillSupport;null==n||n({LitElement:s});(null!==(o=globalThis.litElementVersions)&&void 0!==o?o:globalThis.litElementVersions=[]).push("3.2.0");
 
   /**
    * @license
    * Copyright 2018 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
-   */const l=l=>null!=l?l:w;
+   */const l=l=>null!=l?l:b;
 
   class AstroImage {
       constructor(image) {
@@ -225,9 +225,9 @@
           console.error("--- [table init] find images length", list.length);
           if (list) {
               let gallery = this.closest('astro-gallery');
-              x($ `
+              Z(y `
         <div class="row">
-          ${list.map((image) => $ `
+          ${list.map((image) => y `
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3">
               <div class="card preview">
                 <a href="gallery-${image.id}.html" @click="${gallery.navigate.bind(gallery)}"
@@ -290,7 +290,7 @@
               console.warn("++++++++++++++++++ " + image);
               if (image) {
                   this.closest('astro-gallery');
-                  x($ `
+                  Z(y `
           <figure>
             <img class="astro-fit-image" src="${image.previewUrl}" alt="${image.title}"/>
             <div class="btn-group">
@@ -392,7 +392,7 @@
           }
       }
       render() {
-          x($ `
+          Z(y `
       <astro-image-service>
       </astro-image-service>
 
@@ -546,19 +546,19 @@
               // listener options: capture, passive, and once.
               capture: true,
           };
-          const myTemplate = (value) => $ `<button @click=${clickHandler}>Click Me ${value}!</button>`;
-          x($ `
+          const myTemplate = (value) => y `<button @click=${clickHandler}>Click Me ${value}!</button>`;
+          Z(y `
 <div id="d1"></div>
 <div id="d2"></div>
 <div id="d3"></div>
 `, this);
           // todo: d1 d2 d3 ist natürlich Quatsch
           // Render the template with some data
-          x(myTemplate('world'), this.querySelector("#d1"));
+          Z(myTemplate('world'), this.querySelector("#d1"));
           // ... Later on ...
           // Render the template with different data
-          x(myTemplate('lit-html'), this.querySelector("#d2"));
-          x($ `<astro-optic-selector>
+          Z(myTemplate('lit-html'), this.querySelector("#d2"));
+          Z(y `<astro-optic-selector>
 </astro-optic-selector>
 <button @click=${clickHandler}>Click Me ${this.tagName}!</button>
 <div class="form-group">
@@ -1528,6 +1528,43 @@
     rightharpoonaboveshortbar: "M0,241 l0,40c399126,0,399993,0,399993,0\nc4.7,-4.7,7,-9.3,7,-14c0,-9.3,-3.7,-15.3,-11,-18c-92.7,-56.7,-159,-133.7,-199,\n-231c-3.3,-9.3,-6,-14.7,-8,-16c-2,-1.3,-7,-2,-15,-2c-10.7,0,-16.7,2,-18,6\nc-2,2.7,-1,9.7,3,21c15.3,42,36.7,81.8,64,119.5c27.3,37.7,58,69.2,92,94.5z\nM0 241 v40 H399908 v-40z M0 475 v-40 H399500 v40z M0 475 v-40 H399500 v40z",
     shortbaraboveleftharpoon: "M7,435c-4,4,-6.3,8.7,-7,14c0,5.3,0.7,9,2,11\nc1.3,2,5.3,5.3,12,10c90.7,54,156,130,196,228c3.3,10.7,6.3,16.3,9,17c2,0.7,5,1,9,\n1c0,0,5,0,5,0c10.7,0,16.7,-2,18,-6c2,-2.7,1,-9.7,-3,-21c-32,-87.3,-82.7,-157.7,\n-152,-211c0,0,-3,-3,-3,-3l399907,0l0,-40c-399126,0,-399993,0,-399993,0z\nM93 435 v40 H400000 v-40z M500 241 v40 H400000 v-40z M500 241 v40 H400000 v-40z",
     shortrightharpoonabovebar: "M53,241l0,40c398570,0,399437,0,399437,0\nc4.7,-4.7,7,-9.3,7,-14c0,-9.3,-3.7,-15.3,-11,-18c-92.7,-56.7,-159,-133.7,-199,\n-231c-3.3,-9.3,-6,-14.7,-8,-16c-2,-1.3,-7,-2,-15,-2c-10.7,0,-16.7,2,-18,6\nc-2,2.7,-1,9.7,3,21c15.3,42,36.7,81.8,64,119.5c27.3,37.7,58,69.2,92,94.5z\nM500 241 v40 H399408 v-40z M500 435 v40 H400000 v-40z"
+  };
+  var tallDelim = function tallDelim(label, midHeight) {
+    switch (label) {
+      case "lbrack":
+        return "M403 1759 V84 H666 V0 H319 V1759 v" + midHeight + " v1759 h347 v-84\nH403z M403 1759 V0 H319 V1759 v" + midHeight + " v1759 h84z";
+
+      case "rbrack":
+        return "M347 1759 V0 H0 V84 H263 V1759 v" + midHeight + " v1759 H0 v84 H347z\nM347 1759 V0 H263 V1759 v" + midHeight + " v1759 h84z";
+
+      case "vert":
+        return "M145 15 v585 v" + midHeight + " v585 c2.667,10,9.667,15,21,15\nc10,0,16.667,-5,20,-15 v-585 v" + -midHeight + " v-585 c-2.667,-10,-9.667,-15,-21,-15\nc-10,0,-16.667,5,-20,15z M188 15 H145 v585 v" + midHeight + " v585 h43z";
+
+      case "doublevert":
+        return "M145 15 v585 v" + midHeight + " v585 c2.667,10,9.667,15,21,15\nc10,0,16.667,-5,20,-15 v-585 v" + -midHeight + " v-585 c-2.667,-10,-9.667,-15,-21,-15\nc-10,0,-16.667,5,-20,15z M188 15 H145 v585 v" + midHeight + " v585 h43z\nM367 15 v585 v" + midHeight + " v585 c2.667,10,9.667,15,21,15\nc10,0,16.667,-5,20,-15 v-585 v" + -midHeight + " v-585 c-2.667,-10,-9.667,-15,-21,-15\nc-10,0,-16.667,5,-20,15z M410 15 H367 v585 v" + midHeight + " v585 h43z";
+
+      case "lfloor":
+        return "M319 602 V0 H403 V602 v" + midHeight + " v1715 h263 v84 H319z\nMM319 602 V0 H403 V602 v" + midHeight + " v1715 H319z";
+
+      case "rfloor":
+        return "M319 602 V0 H403 V602 v" + midHeight + " v1799 H0 v-84 H319z\nMM319 602 V0 H403 V602 v" + midHeight + " v1715 H319z";
+
+      case "lceil":
+        return "M403 1759 V84 H666 V0 H319 V1759 v" + midHeight + " v602 h84z\nM403 1759 V0 H319 V1759 v" + midHeight + " v602 h84z";
+
+      case "rceil":
+        return "M347 1759 V0 H0 V84 H263 V1759 v" + midHeight + " v602 h84z\nM347 1759 V0 h-84 V1759 v" + midHeight + " v602 h84z";
+
+      case "lparen":
+        return "M863,9c0,-2,-2,-5,-6,-9c0,0,-17,0,-17,0c-12.7,0,-19.3,0.3,-20,1\nc-5.3,5.3,-10.3,11,-15,17c-242.7,294.7,-395.3,682,-458,1162c-21.3,163.3,-33.3,349,\n-36,557 l0," + (midHeight + 84) + "c0.2,6,0,26,0,60c2,159.3,10,310.7,24,454c53.3,528,210,\n949.7,470,1265c4.7,6,9.7,11.7,15,17c0.7,0.7,7,1,19,1c0,0,18,0,18,0c4,-4,6,-7,6,-9\nc0,-2.7,-3.3,-8.7,-10,-18c-135.3,-192.7,-235.5,-414.3,-300.5,-665c-65,-250.7,-102.5,\n-544.7,-112.5,-882c-2,-104,-3,-167,-3,-189\nl0,-" + (midHeight + 92) + "c0,-162.7,5.7,-314,17,-454c20.7,-272,63.7,-513,129,-723c65.3,\n-210,155.3,-396.3,270,-559c6.7,-9.3,10,-15.3,10,-18z";
+
+      case "rparen":
+        return "M76,0c-16.7,0,-25,3,-25,9c0,2,2,6.3,6,13c21.3,28.7,42.3,60.3,\n63,95c96.7,156.7,172.8,332.5,228.5,527.5c55.7,195,92.8,416.5,111.5,664.5\nc11.3,139.3,17,290.7,17,454c0,28,1.7,43,3.3,45l0," + (midHeight + 9) + "\nc-3,4,-3.3,16.7,-3.3,38c0,162,-5.7,313.7,-17,455c-18.7,248,-55.8,469.3,-111.5,664\nc-55.7,194.7,-131.8,370.3,-228.5,527c-20.7,34.7,-41.7,66.3,-63,95c-2,3.3,-4,7,-6,11\nc0,7.3,5.7,11,17,11c0,0,11,0,11,0c9.3,0,14.3,-0.3,15,-1c5.3,-5.3,10.3,-11,15,-17\nc242.7,-294.7,395.3,-681.7,458,-1161c21.3,-164.7,33.3,-350.7,36,-558\nl0,-" + (midHeight + 144) + "c-2,-159.3,-10,-310.7,-24,-454c-53.3,-528,-210,-949.7,\n-470,-1265c-4.7,-6,-9.7,-11.7,-15,-17c-0.7,-0.7,-6.7,-1,-18,-1z";
+
+      default:
+        // We should not ever get here.
+        throw new Error("Unknown stretchy delimiter.");
+    }
   };
 
   /**
@@ -5053,7 +5090,7 @@
   defineSymbol(math, main, bin, "\u2217", "\\ast");
   defineSymbol(math, main, bin, "\u2294", "\\sqcup", true);
   defineSymbol(math, main, bin, "\u25ef", "\\bigcirc", true);
-  defineSymbol(math, main, bin, "\u2219", "\\bullet");
+  defineSymbol(math, main, bin, "\u2219", "\\bullet", true);
   defineSymbol(math, main, bin, "\u2021", "\\ddagger");
   defineSymbol(math, main, bin, "\u2240", "\\wr", true);
   defineSymbol(math, main, bin, "\u2a3f", "\\amalg");
@@ -5412,13 +5449,13 @@
   defineSymbol(math, main, bin, "+", "+");
   defineSymbol(math, main, bin, "\u2212", "-", true);
   defineSymbol(math, main, bin, "\u22c5", "\\cdot", true);
-  defineSymbol(math, main, bin, "\u2218", "\\circ");
+  defineSymbol(math, main, bin, "\u2218", "\\circ", true);
   defineSymbol(math, main, bin, "\u00f7", "\\div", true);
   defineSymbol(math, main, bin, "\u00b1", "\\pm", true);
   defineSymbol(math, main, bin, "\u00d7", "\\times", true);
   defineSymbol(math, main, bin, "\u2229", "\\cap", true);
   defineSymbol(math, main, bin, "\u222a", "\\cup", true);
-  defineSymbol(math, main, bin, "\u2216", "\\setminus");
+  defineSymbol(math, main, bin, "\u2216", "\\setminus", true);
   defineSymbol(math, main, bin, "\u2227", "\\land");
   defineSymbol(math, main, bin, "\u2228", "\\lor");
   defineSymbol(math, main, bin, "\u2227", "\\wedge", true);
@@ -6016,7 +6053,7 @@
 
       if (lookupSymbol(text, fontName, mode).metrics) {
         return makeSymbol(text, fontName, mode, options, classes.concat(fontClasses));
-      } else if (ligatures.hasOwnProperty(text) && fontName.substr(0, 10) === "Typewriter") {
+      } else if (ligatures.hasOwnProperty(text) && fontName.slice(0, 10) === "Typewriter") {
         // Deconstruct ligatures in monospace fonts (\texttt, \tt).
         var parts = [];
 
@@ -7350,7 +7387,7 @@
    * optional replacement from symbols.js.
    */
   var makeText = function makeText(text, mode, options) {
-    if (symbols[mode][text] && symbols[mode][text].replace && text.charCodeAt(0) !== 0xD835 && !(ligatures.hasOwnProperty(text) && options && (options.fontFamily && options.fontFamily.substr(4, 2) === "tt" || options.font && options.font.substr(4, 2) === "tt"))) {
+    if (symbols[mode][text] && symbols[mode][text].replace && text.charCodeAt(0) !== 0xD835 && !(ligatures.hasOwnProperty(text) && options && (options.fontFamily && options.fontFamily.slice(4, 6) === "tt" || options.font && options.font.slice(4, 6) === "tt"))) {
       text = symbols[mode][text].replace;
     }
 
@@ -7784,7 +7821,7 @@
     function buildSvgSpan_() {
       var viewBoxWidth = 400000; // default
 
-      var label = group.label.substr(1);
+      var label = group.label.slice(1);
 
       if (utils.contains(["widehat", "widecheck", "widetilde", "utilde"], label)) {
         // Each type in the `if` statement corresponds to one of the ParseNode
@@ -8433,6 +8470,217 @@
 
   });
 
+  var makeSpan = buildCommon.makeSpan;
+
+  function htmlBuilder$9(group, options) {
+    var elements = buildExpression$1(group.body, options, true);
+    return makeSpan([group.mclass], elements, options);
+  }
+
+  function mathmlBuilder$8(group, options) {
+    var node;
+    var inner = buildExpression(group.body, options);
+
+    if (group.mclass === "minner") {
+      node = new mathMLTree.MathNode("mpadded", inner);
+    } else if (group.mclass === "mord") {
+      if (group.isCharacterBox) {
+        node = inner[0];
+        node.type = "mi";
+      } else {
+        node = new mathMLTree.MathNode("mi", inner);
+      }
+    } else {
+      if (group.isCharacterBox) {
+        node = inner[0];
+        node.type = "mo";
+      } else {
+        node = new mathMLTree.MathNode("mo", inner);
+      } // Set spacing based on what is the most likely adjacent atom type.
+      // See TeXbook p170.
+
+
+      if (group.mclass === "mbin") {
+        node.attributes.lspace = "0.22em"; // medium space
+
+        node.attributes.rspace = "0.22em";
+      } else if (group.mclass === "mpunct") {
+        node.attributes.lspace = "0em";
+        node.attributes.rspace = "0.17em"; // thinspace
+      } else if (group.mclass === "mopen" || group.mclass === "mclose") {
+        node.attributes.lspace = "0em";
+        node.attributes.rspace = "0em";
+      } else if (group.mclass === "minner") {
+        node.attributes.lspace = "0.0556em"; // 1 mu is the most likely option
+
+        node.attributes.width = "+0.1111em";
+      } // MathML <mo> default space is 5/18 em, so <mrel> needs no action.
+      // Ref: https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mo
+
+    }
+
+    return node;
+  } // Math class commands except \mathop
+
+
+  defineFunction({
+    type: "mclass",
+    names: ["\\mathord", "\\mathbin", "\\mathrel", "\\mathopen", "\\mathclose", "\\mathpunct", "\\mathinner"],
+    props: {
+      numArgs: 1,
+      primitive: true
+    },
+
+    handler(_ref, args) {
+      var {
+        parser,
+        funcName
+      } = _ref;
+      var body = args[0];
+      return {
+        type: "mclass",
+        mode: parser.mode,
+        mclass: "m" + funcName.slice(5),
+        // TODO(kevinb): don't prefix with 'm'
+        body: ordargument(body),
+        isCharacterBox: utils.isCharacterBox(body)
+      };
+    },
+
+    htmlBuilder: htmlBuilder$9,
+    mathmlBuilder: mathmlBuilder$8
+  });
+  var binrelClass = arg => {
+    // \binrel@ spacing varies with (bin|rel|ord) of the atom in the argument.
+    // (by rendering separately and with {}s before and after, and measuring
+    // the change in spacing).  We'll do roughly the same by detecting the
+    // atom type directly.
+    var atom = arg.type === "ordgroup" && arg.body.length ? arg.body[0] : arg;
+
+    if (atom.type === "atom" && (atom.family === "bin" || atom.family === "rel")) {
+      return "m" + atom.family;
+    } else {
+      return "mord";
+    }
+  }; // \@binrel{x}{y} renders like y but as mbin/mrel/mord if x is mbin/mrel/mord.
+  // This is equivalent to \binrel@{x}\binrel@@{y} in AMSTeX.
+
+  defineFunction({
+    type: "mclass",
+    names: ["\\@binrel"],
+    props: {
+      numArgs: 2
+    },
+
+    handler(_ref2, args) {
+      var {
+        parser
+      } = _ref2;
+      return {
+        type: "mclass",
+        mode: parser.mode,
+        mclass: binrelClass(args[0]),
+        body: ordargument(args[1]),
+        isCharacterBox: utils.isCharacterBox(args[1])
+      };
+    }
+
+  }); // Build a relation or stacked op by placing one symbol on top of another
+
+  defineFunction({
+    type: "mclass",
+    names: ["\\stackrel", "\\overset", "\\underset"],
+    props: {
+      numArgs: 2
+    },
+
+    handler(_ref3, args) {
+      var {
+        parser,
+        funcName
+      } = _ref3;
+      var baseArg = args[1];
+      var shiftedArg = args[0];
+      var mclass;
+
+      if (funcName !== "\\stackrel") {
+        // LaTeX applies \binrel spacing to \overset and \underset.
+        mclass = binrelClass(baseArg);
+      } else {
+        mclass = "mrel"; // for \stackrel
+      }
+
+      var baseOp = {
+        type: "op",
+        mode: baseArg.mode,
+        limits: true,
+        alwaysHandleSupSub: true,
+        parentIsSupSub: false,
+        symbol: false,
+        suppressBaseShift: funcName !== "\\stackrel",
+        body: ordargument(baseArg)
+      };
+      var supsub = {
+        type: "supsub",
+        mode: shiftedArg.mode,
+        base: baseOp,
+        sup: funcName === "\\underset" ? null : shiftedArg,
+        sub: funcName === "\\underset" ? shiftedArg : null
+      };
+      return {
+        type: "mclass",
+        mode: parser.mode,
+        mclass,
+        body: [supsub],
+        isCharacterBox: utils.isCharacterBox(supsub)
+      };
+    },
+
+    htmlBuilder: htmlBuilder$9,
+    mathmlBuilder: mathmlBuilder$8
+  });
+
+  // \pmb is a simulation of bold font.
+  // The version of \pmb in ambsy.sty works by typesetting three copies
+  // with small offsets. We use CSS text-shadow.
+  // It's a hack. Not as good as a real bold font. Better than nothing.
+  defineFunction({
+    type: "pmb",
+    names: ["\\pmb"],
+    props: {
+      numArgs: 1,
+      allowedInText: true
+    },
+
+    handler(_ref, args) {
+      var {
+        parser
+      } = _ref;
+      return {
+        type: "pmb",
+        mode: parser.mode,
+        mclass: binrelClass(args[0]),
+        body: ordargument(args[0])
+      };
+    },
+
+    htmlBuilder(group, options) {
+      var elements = buildExpression$1(group.body, options, true);
+      var node = buildCommon.makeSpan([group.mclass], elements, options);
+      node.style.textShadow = "0.02em 0.01em 0.04px";
+      return node;
+    },
+
+    mathmlBuilder(group, style) {
+      var inner = buildExpression(group.body, style); // Wrap with an <mstyle> element.
+
+      var node = new mathMLTree.MathNode("mstyle", inner);
+      node.setAttribute("style", "text-shadow: 0.02em 0.01em 0.04px");
+      return node;
+    }
+
+  });
+
   var cdArrowFunctionName = {
     ">": "\\\\cdrightarrow",
     "<": "\\\\cdleftarrow",
@@ -8806,7 +9054,7 @@
 
   });
 
-  var htmlBuilder$9 = (group, options) => {
+  var htmlBuilder$8 = (group, options) => {
     var elements = buildExpression$1(group.body, options.withColor(group.color), false); // \color isn't supposed to affect the type of the elements it contains.
     // To accomplish this, we wrap the results in a fragment, so the inner
     // elements will be able to directly interact with their neighbors. For
@@ -8815,7 +9063,7 @@
     return buildCommon.makeFragment(elements);
   };
 
-  var mathmlBuilder$8 = (group, options) => {
+  var mathmlBuilder$7 = (group, options) => {
     var inner = buildExpression(group.body, options.withColor(group.color));
     var node = new mathMLTree.MathNode("mstyle", inner);
     node.setAttribute("mathcolor", group.color);
@@ -8845,8 +9093,8 @@
       };
     },
 
-    htmlBuilder: htmlBuilder$9,
-    mathmlBuilder: mathmlBuilder$8
+    htmlBuilder: htmlBuilder$8,
+    mathmlBuilder: mathmlBuilder$7
   });
   defineFunction({
     type: "color",
@@ -8878,8 +9126,8 @@
       };
     },
 
-    htmlBuilder: htmlBuilder$9,
-    mathmlBuilder: mathmlBuilder$8
+    htmlBuilder: htmlBuilder$8,
+    mathmlBuilder: mathmlBuilder$7
   });
 
   // Row breaks within tabular environments, and line breaks at top level
@@ -8889,8 +9137,7 @@
     names: ["\\\\"],
     props: {
       numArgs: 0,
-      numOptionalArgs: 1,
-      argTypes: ["size"],
+      numOptionalArgs: 0,
       allowedInText: true
     },
 
@@ -8898,7 +9145,7 @@
       var {
         parser
       } = _ref;
-      var size = optArgs[0];
+      var size = parser.gullet.future().text === "[" ? parser.parseSizeGroup(true) : null;
       var newLine = !parser.settings.displayMode || !parser.settings.useStrictBehavior("newLineInDisplayMode", "In LaTeX, \\\\ or \\newline " + "does nothing in display mode");
       return {
         type: "cr",
@@ -9350,6 +9597,8 @@
     var middle;
     var repeat;
     var bottom;
+    var svgLabel = "";
+    var viewBoxWidth = 0;
     top = repeat = bottom = delim;
     middle = null; // Also keep track of what font the delimiters are in
 
@@ -9375,44 +9624,64 @@
       bottom = "\\Downarrow";
     } else if (utils.contains(verts, delim)) {
       repeat = "\u2223";
+      svgLabel = "vert";
+      viewBoxWidth = 333;
     } else if (utils.contains(doubleVerts, delim)) {
       repeat = "\u2225";
+      svgLabel = "doublevert";
+      viewBoxWidth = 556;
     } else if (delim === "[" || delim === "\\lbrack") {
       top = "\u23a1";
       repeat = "\u23a2";
       bottom = "\u23a3";
       font = "Size4-Regular";
+      svgLabel = "lbrack";
+      viewBoxWidth = 667;
     } else if (delim === "]" || delim === "\\rbrack") {
       top = "\u23a4";
       repeat = "\u23a5";
       bottom = "\u23a6";
       font = "Size4-Regular";
+      svgLabel = "rbrack";
+      viewBoxWidth = 667;
     } else if (delim === "\\lfloor" || delim === "\u230a") {
       repeat = top = "\u23a2";
       bottom = "\u23a3";
       font = "Size4-Regular";
+      svgLabel = "lfloor";
+      viewBoxWidth = 667;
     } else if (delim === "\\lceil" || delim === "\u2308") {
       top = "\u23a1";
       repeat = bottom = "\u23a2";
       font = "Size4-Regular";
+      svgLabel = "lceil";
+      viewBoxWidth = 667;
     } else if (delim === "\\rfloor" || delim === "\u230b") {
       repeat = top = "\u23a5";
       bottom = "\u23a6";
       font = "Size4-Regular";
+      svgLabel = "rfloor";
+      viewBoxWidth = 667;
     } else if (delim === "\\rceil" || delim === "\u2309") {
       top = "\u23a4";
       repeat = bottom = "\u23a5";
       font = "Size4-Regular";
+      svgLabel = "rceil";
+      viewBoxWidth = 667;
     } else if (delim === "(" || delim === "\\lparen") {
       top = "\u239b";
       repeat = "\u239c";
       bottom = "\u239d";
       font = "Size4-Regular";
+      svgLabel = "lparen";
+      viewBoxWidth = 875;
     } else if (delim === ")" || delim === "\\rparen") {
       top = "\u239e";
       repeat = "\u239f";
       bottom = "\u23a0";
       font = "Size4-Regular";
+      svgLabel = "rparen";
+      viewBoxWidth = 875;
     } else if (delim === "\\{" || delim === "\\lbrace") {
       top = "\u23a7";
       middle = "\u23a8";
@@ -9484,32 +9753,59 @@
     var depth = realHeightTotal / 2 - axisHeight; // Now, we start building the pieces that will go into the vlist
     // Keep a list of the pieces of the stacked delimiter
 
-    var stack = []; // Add the bottom symbol
+    var stack = [];
 
-    stack.push(makeGlyphSpan(bottom, font, mode));
-    stack.push(lap); // overlap
-
-    if (middle === null) {
-      // The middle section will be an SVG. Make it an extra 0.016em tall.
-      // We'll overlap by 0.008em at top and bottom.
-      var innerHeight = realHeightTotal - topHeightTotal - bottomHeightTotal + 2 * lapInEms;
-      stack.push(makeInner(repeat, innerHeight, options));
+    if (svgLabel.length > 0) {
+      // Instead of stacking glyphs, create a single SVG.
+      // This evades browser problems with imprecise positioning of spans.
+      var midHeight = realHeightTotal - topHeightTotal - bottomHeightTotal;
+      var viewBoxHeight = Math.round(realHeightTotal * 1000);
+      var pathStr = tallDelim(svgLabel, Math.round(midHeight * 1000));
+      var path = new PathNode(svgLabel, pathStr);
+      var width = (viewBoxWidth / 1000).toFixed(3) + "em";
+      var height = (viewBoxHeight / 1000).toFixed(3) + "em";
+      var svg = new SvgNode([path], {
+        "width": width,
+        "height": height,
+        "viewBox": "0 0 " + viewBoxWidth + " " + viewBoxHeight
+      });
+      var wrapper = buildCommon.makeSvgSpan([], [svg], options);
+      wrapper.height = viewBoxHeight / 1000;
+      wrapper.style.width = width;
+      wrapper.style.height = height;
+      stack.push({
+        type: "elem",
+        elem: wrapper
+      });
     } else {
-      // When there is a middle bit, we need the middle part and two repeated
-      // sections
-      var _innerHeight = (realHeightTotal - topHeightTotal - bottomHeightTotal - middleHeightTotal) / 2 + 2 * lapInEms;
+      // Stack glyphs
+      // Start by adding the bottom symbol
+      stack.push(makeGlyphSpan(bottom, font, mode));
+      stack.push(lap); // overlap
 
-      stack.push(makeInner(repeat, _innerHeight, options)); // Now insert the middle of the brace.
+      if (middle === null) {
+        // The middle section will be an SVG. Make it an extra 0.016em tall.
+        // We'll overlap by 0.008em at top and bottom.
+        var innerHeight = realHeightTotal - topHeightTotal - bottomHeightTotal + 2 * lapInEms;
+        stack.push(makeInner(repeat, innerHeight, options));
+      } else {
+        // When there is a middle bit, we need the middle part and two repeated
+        // sections
+        var _innerHeight = (realHeightTotal - topHeightTotal - bottomHeightTotal - middleHeightTotal) / 2 + 2 * lapInEms;
+
+        stack.push(makeInner(repeat, _innerHeight, options)); // Now insert the middle of the brace.
+
+        stack.push(lap);
+        stack.push(makeGlyphSpan(middle, font, mode));
+        stack.push(lap);
+        stack.push(makeInner(repeat, _innerHeight, options));
+      } // Add the top symbol
+
 
       stack.push(lap);
-      stack.push(makeGlyphSpan(middle, font, mode));
-      stack.push(lap);
-      stack.push(makeInner(repeat, _innerHeight, options));
-    } // Add the top symbol
+      stack.push(makeGlyphSpan(top, font, mode));
+    } // Finally, build the vlist
 
-
-    stack.push(lap);
-    stack.push(makeGlyphSpan(top, font, mode)); // Finally, build the vlist
 
     var newOptions = options.havingBaseStyle(Style$1.TEXT);
     var inner = buildCommon.makeVList({
@@ -10191,12 +10487,12 @@
     }
   });
 
-  var htmlBuilder$8 = (group, options) => {
+  var htmlBuilder$7 = (group, options) => {
     // \cancel, \bcancel, \xcancel, \sout, \fbox, \colorbox, \fcolorbox, \phase
     // Some groups can return document fragments.  Handle those by wrapping
     // them in a span.
     var inner = buildCommon.wrapFragment(buildGroup$1(group.body, options), options);
-    var label = group.label.substr(1);
+    var label = group.label.slice(1);
     var scale = options.sizeMultiplier;
     var img;
     var imgShift = 0; // In the LaTeX cancel package, line geometry is slightly different
@@ -10343,7 +10639,7 @@
     }
   };
 
-  var mathmlBuilder$7 = (group, options) => {
+  var mathmlBuilder$6 = (group, options) => {
     var fboxsep = 0;
     var node = new mathMLTree.MathNode(group.label.indexOf("colorbox") > -1 ? "mpadded" : "menclose", [buildGroup(group.body, options)]);
 
@@ -10429,8 +10725,8 @@
       };
     },
 
-    htmlBuilder: htmlBuilder$8,
-    mathmlBuilder: mathmlBuilder$7
+    htmlBuilder: htmlBuilder$7,
+    mathmlBuilder: mathmlBuilder$6
   });
   defineFunction({
     type: "enclose",
@@ -10459,8 +10755,8 @@
       };
     },
 
-    htmlBuilder: htmlBuilder$8,
-    mathmlBuilder: mathmlBuilder$7
+    htmlBuilder: htmlBuilder$7,
+    mathmlBuilder: mathmlBuilder$6
   });
   defineFunction({
     type: "enclose",
@@ -10505,8 +10801,8 @@
       };
     },
 
-    htmlBuilder: htmlBuilder$8,
-    mathmlBuilder: mathmlBuilder$7
+    htmlBuilder: htmlBuilder$7,
+    mathmlBuilder: mathmlBuilder$6
   });
   defineFunction({
     type: "enclose",
@@ -10589,6 +10885,13 @@
     var hlineInfo = [];
     parser.consumeSpaces();
     var nxt = parser.fetch().text;
+
+    if (nxt === "\\relax") {
+      // \relax is an artifact of the \cr macro below
+      parser.consume();
+      parser.consumeSpaces();
+      nxt = parser.fetch().text;
+    }
 
     while (nxt === "\\hline" || nxt === "\\hdashline") {
       parser.consume();
@@ -10793,14 +11096,14 @@
 
 
   function dCellStyle(envName) {
-    if (envName.substr(0, 1) === "d") {
+    if (envName.slice(0, 1) === "d") {
       return "display";
     } else {
       return "text";
     }
   }
 
-  var htmlBuilder$7 = function htmlBuilder(group, options) {
+  var htmlBuilder$6 = function htmlBuilder(group, options) {
     var r;
     var c;
     var nr = group.body.length;
@@ -11103,7 +11406,7 @@
     r: "right "
   };
 
-  var mathmlBuilder$6 = function mathmlBuilder(group, options) {
+  var mathmlBuilder$5 = function mathmlBuilder(group, options) {
     var tbl = [];
     var glue = new mathMLTree.MathNode("mtd", [], ["mtr-glue"]);
     var tag = new mathMLTree.MathNode("mtd", [], ["mml-eqn-num"]);
@@ -11387,8 +11690,8 @@
       return parseArray(context.parser, res, dCellStyle(context.envName));
     },
 
-    htmlBuilder: htmlBuilder$7,
-    mathmlBuilder: mathmlBuilder$6
+    htmlBuilder: htmlBuilder$6,
+    mathmlBuilder: mathmlBuilder$5
   }); // The matrix environments of amsmath builds on the array environment
   // of LaTeX, which is discussed above.
   // The mathtools package adds starred versions of the same environments.
@@ -11464,8 +11767,8 @@
       } : res;
     },
 
-    htmlBuilder: htmlBuilder$7,
-    mathmlBuilder: mathmlBuilder$6
+    htmlBuilder: htmlBuilder$6,
+    mathmlBuilder: mathmlBuilder$5
   });
   defineEnvironment({
     type: "array",
@@ -11483,8 +11786,8 @@
       return res;
     },
 
-    htmlBuilder: htmlBuilder$7,
-    mathmlBuilder: mathmlBuilder$6
+    htmlBuilder: htmlBuilder$6,
+    mathmlBuilder: mathmlBuilder$5
   });
   defineEnvironment({
     type: "array",
@@ -11529,8 +11832,8 @@
       return res;
     },
 
-    htmlBuilder: htmlBuilder$7,
-    mathmlBuilder: mathmlBuilder$6
+    htmlBuilder: htmlBuilder$6,
+    mathmlBuilder: mathmlBuilder$5
   }); // A cases environment (in amsmath.sty) is almost equivalent to
   // \def\arraystretch{1.2}%
   // \left\{\begin{array}{@{}l@{\quad}l@{}} … \end{array}\right.
@@ -11577,8 +11880,8 @@
       };
     },
 
-    htmlBuilder: htmlBuilder$7,
-    mathmlBuilder: mathmlBuilder$6
+    htmlBuilder: htmlBuilder$6,
+    mathmlBuilder: mathmlBuilder$5
   }); // In the align environment, one uses ampersands, &, to specify number of
   // columns in each row, and to locate spacing between each column.
   // align gets automatic numbering. align* and aligned do not.
@@ -11593,8 +11896,8 @@
       numArgs: 0
     },
     handler: alignedHandler,
-    htmlBuilder: htmlBuilder$7,
-    mathmlBuilder: mathmlBuilder$6
+    htmlBuilder: htmlBuilder$6,
+    mathmlBuilder: mathmlBuilder$5
   }); // A gathered environment is like an array environment with one centered
   // column, but where rows are considered lines so get \jot line spacing
   // and contents are set in \displaystyle.
@@ -11625,8 +11928,8 @@
       return parseArray(context.parser, res, "display");
     },
 
-    htmlBuilder: htmlBuilder$7,
-    mathmlBuilder: mathmlBuilder$6
+    htmlBuilder: htmlBuilder$6,
+    mathmlBuilder: mathmlBuilder$5
   }); // alignat environment is like an align environment, but one must explicitly
   // specify maximum number of columns in each row, and can adjust spacing between
   // each columns.
@@ -11638,8 +11941,8 @@
       numArgs: 1
     },
     handler: alignedHandler,
-    htmlBuilder: htmlBuilder$7,
-    mathmlBuilder: mathmlBuilder$6
+    htmlBuilder: htmlBuilder$6,
+    mathmlBuilder: mathmlBuilder$5
   });
   defineEnvironment({
     type: "array",
@@ -11660,8 +11963,8 @@
       return parseArray(context.parser, res, "display");
     },
 
-    htmlBuilder: htmlBuilder$7,
-    mathmlBuilder: mathmlBuilder$6
+    htmlBuilder: htmlBuilder$6,
+    mathmlBuilder: mathmlBuilder$5
   });
   defineEnvironment({
     type: "array",
@@ -11675,8 +11978,8 @@
       return parseCD(context.parser);
     },
 
-    htmlBuilder: htmlBuilder$7,
-    mathmlBuilder: mathmlBuilder$6
+    htmlBuilder: htmlBuilder$6,
+    mathmlBuilder: mathmlBuilder$5
   });
   defineMacro("\\nonumber", "\\gdef\\@eqnsw{0}");
   defineMacro("\\notag", "\\nonumber"); // Catch \hline outside array environment
@@ -11765,172 +12068,6 @@
       };
     }
 
-  });
-
-  var makeSpan = buildCommon.makeSpan;
-
-  function htmlBuilder$6(group, options) {
-    var elements = buildExpression$1(group.body, options, true);
-    return makeSpan([group.mclass], elements, options);
-  }
-
-  function mathmlBuilder$5(group, options) {
-    var node;
-    var inner = buildExpression(group.body, options);
-
-    if (group.mclass === "minner") {
-      return mathMLTree.newDocumentFragment(inner);
-    } else if (group.mclass === "mord") {
-      if (group.isCharacterBox) {
-        node = inner[0];
-        node.type = "mi";
-      } else {
-        node = new mathMLTree.MathNode("mi", inner);
-      }
-    } else {
-      if (group.isCharacterBox) {
-        node = inner[0];
-        node.type = "mo";
-      } else {
-        node = new mathMLTree.MathNode("mo", inner);
-      } // Set spacing based on what is the most likely adjacent atom type.
-      // See TeXbook p170.
-
-
-      if (group.mclass === "mbin") {
-        node.attributes.lspace = "0.22em"; // medium space
-
-        node.attributes.rspace = "0.22em";
-      } else if (group.mclass === "mpunct") {
-        node.attributes.lspace = "0em";
-        node.attributes.rspace = "0.17em"; // thinspace
-      } else if (group.mclass === "mopen" || group.mclass === "mclose") {
-        node.attributes.lspace = "0em";
-        node.attributes.rspace = "0em";
-      } // MathML <mo> default space is 5/18 em, so <mrel> needs no action.
-      // Ref: https://developer.mozilla.org/en-US/docs/Web/MathML/Element/mo
-
-    }
-
-    return node;
-  } // Math class commands except \mathop
-
-
-  defineFunction({
-    type: "mclass",
-    names: ["\\mathord", "\\mathbin", "\\mathrel", "\\mathopen", "\\mathclose", "\\mathpunct", "\\mathinner"],
-    props: {
-      numArgs: 1,
-      primitive: true
-    },
-
-    handler(_ref, args) {
-      var {
-        parser,
-        funcName
-      } = _ref;
-      var body = args[0];
-      return {
-        type: "mclass",
-        mode: parser.mode,
-        mclass: "m" + funcName.substr(5),
-        // TODO(kevinb): don't prefix with 'm'
-        body: ordargument(body),
-        isCharacterBox: utils.isCharacterBox(body)
-      };
-    },
-
-    htmlBuilder: htmlBuilder$6,
-    mathmlBuilder: mathmlBuilder$5
-  });
-  var binrelClass = arg => {
-    // \binrel@ spacing varies with (bin|rel|ord) of the atom in the argument.
-    // (by rendering separately and with {}s before and after, and measuring
-    // the change in spacing).  We'll do roughly the same by detecting the
-    // atom type directly.
-    var atom = arg.type === "ordgroup" && arg.body.length ? arg.body[0] : arg;
-
-    if (atom.type === "atom" && (atom.family === "bin" || atom.family === "rel")) {
-      return "m" + atom.family;
-    } else {
-      return "mord";
-    }
-  }; // \@binrel{x}{y} renders like y but as mbin/mrel/mord if x is mbin/mrel/mord.
-  // This is equivalent to \binrel@{x}\binrel@@{y} in AMSTeX.
-
-  defineFunction({
-    type: "mclass",
-    names: ["\\@binrel"],
-    props: {
-      numArgs: 2
-    },
-
-    handler(_ref2, args) {
-      var {
-        parser
-      } = _ref2;
-      return {
-        type: "mclass",
-        mode: parser.mode,
-        mclass: binrelClass(args[0]),
-        body: ordargument(args[1]),
-        isCharacterBox: utils.isCharacterBox(args[1])
-      };
-    }
-
-  }); // Build a relation or stacked op by placing one symbol on top of another
-
-  defineFunction({
-    type: "mclass",
-    names: ["\\stackrel", "\\overset", "\\underset"],
-    props: {
-      numArgs: 2
-    },
-
-    handler(_ref3, args) {
-      var {
-        parser,
-        funcName
-      } = _ref3;
-      var baseArg = args[1];
-      var shiftedArg = args[0];
-      var mclass;
-
-      if (funcName !== "\\stackrel") {
-        // LaTeX applies \binrel spacing to \overset and \underset.
-        mclass = binrelClass(baseArg);
-      } else {
-        mclass = "mrel"; // for \stackrel
-      }
-
-      var baseOp = {
-        type: "op",
-        mode: baseArg.mode,
-        limits: true,
-        alwaysHandleSupSub: true,
-        parentIsSupSub: false,
-        symbol: false,
-        suppressBaseShift: funcName !== "\\stackrel",
-        body: ordargument(baseArg)
-      };
-      var supsub = {
-        type: "supsub",
-        mode: shiftedArg.mode,
-        base: baseOp,
-        sup: funcName === "\\underset" ? null : shiftedArg,
-        sub: funcName === "\\underset" ? shiftedArg : null
-      };
-      return {
-        type: "mclass",
-        mode: parser.mode,
-        mclass,
-        body: [supsub],
-        isCharacterBox: utils.isCharacterBox(supsub)
-      };
-    },
-
-    htmlBuilder: htmlBuilder$6,
-    mathmlBuilder: mathmlBuilder$5
   });
 
   // TODO(kevinb): implement \\sl and \\sc
@@ -13530,7 +13667,7 @@
       if (group.name === "\\oiint" || group.name === "\\oiiint") {
         // No font glyphs yet, so use a glyph w/o the oval.
         // TODO: When font glyphs are available, delete this code.
-        stash = group.name.substr(1);
+        stash = group.name.slice(1);
         group.name = stash === "oiint" ? "\\iint" : "\\iiint";
       }
 
@@ -15991,7 +16128,7 @@
 
     if (next in dotsByToken) {
       thedots = dotsByToken[next];
-    } else if (next.substr(0, 4) === '\\not') {
+    } else if (next.slice(0, 4) === '\\not') {
       thedots = '\\dotsb';
     } else if (next in symbols.math) {
       if (utils.contains(['bin', 'rel'], symbols.math[next].group)) {
@@ -16128,12 +16265,7 @@
   defineMacro("\\bmod", "\\mathchoice{\\mskip1mu}{\\mskip1mu}{\\mskip5mu}{\\mskip5mu}" + "\\mathbin{\\rm mod}" + "\\mathchoice{\\mskip1mu}{\\mskip1mu}{\\mskip5mu}{\\mskip5mu}");
   defineMacro("\\pod", "\\allowbreak" + "\\mathchoice{\\mkern18mu}{\\mkern8mu}{\\mkern8mu}{\\mkern8mu}(#1)");
   defineMacro("\\pmod", "\\pod{{\\rm mod}\\mkern6mu#1}");
-  defineMacro("\\mod", "\\allowbreak" + "\\mathchoice{\\mkern18mu}{\\mkern12mu}{\\mkern12mu}{\\mkern12mu}" + "{\\rm mod}\\,\\,#1"); // \pmb    --   A simulation of bold.
-  // The version in ambsy.sty works by typesetting three copies of the argument
-  // with small offsets. We use two copies. We omit the vertical offset because
-  // of rendering problems that makeVList encounters in Safari.
-
-  defineMacro("\\pmb", "\\html@mathml{" + "\\@binrel{#1}{\\mathrlap{#1}\\kern0.5px#1}}" + "{\\mathbf{#1}}"); //////////////////////////////////////////////////////////////////////
+  defineMacro("\\mod", "\\allowbreak" + "\\mathchoice{\\mkern18mu}{\\mkern12mu}{\\mkern12mu}{\\mkern12mu}" + "{\\rm mod}\\,\\,#1"); //////////////////////////////////////////////////////////////////////
   // LaTeX source2e
   // \expandafter\let\expandafter\@normalcr
   //     \csname\expandafter\@gobble\string\\ \endcsname
@@ -16373,7 +16505,67 @@
   defineMacro("\\ket", "\\mathinner{|{#1}\\rangle}");
   defineMacro("\\braket", "\\mathinner{\\langle{#1}\\rangle}");
   defineMacro("\\Bra", "\\left\\langle#1\\right|");
-  defineMacro("\\Ket", "\\left|#1\\right\\rangle"); //////////////////////////////////////////////////////////////////////
+  defineMacro("\\Ket", "\\left|#1\\right\\rangle");
+
+  var braketHelper = one => context => {
+    var left = context.consumeArg().tokens;
+    var middle = context.consumeArg().tokens;
+    var middleDouble = context.consumeArg().tokens;
+    var right = context.consumeArg().tokens;
+    var oldMiddle = context.macros.get("|");
+    var oldMiddleDouble = context.macros.get("\\|");
+    context.macros.beginGroup();
+
+    var midMacro = double => context => {
+      if (one) {
+        // Only modify the first instance of | or \|
+        context.macros.set("|", oldMiddle);
+
+        if (middleDouble.length) {
+          context.macros.set("\\|", oldMiddleDouble);
+        }
+      }
+
+      var doubled = double;
+
+      if (!double && middleDouble.length) {
+        // Mimic \@ifnextchar
+        var nextToken = context.future();
+
+        if (nextToken.text === "|") {
+          context.popToken();
+          doubled = true;
+        }
+      }
+
+      return {
+        tokens: doubled ? middleDouble : middle,
+        numArgs: 0
+      };
+    };
+
+    context.macros.set("|", midMacro(false));
+
+    if (middleDouble.length) {
+      context.macros.set("\\|", midMacro(true));
+    }
+
+    var arg = context.consumeArg().tokens;
+    var expanded = context.expandTokens([...right, ...arg, ...left // reversed
+    ]);
+    context.macros.endGroup();
+    return {
+      tokens: expanded.reverse(),
+      numArgs: 0
+    };
+  };
+
+  defineMacro("\\bra@ket", braketHelper(false));
+  defineMacro("\\bra@set", braketHelper(true));
+  defineMacro("\\Braket", "\\bra@ket{\\left\\langle}" + "{\\,\\middle\\vert\\,}{\\,\\middle\\vert\\,}{\\right\\rangle}");
+  defineMacro("\\Set", "\\bra@set{\\left\\{\\:}" + "{\\;\\middle\\vert\\;}{\\;\\middle\\Vert\\;}{\\:\\right\\}}");
+  defineMacro("\\set", "\\bra@set{\\{\\,}{\\mid}{}{\\,\\}}"); // has no support for special || or \|
+  //////////////////////////////////////////////////////////////////////
   // actuarialangle.dtx
 
   defineMacro("\\angln", "{\\angl n}"); // Custom Khan Academy colors, should be moved to an optional package
@@ -16829,7 +17021,9 @@
       return this.macros.has(name) ? this.expandTokens([new Token(name)]) : undefined;
     }
     /**
-     * Fully expand the given token stream and return the resulting list of tokens
+     * Fully expand the given token stream and return the resulting list of
+     * tokens.  Note that the input tokens are in reverse order, but the
+     * output tokens are in forward order.
      */
 
 
@@ -16949,6 +17143,113 @@
     }
 
   }
+
+  // Helpers for Parser.js handling of Unicode (sub|super)script characters.
+  var unicodeSubRegEx = /^[₊₋₌₍₎₀₁₂₃₄₅₆₇₈₉ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓᵦᵧᵨᵩᵪ]/;
+  var uSubsAndSups = Object.freeze({
+    '₊': '+',
+    '₋': '-',
+    '₌': '=',
+    '₍': '(',
+    '₎': ')',
+    '₀': '0',
+    '₁': '1',
+    '₂': '2',
+    '₃': '3',
+    '₄': '4',
+    '₅': '5',
+    '₆': '6',
+    '₇': '7',
+    '₈': '8',
+    '₉': '9',
+    '\u2090': 'a',
+    '\u2091': 'e',
+    '\u2095': 'h',
+    '\u1D62': 'i',
+    '\u2C7C': 'j',
+    '\u2096': 'k',
+    '\u2097': 'l',
+    '\u2098': 'm',
+    '\u2099': 'n',
+    '\u2092': 'o',
+    '\u209A': 'p',
+    '\u1D63': 'r',
+    '\u209B': 's',
+    '\u209C': 't',
+    '\u1D64': 'u',
+    '\u1D65': 'v',
+    '\u2093': 'x',
+    '\u1D66': 'β',
+    '\u1D67': 'γ',
+    '\u1D68': 'ρ',
+    '\u1D69': '\u03d5',
+    '\u1D6A': 'χ',
+    '⁺': '+',
+    '⁻': '-',
+    '⁼': '=',
+    '⁽': '(',
+    '⁾': ')',
+    '⁰': '0',
+    '¹': '1',
+    '²': '2',
+    '³': '3',
+    '⁴': '4',
+    '⁵': '5',
+    '⁶': '6',
+    '⁷': '7',
+    '⁸': '8',
+    '⁹': '9',
+    '\u1D2C': 'A',
+    '\u1D2E': 'B',
+    '\u1D30': 'D',
+    '\u1D31': 'E',
+    '\u1D33': 'G',
+    '\u1D34': 'H',
+    '\u1D35': 'I',
+    '\u1D36': 'J',
+    '\u1D37': 'K',
+    '\u1D38': 'L',
+    '\u1D39': 'M',
+    '\u1D3A': 'N',
+    '\u1D3C': 'O',
+    '\u1D3E': 'P',
+    '\u1D3F': 'R',
+    '\u1D40': 'T',
+    '\u1D41': 'U',
+    '\u2C7D': 'V',
+    '\u1D42': 'W',
+    '\u1D43': 'a',
+    '\u1D47': 'b',
+    '\u1D9C': 'c',
+    '\u1D48': 'd',
+    '\u1D49': 'e',
+    '\u1DA0': 'f',
+    '\u1D4D': 'g',
+    '\u02B0': 'h',
+    '\u2071': 'i',
+    '\u02B2': 'j',
+    '\u1D4F': 'k',
+    '\u02E1': 'l',
+    '\u1D50': 'm',
+    '\u207F': 'n',
+    '\u1D52': 'o',
+    '\u1D56': 'p',
+    '\u02B3': 'r',
+    '\u02E2': 's',
+    '\u1D57': 't',
+    '\u1D58': 'u',
+    '\u1D5B': 'v',
+    '\u02B7': 'w',
+    '\u02E3': 'x',
+    '\u02B8': 'y',
+    '\u1DBB': 'z',
+    '\u1D5D': 'β',
+    '\u1D5E': 'γ',
+    '\u1D5F': 'δ',
+    '\u1D60': '\u03d5',
+    '\u1D61': 'χ',
+    '\u1DBF': 'θ'
+  });
 
   /* eslint no-constant-condition:0 */
 
@@ -17748,6 +18049,46 @@
             mode: this.mode,
             body: primes
           };
+        } else if (uSubsAndSups[lex.text]) {
+          // A Unicode subscript or superscript character.
+          // We treat these similarly to the unicode-math package.
+          // So we render a string of Unicode (sub|super)scripts the
+          // same as a (sub|super)script of regular characters.
+          var str = uSubsAndSups[lex.text];
+          var isSub = unicodeSubRegEx.test(lex.text);
+          this.consume(); // Continue fetching tokens to fill out the string.
+
+          while (true) {
+            var token = this.fetch().text;
+
+            if (!uSubsAndSups[token]) {
+              break;
+            }
+
+            if (unicodeSubRegEx.test(token) !== isSub) {
+              break;
+            }
+
+            this.consume();
+            str += uSubsAndSups[token];
+          } // Now create a (sub|super)script.
+
+
+          var body = new Parser(str, this.settings).parse();
+
+          if (isSub) {
+            subscript = {
+              type: "ordgroup",
+              mode: "math",
+              body
+            };
+          } else {
+            superscript = {
+              type: "ordgroup",
+              mode: "math",
+              body
+            };
+          }
         } else {
           // If it wasn't ^, _, or ', stop parsing super/subscripts
           break;
@@ -18297,7 +18638,7 @@
           this.settings.reportNonstrict("unicodeTextInMathMode", "Accented Unicode text character \"" + text[0] + "\" used in " + "math mode", nucleus);
         }
 
-        text = unicodeSymbols[text[0]] + text.substr(1);
+        text = unicodeSymbols[text[0]] + text.slice(1);
       } // Strip off any combining characters
 
 
@@ -18543,7 +18884,7 @@
     /**
      * Current KaTeX version
      */
-    version: "0.15.1",
+    version: "0.16.4",
 
     /**
      * Renders the given LaTeX into an HTML+MathML combination, and adds

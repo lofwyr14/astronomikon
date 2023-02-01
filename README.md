@@ -7,7 +7,6 @@ Website zum Ansehen astronomischer Fotos.
 # Lokalen Apachen starten
 der auf www served:
 ```
-cd docker
 docker-compose build
 docker-compose up -d
 ```
