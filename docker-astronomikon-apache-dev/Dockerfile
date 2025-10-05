@@ -1,4 +1,4 @@
-FROM debian:buster-slim
+FROM debian:trixie-slim
 
 RUN apt update
 RUN apt upgrade -y
