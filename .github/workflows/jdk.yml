@@ -1,0 +1,76 @@
+name: Java matrix (select distro + version)
+
+on:
+  workflow_dispatch:
+    inputs:
+      distribution:
+        description: "JDK distribution"
+        type: choice
+        required: true
+        default: temurin
+        options:
+          - temurin
+          - zulu
+          - corretto
+          - microsoft
+          - oracle
+          - liberica
+          - adopt
+          - dragonwell
+          - sapmachine
+          - semeru
+          - graalvm
+      java-version:
+        description: "Java version"
+        type: choice
+        required: true
+        default: "23"
+        options:
+          - "8"
+          - "9"
+          - "10"
+          - "11"
+          - "12"
+          - "13"
+          - "14"
+          - "15"
+          - "16"
+          - "17"
+          - "18"
+          - "19"
+          - "20"
+          - "21"
+          - "22"
+          - "23"
+          - "24"
+          - "25"
+          - "26"
+
+jobs:
+  java-info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: ${{ inputs.distribution }}
+          java-version: ${{ inputs.java-version }}
+
+      - name: Print Java version and JAVA_HOME
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Distribution: ${{ inputs.distribution }}"
+          echo "Requested Java: ${{ inputs.java-version }}"
+          echo
+          echo "== java -version =="
+          java -version
+          echo
+          echo "== JAVA_HOME =="
+          echo "$JAVA_HOME"
+          echo
+          echo "== which java =="
+          which java
+          echo
+          echo "== resolved java path =="
+          readlink -f "$(which java)"
